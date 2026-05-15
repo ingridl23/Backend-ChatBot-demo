@@ -1,0 +1,15 @@
+package com.chat.demo.repository;
+
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.chat.demo.model.User;
+
+
+@Repository
+public interface IuserRepository extends JpaRepository<User, Long>{
+
+	Optional<User>findByUsername(String username);
+}
