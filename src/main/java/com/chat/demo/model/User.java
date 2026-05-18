@@ -2,8 +2,9 @@ package com.chat.demo.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-
+import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 @Entity
 @Table(name = "users")
@@ -19,7 +20,10 @@ public class User {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String username;
+    private String userName;
+
+    @Column(unique = true, nullable = false)
+    private String lastName;
 
     @Column(unique = true, nullable = false)
     private String email;
@@ -28,6 +32,18 @@ public class User {
     private String password;
 
     private Boolean enabled = true;
+    
+    @ManyToOne
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
+    @ManyToOne
+    @JoinColumn(name = "area_id")
+    private Area area;
+    
+    private Date createdAt;
+    private Date updatedAt;
+    
+
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -36,4 +52,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+    @OneToMany(mappedBy = "user")
+    private List<Conversation> conversations;
 }

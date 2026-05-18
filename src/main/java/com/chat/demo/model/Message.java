@@ -1,0 +1,44 @@
+package com.chat.demo.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "messages")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Message {
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+	private User user ;
+    
+    private String tittle;
+    
+    private Boolean status;
+    
+    private String content;
+    
+    private String metadata;
+    
+    @ManyToOne
+    @JoinColumn(name = "senderType_id")
+    private SenderType senderType;
+
+    
+    @ManyToOne
+    @JoinColumn(name = "conversation_id")
+    private Conversation conversation;
+    
+    private LocalDateTime createdAt;
+	
+}

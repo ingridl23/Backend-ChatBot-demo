@@ -9,7 +9,7 @@ import com.chat.demo.model.Permission;
 
 
 @Repository
-public interface IpermissionRepository extends JpaRepository<Permission, Long>{
+public interface PermissionRepository extends JpaRepository<Permission, Long>{
 	 Optional<Permission> findByName(String name);
 }
 
