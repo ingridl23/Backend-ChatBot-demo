@@ -1,5 +1,6 @@
 package com.chat.demo.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,13 +15,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "document_chucks")
+@Table(name = "document_chunks")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class DocumentChuck {
+public class DocumentChunk {
 
 	 @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,9 +31,10 @@ public class DocumentChuck {
 	    @JoinColumn(name = "document_id")
 	    private Document document;
 	  
+	  @Column(columnDefinition = "TEXT")
 	    private String content;
 	  
-	    private Integer chunckIndex;
+	    private Integer chunkIndex;
 	    
 	    //private Long embedding_id; depende como se genere pero lo mas probable que se genere codigo number + string
 	    private String embeddingId;

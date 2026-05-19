@@ -22,16 +22,18 @@ public class Message {
     @JoinColumn(name = "user_id")
 	private User user ;
     
-    private String tittle;
+    private String title;
     
     private Boolean status;
     
+    @Column(columnDefinition = "TEXT")
     private String content;
     
+    @Column(columnDefinition = "TEXT")
     private String metadata;
     
     @ManyToOne
-    @JoinColumn(name = "senderType_id")
+    @JoinColumn(name = "sender_type_id")
     private SenderType senderType;
 
     

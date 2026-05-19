@@ -1,10 +1,7 @@
 package com.chat.demo.model;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,8 +40,10 @@ public class Organization {
 	    
 	    private String faviconUrl;
 	    
+	    @Column(unique = true)
 	    private String domain;
 	    
+	    @Column(nullable = false)
 	    private String supportEmail;
 	    
 	    private LocalDateTime createdAt;
@@ -57,6 +56,9 @@ public class Organization {
 
 	    @OneToMany(mappedBy = "organization")
 	    private List<Document> documents;
+	    
+	    @OneToMany(mappedBy = "organization")
+	    private List<Integration> integrations;
 	    
 	}
 

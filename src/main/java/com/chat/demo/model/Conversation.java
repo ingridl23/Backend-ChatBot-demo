@@ -41,6 +41,6 @@ public class Conversation {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "conversations", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL)
     private List<Message> messages;
 }

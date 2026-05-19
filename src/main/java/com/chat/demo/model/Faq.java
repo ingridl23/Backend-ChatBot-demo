@@ -14,9 +14,11 @@ public class Faq {
 	 @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
-
+	 
+	   // @Column(unique = true)
 	    private String question;
 	    
+	    @Column(columnDefinition = "TEXT")
 	    private String answer;
 	    
 	    @ManyToOne

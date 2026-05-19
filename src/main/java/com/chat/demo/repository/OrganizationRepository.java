@@ -9,5 +9,6 @@ import com.chat.demo.model.Organization;
 
 public interface OrganizationRepository extends JpaRepository<Organization, Long>{
 
-		Optional<Organization>findByOrganizationName(String name);
+		Optional<Organization>findByName(String name);
+		Optional<Organization> findByDomain(String domain);
 }

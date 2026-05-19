@@ -39,5 +39,9 @@ public class Document {
     @JoinColumn(name = "uploaded_by")
     private User uploadedBy;
     
-    private Date createdAt;
+    private String fileName;
+    private String mimeType;
+    private Long fileSize;
+    
+    private LocalDateTime createdAt;
 }

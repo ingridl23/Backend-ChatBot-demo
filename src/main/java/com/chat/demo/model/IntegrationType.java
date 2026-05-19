@@ -1,7 +1,6 @@
 package com.chat.demo.model;
 
-import java.time.LocalDateTime;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,7 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "integrations_types")
+@Table(name = "integration_types")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,6 +25,7 @@ public class IntegrationType {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 	    
-	    private String name;
+	  @Column(unique = true, nullable = false)
+	  private String name;
 	    
 }

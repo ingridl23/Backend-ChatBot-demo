@@ -2,15 +2,11 @@ package com.chat.demo.service.auth;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.chat.demo.dto.UserRequest;
 import com.chat.demo.model.User;
 import com.chat.demo.repository.UserRepository;
-
-
 import lombok.RequiredArgsConstructor;
 
 
@@ -19,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class UserServiceImpl implements UserService{
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
+	
 	@Override
 	public User createUser(UserRequest request) {
 		   User user = User.builder()
@@ -29,6 +26,8 @@ public class UserServiceImpl implements UserService{
 
 		    return userRepository.save(user);
 	}
+	
+	
 	@Override
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
@@ -42,6 +41,8 @@ public class UserServiceImpl implements UserService{
 	
 		userRepository.deleteById(id);
 	}
+	
+	
 	@Override
 	public void updateUser(Long id, String username, String email, String pass) {
 		User user = userRepository.findById(id)

@@ -32,7 +32,7 @@ public class Area {
     private List<Document> documents;
 
     @OneToMany(mappedBy = "area")
-    private List<System> systems;
+    private List<SystemLink> systems;
     
     
 }

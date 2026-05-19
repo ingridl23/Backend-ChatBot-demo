@@ -1,5 +1,6 @@
 package com.chat.demo.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -14,13 +15,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "systems")
+@Table(name = "system_links")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class System {
+public class SystemLink {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +29,10 @@ public class System {
 
     private String name;
 
+    @Column(nullable = false)
     private String url;
-
+    
+    @Column(columnDefinition = "TEXT")
     private String description;
     
     private Boolean isActive;

@@ -2,6 +2,7 @@ package com.chat.demo.model;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,14 +35,20 @@ public class AISettings {
     @JoinColumn(name = "organization_id")
     private Organization organization;
     
-    private Integer temperature;
+    private Double temperature;
     
+    @Column(columnDefinition = "TEXT")
     private String systemPrompt;
     
     private Integer maxTokens;
     
     private String provider;
     
+    private Boolean active;
+    
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
     
     
 }

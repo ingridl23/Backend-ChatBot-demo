@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 public class RoleServiceImpl  implements RoleService{
 	
-	private final RoleRepository roleRepository ;
+	private final RoleRepository roleRepository;
 
 	@Override
 	public Role createRole(RoleRequest request) {

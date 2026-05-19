@@ -1,7 +1,7 @@
 package com.chat.demo.model;
 
 import java.time.LocalDateTime;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,13 +32,21 @@ public class QueryLog {
     @JoinColumn(name = "user_id")
     private User user;
     
+    @ManyToOne
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
+    
+    @Column(columnDefinition = "TEXT")
     private String question;
     
-    private LocalDateTime responseTime;
+    @Column(columnDefinition = "TEXT")
+    private String response;
+    
+    private Long responseTimeMs;
     
     private Boolean success;
     
-    private Boolean Feedback;
+    private Boolean positiveFeedback;
     
     private LocalDateTime createdAt;
     
