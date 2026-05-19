@@ -5,6 +5,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PermissionRequest {
-
+	private Long id;
     private String name;
 }

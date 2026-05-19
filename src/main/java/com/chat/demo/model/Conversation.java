@@ -28,11 +28,8 @@ public class Conversation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
-    
     private Boolean status;
-
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     
