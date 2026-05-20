@@ -1,16 +1,29 @@
 package com.chat.demo.dto;
 
 import java.util.Set;
-
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserRequest {
-	private Long id;
-	private String username;
-	private String password;
+	@NotBlank
+	private String userName;
+	@NotBlank
+    private String lastName;
+	@NotBlank
 	private String email;
-	  private Set<String> roles;
+	@NotBlank
+	private String password;
+	private Boolean enabled ;
+	private Long organizationId;
+	private Long areaId;
+	private Set<Long> rolesId;
+	
+	
 	}

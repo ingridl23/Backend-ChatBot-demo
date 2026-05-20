@@ -1,4 +1,4 @@
-package com.chat.demo.service.auth;
+package com.chat.demo.service.auth.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import com.chat.demo.dto.UserRequest;
 import com.chat.demo.model.User;
 import com.chat.demo.repository.UserRepository;
+import com.chat.demo.service.auth.UserService;
+
 import lombok.RequiredArgsConstructor;
 
 

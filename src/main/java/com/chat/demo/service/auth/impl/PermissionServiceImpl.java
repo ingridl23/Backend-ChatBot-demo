@@ -1,9 +1,11 @@
-package com.chat.demo.service.auth;
+package com.chat.demo.service.auth.impl;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.chat.demo.dto.PermissionRequest;
 import com.chat.demo.model.Permission;
 import com.chat.demo.repository.PermissionRepository;
+import com.chat.demo.service.auth.PermissionService;
+
 import lombok.RequiredArgsConstructor;
 
 @Service

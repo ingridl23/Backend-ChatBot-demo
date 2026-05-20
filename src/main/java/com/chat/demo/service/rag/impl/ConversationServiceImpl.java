@@ -1,12 +1,13 @@
 package com.chat.demo.service.rag.impl;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+
 import com.chat.demo.model.Conversation;
 import com.chat.demo.model.User;
 import com.chat.demo.repository.ConversationRepository;
+import com.chat.demo.repository.UserRepository;
 import com.chat.demo.service.rag.ConversationService;
 import lombok.RequiredArgsConstructor;
 
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 public class ConversationServiceImpl implements ConversationService{
 
 	private final ConversationRepository conversationRepository;
+	private final UserRepository userRepository;
 	
 	@Override
 	public Conversation save(Conversation conversation) {
@@ -22,8 +24,12 @@ public class ConversationServiceImpl implements ConversationService{
 	}
 
 	@Override
-	public Conversation createConversation(User user, String title) {
-		 Conversation conversation = Conversation.builder()
+	public Conversation createConversation(Long userId, String title) {
+		 
+		  User user = userRepository.findById(userId)
+		            .orElseThrow(() -> new RuntimeException("User not found"));
+		
+		Conversation conversation = Conversation.builder()
 	                .user(user)
 	                .title(title)
 	                .status(true)
@@ -35,10 +41,9 @@ public class ConversationServiceImpl implements ConversationService{
 	}
 
 	@Override
-	public Conversation update(Long id, Conversation conversation) {
-		   Conversation existing = conversationRepository.findById(id)
-	                .orElseThrow(() -> new RuntimeException("Conversation not found"));
-
+	public Conversation update(Long id,Conversation conversation) {
+		Conversation existing = conversationRepository.findById(id)
+	            .orElseThrow(() -> new RuntimeException("Conversation not found"));
 	        existing.setTitle(conversation.getTitle());
 	        existing.setStatus(conversation.getStatus());
 	        existing.setUpdatedAt(LocalDateTime.now());

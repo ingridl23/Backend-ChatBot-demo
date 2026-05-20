@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chat.demo.dto.PermissionRequest;
+import com.chat.demo.model.Permission;
+import com.chat.demo.service.auth.impl.PermissionServiceImpl;
+
 import lombok.RequiredArgsConstructor;
 
 @RestController

@@ -1,4 +1,5 @@
 package com.chat.demo.service.rag;
+import java.util.List;
 import java.util.Optional;
 import com.chat.demo.model.AISettings;
 
@@ -32,6 +33,8 @@ public interface AISettingsService {
     Optional<AISettings> findByOrganizationId(Long organizationId);
 
     AISettings getActiveSettings(Long organizationId);
+    
+    List <AISettings> getActiveSettingsAll();
 
     void deactivateAllByOrganization(Long organizationId);
 

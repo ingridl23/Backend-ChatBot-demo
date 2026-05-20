@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chat.demo.dto.RoleRequest;
+import com.chat.demo.model.Role;
+import com.chat.demo.service.auth.impl.RoleServiceImpl;
+
 import lombok.RequiredArgsConstructor;
 
 @RestController

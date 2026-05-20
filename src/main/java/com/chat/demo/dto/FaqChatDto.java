@@ -1,26 +1,19 @@
 package com.chat.demo.dto;
-
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SystemLinkRequest {
-	@NotBlank
-	    private String name;
-	@NotBlank
-	    private String url;
-	@NotBlank
-	    private String description;
-	    
-	    private Boolean isActive;
-	    
-	    private Long organizationId;
+public class FaqChatDto {
 
-	    private Long areaId;
+	@NotBlank
+	private String question;
+	@NotBlank
+	private String answer;
 }

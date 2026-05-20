@@ -74,4 +74,9 @@ public class AISettingsServiceImpl implements AISettingsService{
 		
 	}
 
+	@Override
+	public List <AISettings> getActiveSettingsAll() {
+		return aiSettingsRepository.findAll();
+	}
+
 }

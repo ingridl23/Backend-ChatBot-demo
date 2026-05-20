@@ -1,4 +1,4 @@
-package com.chat.demo.service.auth;
+package com.chat.demo.service.auth.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.chat.demo.dto.RoleRequest;
 import com.chat.demo.model.Role;
 import com.chat.demo.repository.RoleRepository;
+import com.chat.demo.service.auth.RoleService;
 
 import lombok.RequiredArgsConstructor;
 
