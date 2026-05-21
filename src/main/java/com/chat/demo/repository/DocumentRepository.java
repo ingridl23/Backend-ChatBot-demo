@@ -10,9 +10,10 @@ public interface DocumentRepository extends JpaRepository<Document, Long>{
 
 	    Optional<Document>findByTitle(String title);
 
-	    List<Document> findByOrganizationId(Long organizationId);
+	    Optional<Document> findByOrganizationId(Long organizationId);
 
-	    List<Document> findByAreaId(Long areaId);
+	    Optional<Document> findByAreaId(Long areaId);
 
-	    List<Document> findByUploadedById(Long userId);
+	    Optional<Document> findByUploadedById(Long userId);
+	
 }

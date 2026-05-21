@@ -12,7 +12,7 @@
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Spring-ChatBot-demo</name>
-	<description>Secure Blog API with Spring Boot, JWT, OAuth2 and Role-Based Authorization</description>
+	<description>Backend ChatBot with Spring Boot, JWT, OAuth2 and Role-Based Authorization</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -64,7 +64,7 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		
-		<!--    autoconfiguration of beans-->
+		<!--autoconfiguration of beans-->
 
     <dependency>
       <groupId>org.springframework.ai</groupId>
@@ -92,6 +92,27 @@
       <!-- <version>3.3.1</version> --> 
     </dependency>
 
+
+<!-- Postgresql driver -->
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <scope>runtime</scope>
+</dependency>
+
+<!-- PG Vector Starter -->
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <scope>runtime</scope>
+</dependency>
+
+<!-- PG VectorStore-->
+<dependency>
+    <groupId>org.springframework.ai</groupId>
+    <artifactId>spring-ai-pgvector-store</artifactId>
+    <!-- <artifactId>spring-ai-starter-vector-store-pgvector</artifactId> -->
+</dependency>
     <!--
     <dependency>
       <groupId>org.springframework.ai</groupId>
@@ -104,8 +125,6 @@
       <artifactId>gson</artifactId>
     </dependency>
 
-		
-		
 		<!-- DEVTOOLS -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -114,13 +133,13 @@
 			<optional>true</optional>
 		</dependency>
 
-<!-- conector MYSQL -->
+<!-- conector MYSQL 
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
+		-->
 		<!-- el Lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -131,14 +150,11 @@
 		
 		
 		
-		<!-- ElasticSearch ( parecido a elasticGirl de los increibles  =) xd lol  -->
-	
-		 <dependency>
-      <groupId>org.springframework.ai</groupId>
-      <artifactId>spring-ai-elasticsearch-store</artifactId>
-      <!--   <version>1.0.0-M5</version> -->
-    </dependency>
-		
+	<!--Postgresql -->
+		<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+</dependency>
 		
 		
 		<!-- TEST -->

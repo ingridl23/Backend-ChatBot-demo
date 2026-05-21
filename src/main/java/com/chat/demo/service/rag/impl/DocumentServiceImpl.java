@@ -43,17 +43,17 @@ public class DocumentServiceImpl implements DocumentService{
 	}
 
 	@Override
-	public List<Document> findByOrganization(Long organizationId) {
+	public Optional<Document> findByOrganization(Long organizationId) {
 		return documentRepository.findByOrganizationId(organizationId);
 	}
 
 	@Override
-	public List<Document> findByArea(Long areaId) {
+	public Optional<Document> findByArea(Long areaId) {
 	      return documentRepository.findByAreaId(areaId);
 	}
 
 	@Override
-	public List<Document> findByUploadedBy(Long userId) {
+	public Optional<Document> findByUploadedBy(Long userId) {
 	
 		   return documentRepository.findByUploadedById(userId);
 	}
@@ -62,6 +62,11 @@ public class DocumentServiceImpl implements DocumentService{
 	public void delete(Long id) {
 		documentRepository.deleteById(id);
 		
+	}
+
+	@Override
+	public List<Document> findAllDocuments() {
+		return documentRepository.findAll();
 	}
 
 }

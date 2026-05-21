@@ -3,6 +3,7 @@ package com.chat.demo.controller.rag;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,7 +49,7 @@ public class ConversationController {
 	    }
 	
 	//buscar conversacion por usuario relacionado
-	@GetMapping("conversationByUser/{id}")
+	@GetMapping("/conversation/user/{id}")
 	  @PreAuthorize("hasAnyRole('USER')")
 	    public List<Conversation> getConversationByUserId(@PathVariable Long id) {
 	        return conversaServ.findByUser(id);
@@ -57,7 +58,7 @@ public class ConversationController {
 	
 	// buscar conversacion por su titulo
 	
-	@GetMapping("title/{id}")
+	@GetMapping("/title/{id}")
 	  @PreAuthorize("hasAnyRole('USER')")
 	    public Optional<Conversation> getConversationByTitleId(@PathVariable String title) {
 	        return conversaServ.findByTitle(title);
@@ -68,7 +69,7 @@ public class ConversationController {
 	// buscar conversacion por usuario relacionado activo
 	
 
-	@GetMapping("enabledUser/{id}")
+	@GetMapping("/enabled/{id}")
 	  @PreAuthorize("hasAnyRole('USER','ADMIN')")
 	    public List<Conversation> getConversationByUserEnabledId(@PathVariable Long userId) {
 	        return conversaServ.findActiveByUser(userId);
@@ -84,7 +85,7 @@ public class ConversationController {
 	    }
 	*/
 
-	// modificar conversacion
+	// modificar conversacion obteniendo su id 
 	
 	  @PatchMapping("/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN')")
@@ -95,7 +96,7 @@ public class ConversationController {
 	
 	//eliminar conversacion
 	 
-	  @PatchMapping("/{id}")
+	  @DeleteMapping("/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN')")
 	  public void deleteConversation(@PathVariable Long id) {
 		  conversaServ.delete(id);

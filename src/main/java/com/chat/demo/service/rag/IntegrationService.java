@@ -15,7 +15,7 @@ public interface IntegrationService {
 
     List<Integration> findByOrganization(Long organizationId);
 
-    List<Integration> findActiveByOrganization(Long organizationId);
+   // List<Integration> findActiveByOrganization(Long organizationId);
 
     void deactivate(Long id);
 

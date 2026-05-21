@@ -1,0 +1,12 @@
+############# opcion 1 ################
+#spring:
+ # ai:
+ ##   ollama:
+ ##     base-url: http://localhost:11434
+   #   chat:
+    #    model: llama3
+		################ opcion 2 #########################
+		spring:
+		  ai:
+		    openai:
+		      api-key: ${OPENAI_API_KEY}		

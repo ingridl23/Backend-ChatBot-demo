@@ -52,12 +52,13 @@ public class IntegrationServiceImpl implements IntegrationService {
 		return integraRepo.findByOrganizationId(organizationId);
 	}
 
+	/*
 	@Override
 	public List<Integration> findActiveByOrganization(Long organizationId) {
 		
 		return integraRepo.findByOrganizationIdAndIsActiveTrue(organizationId);
 	}
-
+*/
 	@Override
 	public void deactivate(Long id) {
 	

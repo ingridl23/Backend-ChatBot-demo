@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User createUser(UserRequest request) {
 		   User user = User.builder()
-		            .userName(request.getUsername())
+		            .userName(request.getUserName())
 		            .password(passwordEncoder.encode(request.getPassword()))
 		            .email(request.getEmail())
 		            .build();

@@ -1,13 +1,14 @@
 package com.chat.demo.service.rag;
 
 import java.util.List;
+//import java.util.List;
 import java.util.Optional;
 
 import com.chat.demo.model.Document;
 
 public interface DocumentService {
 	
-	 Document save(Document document);
+	    Document save(Document document);
 
 	    Document update(Long id, Document document);
 
@@ -15,12 +16,14 @@ public interface DocumentService {
 
 	    Optional<Document> findByTitle(String title);
 
-	    List<Document> findByOrganization(Long organizationId);
+	    Optional<Document> findByOrganization(Long organizationId);
 
-	    List<Document> findByArea(Long areaId);
+	    Optional<Document> findByArea(Long areaId);
 
-	    List<Document> findByUploadedBy(Long userId);
+	    Optional<Document> findByUploadedBy(Long userId);
 
 	    void delete(Long id);
+	    
+	    List<Document> findAllDocuments();
 
 }
