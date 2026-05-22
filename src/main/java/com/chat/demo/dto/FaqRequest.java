@@ -1,5 +1,6 @@
 package com.chat.demo.dto;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,13 +13,13 @@ public class FaqRequest {
 
 	@NotBlank
     private String answer;
-
+	@NotNull
     private Long organizationId;
-
+	@NotNull
     private Long areaId;
-
+    @NotBlank
     private Integer priority;
-
+    @NotNull
     private Boolean isActive;
 }
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chat.demo.dto.MessageRequest;
 import com.chat.demo.model.Message;
 import com.chat.demo.service.rag.MessageService;
 
@@ -33,7 +34,7 @@ public class MessageController {
 	
 	  @PostMapping
 	  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-	  public Message saveMessage(@RequestBody Message men) {
+	  public MessageRequest saveMessage(@RequestBody MessageRequest men) {
 		  return mensa.save(men);
 	  }
 	  
@@ -42,7 +43,7 @@ public class MessageController {
 	  
 	  @PutMapping("/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-	  public Message updateMessage(@PathVariable long id , @RequestBody Message men) {
+	  public MessageRequest updateMessage(@PathVariable long id , @RequestBody MessageRequest men) {
 		  return mensa.update(id, men);
 	  }
 
@@ -50,7 +51,7 @@ public class MessageController {
 	  
 	  @GetMapping("/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-	  public Optional<Message> findMessageById(@PathVariable Long id){
+	  public Optional<MessageRequest> findMessageById(@PathVariable Long id){
 		return mensa.findById(id);
 	  }
 	  
@@ -58,7 +59,7 @@ public class MessageController {
 	  
 	  @GetMapping("/title/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-	  public Optional<Message> findMessageByTitle(@PathVariable String title){
+	  public Optional<MessageRequest> findMessageByTitle(@PathVariable String title){
 		return mensa.findByTitle(title);
 	  }
 	  
@@ -66,7 +67,7 @@ public class MessageController {
 	  
 	  @GetMapping("/conversation/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-	  public List<Message> findMessageByConversationById(@PathVariable Long id){
+	  public List<MessageRequest> findMessageByConversationById(@PathVariable Long id){
 		return mensa.findByConversation(id);
 	  }
 	  
@@ -74,7 +75,7 @@ public class MessageController {
 	  // encuentra una conversacion por usuario
 	  @GetMapping("/user/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-	  public List<Message> findMessageByUser(@PathVariable Long id){
+	  public List<MessageRequest> findMessageByUser(@PathVariable Long id){
 		return mensa.findByUser(id);
 	  }
 	  

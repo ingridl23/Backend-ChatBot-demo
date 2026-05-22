@@ -16,69 +16,68 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chat.demo.model.AISettings;
+import com.chat.demo.dto.AISettingsRequest;
+
 
 import com.chat.demo.service.rag.AISettingsService;
 
-import lombok.Getter;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+
 
 @RestController
-@Getter
-@Setter
 @RequestMapping("/api/aisettings")
 
 @RequiredArgsConstructor
 public class AISettingsController {
 
-	private final AISettingsService AIserv;
+	private final AISettingsService aiServ;
 	
 	//crear o guardar una configuracion
 	@PostMapping
 	  @PreAuthorize("hasAnyRole('ADMIN')")
-	    public AISettings saveAI(@RequestBody AISettings request) {
-	        return AIserv.save(request);
+	    public AISettingsRequest saveAI( @Valid @RequestBody AISettingsRequest request) {
+	        return aiServ.save(request);
 	    }
 	
 	// modificar una configuracion de conexion de IA 
 	
 	 @PatchMapping("/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN')")
-	 public AISettings updateSettingsAI (@PathVariable Long id,@RequestBody AISettings request) {
-		 return AIserv.update(id,request);
+	 public AISettingsRequest updateSettingsAI ( @Valid @PathVariable Long id,@RequestBody AISettingsRequest request) {
+		 return aiServ.update(id,request);
 	 }
 	
 	 // buscar una configuracion por id
 	 
 	 @GetMapping("/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-	 public AISettings foundSettingsAIById (@PathVariable Long id,@RequestBody AISettings request) {
-		 return AIserv.update(id,request);
+	 public Optional<AISettingsRequest> foundSettingsAIById ( @Valid @PathVariable Long id) {
+		 return aiServ.findById(id);
 	 }
 	 
 	// buscar una configuracion por organizacion
 	 
 	 @GetMapping("/organization/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-	 public Optional <AISettings> foundSettingsAIByOrganizationId (@PathVariable Long id) {
-		 return AIserv.findByOrganizationId(id);
+	 public Optional <AISettingsRequest> foundSettingsAIByOrganizationId ( @Valid @PathVariable Long id) {
+		 return aiServ.findByOrganizationId(id);
 	 }
 	 
 	 
 	 // obtener la configuracion activa
 	 @GetMapping("/active/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-	 public AISettings foundActiveSettingsAIById (@PathVariable Long id) {
-		 return AIserv.getActiveSettings(id);
+	 public AISettingsRequest foundActiveSettingsAIById ( @Valid @PathVariable Long id) {
+		 return aiServ.getActiveSettings(id);
 	 }
 	 
 	 // obtener las configuraciones 
 	 
-	 @GetMapping("/")
+	 @GetMapping
 	  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-	 public List <AISettings> getActiveSettingsAll () {
-		 return AIserv.getActiveSettingsAll();
+	 public List <AISettingsRequest> getActiveSettingsAll () {
+		 return aiServ.getActiveSettingsAll();
 	 }
 	 
 	 // desactivar configuracion a una organizacion by id
@@ -86,8 +85,8 @@ public class AISettingsController {
 	 
 	  @PatchMapping("deactive/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN')")
-	  public void deactiveOrganizationById(@PathVariable Long id) {
-		  AIserv.deactivateAllByOrganization(id);
+	  public void deactiveOrganizationById( @Valid @PathVariable Long id) {
+		  aiServ.deactivateAllByOrganization(id);
 	  }
 	  
 	  
@@ -95,8 +94,8 @@ public class AISettingsController {
 		 
 	  @DeleteMapping("/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN')")
-	  public void deleteConfiguration(@PathVariable Long id) {
-		  AIserv.delete(id);
+	  public void deleteConfiguration( @Valid @PathVariable Long id) {
+		  aiServ.delete(id);
 	  }
 	 
 }

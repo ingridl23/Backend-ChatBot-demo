@@ -3,6 +3,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+
+import com.chat.demo.dto.AISettingsRequest;
+import com.chat.demo.mapper.AISettingsMapper;
 import com.chat.demo.model.AISettings;
 import com.chat.demo.repository.AISettingsRepository;
 import com.chat.demo.service.rag.AISettingsService;
@@ -13,50 +16,72 @@ import lombok.RequiredArgsConstructor;
 public class AISettingsServiceImpl implements AISettingsService{
 
 	private final AISettingsRepository aiSettingsRepository;
+	  private final AISettingsMapper mapper;
 	@Override
-	public AISettings save(AISettings settings) {
-		  settings.setCreatedAt(LocalDateTime.now());
-	        settings.setUpdatedAt(LocalDateTime.now());
-
-	        return aiSettingsRepository.save(settings);
-	}
-
-	@Override
-	public AISettings update(Long id, AISettings settings) {
+	public AISettingsRequest save(AISettingsRequest settings) {
 		
-		  AISettings existing = aiSettingsRepository.findById(id)
-	                .orElseThrow(() -> new RuntimeException("AI settings not found"));
+		
+	       AISettings entity =
+	                mapper.toEntity(settings);
 
-	        existing.setModelName(settings.getModelName());
-	        existing.setProvider(settings.getProvider());
-	        existing.setTemperature(settings.getTemperature());
-	        existing.setSystemPrompt(settings.getSystemPrompt());
-	        existing.setMaxTokens(settings.getMaxTokens());
-	        existing.setActive(settings.getActive());
-	        existing.setUpdatedAt(LocalDateTime.now());
+	        entity.setCreatedAt(LocalDateTime.now());
+	        entity.setUpdatedAt(LocalDateTime.now());
 
-	        return aiSettingsRepository.save(existing);
+	        AISettings saved =
+	                aiSettingsRepository.save(entity);
+
+	        return mapper.toResponse(saved);
 	}
 
 	@Override
-	public Optional<AISettings> findById(Long id) {
-		  return aiSettingsRepository.findById(id);
+	public AISettingsRequest update(Long id, AISettingsRequest settings) {
+		
+		AISettings entity = aiSettingsRepository.findById(id)
+		        .orElseThrow(() ->
+		                new RuntimeException("AI settings not found"));
+
+		entity.setModelName(settings.getModelName());
+		entity.setProvider(settings.getProvider());
+		entity.setTemperature(settings.getTemperature());
+		entity.setSystemPrompt(settings.getSystemPrompt());
+		entity.setMaxTokens(settings.getMaxTokens());
+		entity.setActive(settings.getActive());
+		entity.setUpdatedAt(LocalDateTime.now());
+
+		   AISettings saved =
+	                aiSettingsRepository.save(entity);
+
+	        return mapper.toResponse(saved);
 	}
 
 	@Override
-	public Optional<AISettings> findByOrganizationId(Long organizationId) {
-		 List<AISettings> settings = aiSettingsRepository.findByOrganizationId(organizationId);
-
-	        return settings.stream().findFirst();
+	public Optional<AISettingsRequest> findById(Long id) {
+		
+		
+		   return aiSettingsRepository.findById(id)
+		            .map(mapper::toResponse);
 	}
 
 	@Override
-	public AISettings getActiveSettings(Long organizationId) {
-		return aiSettingsRepository
-                .findByOrganizationIdAndActiveTrue(organizationId)
-                .orElseThrow(() -> new RuntimeException("Active AI settings not found"));
+	public Optional<AISettingsRequest> findByOrganizationId(Long organizationId) {
+	    List<AISettings> settings =
+	            aiSettingsRepository.findByOrganizationId(organizationId);
+
+	    return settings.stream()
+	            .findFirst()
+	            .map(mapper::toResponse);
 	}
 
+	@Override
+	public AISettingsRequest getActiveSettings(Long organizationId) {
+		AISettings entity = aiSettingsRepository
+	            .findByOrganizationIdAndActiveTrue(organizationId)
+	            .orElseThrow(() ->
+	                    new RuntimeException("Active AI settings not found"));
+
+	    return mapper.toResponse(entity);
+	}
+	
 	@Override
 	public void deactivateAllByOrganization(Long organizationId) {
 		   List<AISettings> settingsList =
@@ -75,8 +100,22 @@ public class AISettingsServiceImpl implements AISettingsService{
 	}
 
 	@Override
-	public List <AISettings> getActiveSettingsAll() {
-		return aiSettingsRepository.findAll();
+	public List <AISettingsRequest> getActiveSettingsAll() {
+		   return aiSettingsRepository.findAll()
+		            .stream()
+		            .map(mapper::toResponse)
+		            .toList();
+	}
+
+	@Override
+	public Optional<AISettingsRequest> findByUserName(String name) {
+		
+		   Optional<AISettings> settings =
+		            aiSettingsRepository.findByModelName(name);
+
+		    return settings.stream()
+		            .findFirst()
+		            .map(mapper::toResponse);
 	}
 
 }

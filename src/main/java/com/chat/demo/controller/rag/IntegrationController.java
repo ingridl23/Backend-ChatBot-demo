@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chat.demo.dto.IntegrationRequest;
 import com.chat.demo.model.Integration;
 import com.chat.demo.service.rag.IntegrationService;
 
@@ -35,7 +36,7 @@ public class IntegrationController {
 	
 	  @PostMapping
 	  @PreAuthorize("hasAnyRole('ADMIN')")
-	  public Integration integrationSave(@RequestBody Integration integration) {
+	  public IntegrationRequest integrationSave(@RequestBody IntegrationRequest integration) {
 		  return integraServ.save(integration);
 	  }
 	  
@@ -43,7 +44,7 @@ public class IntegrationController {
 	  
 	  @PutMapping("/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN')")
-	  public Integration integrationUpdate(@PathVariable Long id , @RequestBody Integration integra) {
+	  public IntegrationRequest integrationUpdate(@PathVariable Long id , @RequestBody IntegrationRequest integra) {
 		  return integraServ.update(id,integra);
 	  }
 	
@@ -52,7 +53,7 @@ public class IntegrationController {
 	  
 	  @GetMapping("/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN')")
-	  public Optional <Integration> getIntegrationById(@PathVariable Long id){
+	  public Optional <IntegrationRequest> getIntegrationById(@PathVariable Long id){
 		   return integraServ.findById(id);
 	  }
 	  
@@ -62,7 +63,7 @@ public class IntegrationController {
 	  
 	  @GetMapping("/name/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN')")
-	  public Optional<Integration> getIntegrationByName(@PathVariable String name){
+	  public Optional<IntegrationRequest> getIntegrationByName(@PathVariable String name){
 		   return integraServ.findByName(name);
 	  }
 	  
@@ -70,7 +71,7 @@ public class IntegrationController {
 	  
 	  @GetMapping("/organization/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN')")
-	  public List<Integration> getIntegrationByOrganization(@PathVariable Long id){
+	  public List<IntegrationRequest> getIntegrationByOrganization(@PathVariable Long id){
 		   return integraServ.findByOrganization(id);
 	  }
 	  

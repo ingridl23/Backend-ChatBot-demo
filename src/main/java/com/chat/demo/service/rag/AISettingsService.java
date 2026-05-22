@@ -1,6 +1,8 @@
 package com.chat.demo.service.rag;
 import java.util.List;
 import java.util.Optional;
+
+import com.chat.demo.dto.AISettingsRequest;
 import com.chat.demo.model.AISettings;
 
 /**
@@ -24,19 +26,24 @@ Decisión arquitectónica.
  */
 
 public interface AISettingsService {
-	AISettings save(AISettings settings);
+	
+	
+	AISettingsRequest save(AISettingsRequest settings);
 
-    AISettings update(Long id, AISettings settings);
+	AISettingsRequest update(Long id, AISettingsRequest settings);
 
-    Optional<AISettings> findById(Long id);
+    Optional<AISettingsRequest> findById(Long id);
 
-    Optional<AISettings> findByOrganizationId(Long organizationId);
-
-    AISettings getActiveSettings(Long organizationId);
+    Optional<AISettingsRequest> findByOrganizationId(Long organizationId);
     
-    List <AISettings> getActiveSettingsAll();
+    Optional<AISettingsRequest> findByUserName(String name);
+    AISettingsRequest getActiveSettings(Long organizationId);
+    
+    List <AISettingsRequest> getActiveSettingsAll();
 
     void deactivateAllByOrganization(Long organizationId);
 
     void delete(Long id);
+    
+    
 }

@@ -2,6 +2,7 @@ package com.chat.demo.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 
 import java.time.LocalDateTime;
 
@@ -37,10 +38,12 @@ public class Message {
     private SenderType senderType;
 
     
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "conversation_id")
     private Conversation conversation;
     
     private LocalDateTime createdAt;
-	
+    
+    private LocalDateTime updatedAt;
 }

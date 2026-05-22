@@ -64,6 +64,7 @@ public class Integration {
     
     private LocalDateTime createdAt;
     
+    private LocalDateTime updatedAt;
     
 	
 }

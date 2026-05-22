@@ -1,21 +1,23 @@
 package com.chat.demo.service.rag;
 import java.util.List;
 import java.util.Optional;
+
+import com.chat.demo.dto.OrganizationRequest;
 import com.chat.demo.model.Organization;
 
 public interface OrganizationService {
 	
-	    Organization save(Organization organization);
+	    OrganizationRequest save(OrganizationRequest organization);
 
-	    Organization update(Long id, Organization organization);
+	    OrganizationRequest update(Long id, OrganizationRequest organization);
 
-	    Optional<Organization> findById(Long id);
+	    Optional<OrganizationRequest> findById(Long id);
 
-	    Optional<Organization> findByName(String name);
+	    Optional<OrganizationRequest> findByName(String name);
 
-	    Optional<Organization> findByDomain(String domain);
+	    Optional<OrganizationRequest> findByDomain(String domain);
 
-	    List<Organization> findAll();
+	    List<OrganizationRequest> findAll();
 
 	    void delete(Long id);
 

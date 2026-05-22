@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chat.demo.dto.DocumentRequest;
 import com.chat.demo.model.Document;
 
 import com.chat.demo.service.rag.DocumentService;
@@ -35,7 +36,7 @@ public class DocumentController {
 	//crear o guardar una configuracion
 		  @PostMapping
 		  @PreAuthorize("hasAnyRole('ADMIN')")
-		    public Document documentSave(@RequestBody Document request) {
+		    public DocumentRequest documentSave(@RequestBody DocumentRequest request) {
 		        return docServ.save(request);
 		    }
 		  
@@ -45,7 +46,7 @@ public class DocumentController {
 		
 		 @PutMapping("/{id}")
 		  @PreAuthorize("hasAnyRole('ADMIN')")
-		 public Document documentUpdate (@PathVariable Long id,@RequestBody Document request) {
+		 public DocumentRequest documentUpdate (@PathVariable Long id,@RequestBody DocumentRequest request) {
 			 return docServ.update(id,request);
 		 }
 		
@@ -53,7 +54,7 @@ public class DocumentController {
 		 
 		 @GetMapping("/{id}")
 		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-		 public Optional<Document> foundDocumentationById (@PathVariable Long id) {
+		 public Optional<DocumentRequest> foundDocumentationById (@PathVariable Long id) {
 			 return docServ.findById(id);
 		 }
 		 
@@ -62,7 +63,7 @@ public class DocumentController {
 		 
 		 @GetMapping("/title/{id}")
 		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-		 public Optional<Document> foundDocumentationByTitle (@PathVariable String title) {
+		 public Optional<DocumentRequest> foundDocumentationByTitle (@PathVariable String title) {
 			 return docServ.findByTitle(title);
 		 }
 		 
@@ -70,7 +71,7 @@ public class DocumentController {
 		 // obtener la documentacion por organizacion
 		  @GetMapping("/organization/{id}")
 		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-		 public Optional <Document> foundDocumentationByOrganization (@PathVariable Long id) {
+		 public Optional <DocumentRequest> foundDocumentationByOrganization (@PathVariable Long id) {
 			 return docServ.findByOrganization(id);
 		 }
 		 
@@ -79,7 +80,7 @@ public class DocumentController {
 		 
 		  @GetMapping("/area/{id}")
 		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-		 public Optional <Document> foundDocumentationByArea (@PathVariable Long id) {
+		 public Optional <DocumentRequest> foundDocumentationByArea (@PathVariable Long id) {
 			 return docServ.findByArea(id);
 		 }
 		 
@@ -88,7 +89,7 @@ public class DocumentController {
 		  
 		  @GetMapping("/user/{id}")
 		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-		 public Optional <Document> foundDocumentationByUser (@PathVariable Long id) {
+		 public Optional <DocumentRequest> foundDocumentationByUser (@PathVariable Long id) {
 			 return docServ.findByUploadedBy(id);
 		 }
 		 
@@ -97,7 +98,7 @@ public class DocumentController {
 		 
 		 @GetMapping("/")
 		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-		 public List <Document> getDocumentsAll() {
+		 public List <DocumentRequest> getDocumentsAll() {
 			 return docServ.findAllDocuments();
 		 }
 		 

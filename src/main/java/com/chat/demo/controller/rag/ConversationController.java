@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.chat.demo.dto.ConversationRequest;
+
 import com.chat.demo.model.Conversation;
 import com.chat.demo.service.rag.ConversationService;
 
@@ -29,12 +30,12 @@ public class ConversationController {
 
 	private final ConversationService conversaServ;
 	
-	
+
 	//crear , guardar o comenzar conversacion
 	
 	@PostMapping
 	  @PreAuthorize("hasAnyRole('USER','ADMIN')")
-	    public Conversation createConversation(@RequestBody ConversationRequest request) {
+	    public ConversationRequest createConversation(@RequestBody ConversationRequest request) {
 	        return conversaServ.createConversation(request.getUserId(), request.getTitle());
 	    }
 	
@@ -44,14 +45,14 @@ public class ConversationController {
 	
 	@GetMapping("/{id}")
 	  @PreAuthorize("hasAnyRole('USER')")
-	    public Optional<Conversation> getConversationById(@PathVariable Long id) {
+	    public Optional<ConversationRequest> getConversationById(@PathVariable Long id) {
 	        return conversaServ.findById(id);
 	    }
 	
 	//buscar conversacion por usuario relacionado
 	@GetMapping("/conversation/user/{id}")
 	  @PreAuthorize("hasAnyRole('USER')")
-	    public List<Conversation> getConversationByUserId(@PathVariable Long id) {
+	    public List<ConversationRequest> getConversationByUserId(@PathVariable Long id) {
 	        return conversaServ.findByUser(id);
 	    }
 	
@@ -60,7 +61,7 @@ public class ConversationController {
 	
 	@GetMapping("/title/{id}")
 	  @PreAuthorize("hasAnyRole('USER')")
-	    public Optional<Conversation> getConversationByTitleId(@PathVariable String title) {
+	    public Optional<ConversationRequest> getConversationByTitleId(@PathVariable String title) {
 	        return conversaServ.findByTitle(title);
 	    }
 	
@@ -71,7 +72,7 @@ public class ConversationController {
 
 	@GetMapping("/enabled/{id}")
 	  @PreAuthorize("hasAnyRole('USER','ADMIN')")
-	    public List<Conversation> getConversationByUserEnabledId(@PathVariable Long userId) {
+	    public List<ConversationRequest> getConversationByUserEnabledId(@PathVariable Long userId) {
 	        return conversaServ.findActiveByUser(userId);
 	    }
 	
@@ -89,7 +90,7 @@ public class ConversationController {
 	
 	  @PatchMapping("/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN')")
-     public Conversation updateConversation(@PathVariable Long id, @RequestBody Conversation request) {
+     public ConversationRequest updateConversation(@PathVariable Long id, @RequestBody Conversation request) {
 	   return conversaServ.update(id,request);
   }
 	

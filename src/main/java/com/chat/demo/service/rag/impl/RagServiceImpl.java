@@ -60,7 +60,7 @@ public class RagServiceImpl implements RagService {
 
     @Override
     public ChatResponse ask(ChatRequest request) {
-
+/*
         List<Document> docs =
                 searchRelevantChunks(request.getQuestion());
 
@@ -79,11 +79,11 @@ public class RagServiceImpl implements RagService {
                 .user(prompt)
                 .call()
                 .content();
-
+*/
         ChatResponse response = new ChatResponse();
 
-        response.setAnswer(answer);
-
+        //response.setAnswer(answer);
+        response.setAnswer("IA temporalmente no disponible");
         return response;
     }
 }

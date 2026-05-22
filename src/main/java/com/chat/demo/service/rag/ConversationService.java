@@ -2,26 +2,26 @@ package com.chat.demo.service.rag;
 import java.util.List;
 import java.util.Optional;
 
+import com.chat.demo.dto.ConversationRequest;
 
-import com.chat.demo.model.Conversation;
 
 
 
 public interface ConversationService {
 
-	   Conversation save(Conversation conversation);
+	    ConversationRequest saveConversation(ConversationRequest conversation);
 
-	    Conversation createConversation(Long userId, String title);
+	  //  ConversationRequest createConversation(Long userId, String title);
 
-	    Conversation update(Long id,Conversation request);
+	    ConversationRequest updateConversation(Long id,ConversationRequest request);
 
-	    Optional<Conversation> findById(Long id);
+	    Optional<ConversationRequest> findById(Long id);
 
-	    Optional<Conversation> findByTitle(String title);
+	    Optional<ConversationRequest> findByTitle(String title);
 
-	    List<Conversation> findByUser(Long userId);
+	    List<ConversationRequest> findByUser(Long userId);
 
-	    List<Conversation> findActiveByUser(Long userId);
+	    List<ConversationRequest> findActiveByUser(Long userId);
 
 	    void closeConversation(Long id);
 

@@ -20,10 +20,14 @@ public class ConversationMapper {
 
 	public ConversationRequest toResponse(Conversation con) {
 	    ConversationRequest dto = new ConversationRequest();
-	    
+	    dto.setId(con.getId());
 	    dto.setTitle(con.getTitle());
 	    dto.setStatus(con.getStatus());
 	    
+	    if (con.getUser() != null) {
+	        dto.setUserId(con.getUser().getId());
+	    }
+
 	    return dto;
 	    
 	    

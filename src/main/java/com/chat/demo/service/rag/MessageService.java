@@ -1,23 +1,24 @@
 package com.chat.demo.service.rag;
 import java.util.List;
 import java.util.Optional;
-import com.chat.demo.model.Message;
+
+import com.chat.demo.dto.MessageRequest;
 
 
 public interface MessageService {
 
 	
-	    Message save(Message message);
+	    MessageRequest save(MessageRequest message);
 
-	    Message update(Long id, Message message);
+	    MessageRequest update(Long id, MessageRequest message);
 
-	    Optional<Message> findById(Long id);
+	    Optional<MessageRequest> findById(Long id);
 
-	    Optional<Message> findByTitle(String title);
+	    Optional<MessageRequest> findByTitle(String title);
 
-	    List<Message> findByConversation(Long conversationId);
+	    List<MessageRequest> findByConversation(Long conversationId);
 
-	    List<Message> findByUser(Long userId);
+	    List<MessageRequest> findByUser(Long userId);
 
 	    void delete(Long id);
 	

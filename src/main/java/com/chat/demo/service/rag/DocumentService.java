@@ -4,26 +4,27 @@ import java.util.List;
 //import java.util.List;
 import java.util.Optional;
 
-import com.chat.demo.model.Document;
+import com.chat.demo.dto.DocumentRequest;
+
 
 public interface DocumentService {
 	
-	    Document save(Document document);
+	    DocumentRequest save(DocumentRequest document);
 
-	    Document update(Long id, Document document);
+	    DocumentRequest update(Long id, DocumentRequest document);
 
-	    Optional<Document> findById(Long id);
+	    Optional<DocumentRequest> findById(Long id);
 
-	    Optional<Document> findByTitle(String title);
+	    Optional<DocumentRequest> findByTitle(String title);
 
-	    Optional<Document> findByOrganization(Long organizationId);
+	    Optional<DocumentRequest> findByOrganization(Long organizationId);
 
-	    Optional<Document> findByArea(Long areaId);
+	    Optional<DocumentRequest> findByArea(Long areaId);
 
-	    Optional<Document> findByUploadedBy(Long userId);
+	    Optional<DocumentRequest> findByUploadedBy(Long userId);
 
 	    void delete(Long id);
 	    
-	    List<Document> findAllDocuments();
+	    List<DocumentRequest> findAllDocuments();
 
 }

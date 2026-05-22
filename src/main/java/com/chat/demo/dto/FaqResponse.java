@@ -1,5 +1,6 @@
 package com.chat.demo.dto;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,9 +17,9 @@ public class FaqResponse {
     private String  organizationName;
 	@NotBlank
     private String areaName;
-
+	@NotNull
     private Integer priority;
-
+	@NotNull
     private Boolean isActive;
 }
 

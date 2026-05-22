@@ -47,6 +47,8 @@ public class Organization {
 	    private String supportEmail;
 	    
 	    private LocalDateTime createdAt;
+	    
+	    private LocalDateTime updatedAt;
 
 	    @OneToMany(mappedBy = "organization")
 	    private List<User> users;

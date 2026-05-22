@@ -2,6 +2,7 @@ package com.chat.demo.dto;
 
 import java.util.Set;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,9 +21,13 @@ public class UserRequest {
 	private String email;
 	@NotBlank
 	private String password;
+	@NotNull
 	private Boolean enabled ;
+	@NotNull
 	private Long organizationId;
+	@NotNull
 	private Long areaId;
+	@NotNull
 	private Set<Long> rolesId;
 	
 	

@@ -1,19 +1,21 @@
 package com.chat.demo.service.rag;
 import java.util.List;
 import java.util.Optional;
-import com.chat.demo.model.Integration;
+
+import com.chat.demo.dto.IntegrationRequest;
+
 
 public interface IntegrationService {
 
-	Integration save(Integration integration);
+	IntegrationRequest save(IntegrationRequest integration);
 
-    Integration update(Long id, Integration integration);
+	IntegrationRequest update(Long id, IntegrationRequest integration);
 
-    Optional<Integration> findById(Long id);
+    Optional<IntegrationRequest> findById(Long id);
 
-    Optional<Integration> findByName(String name);
+    Optional<IntegrationRequest> findByName(String name);
 
-    List<Integration> findByOrganization(Long organizationId);
+    Optional<IntegrationRequest> findByOrganization(Long organizationId);
 
    // List<Integration> findActiveByOrganization(Long organizationId);
 

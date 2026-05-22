@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class ChatController {
 
     private final ChatService chatService;
-
+    
     @PostMapping("/ask")
     public ChatResponse ask(
             @RequestBody ChatRequest request) {

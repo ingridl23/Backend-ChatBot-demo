@@ -1,4 +1,6 @@
 package com.chat.demo.model;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,5 +34,9 @@ public class Faq {
 	    private Integer priority;  //escala del 1 al 5
 	    
 	    private Boolean isActive;
+	    
+	    private LocalDateTime createdAt;
+	    
+	    private LocalDateTime uploadedAt;
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chat.demo.dto.FaqRequest;
 import com.chat.demo.model.Faq;
 import com.chat.demo.service.rag.FaqService;
 
@@ -34,7 +35,7 @@ public class FaqController {
 	// crear o guardar un faq
 	@PostMapping
 	  @PreAuthorize("hasAnyRole('ADMIN')")
-	public Faq faqSave(@RequestBody Faq request) {
+	public FaqRequest faqSave(@RequestBody FaqRequest request) {
 		return faqServ.save(request);
 	}
 	
@@ -42,7 +43,7 @@ public class FaqController {
 	// modificar un faq 
 	@PutMapping("/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN')")
-	public Faq faqUpdate(@PathVariable Long id , @RequestBody Faq request) {
+	public FaqRequest faqUpdate(@PathVariable Long id , @RequestBody FaqRequest request) {
 		
 		 return faqServ.update(id, request);
 	}
@@ -51,7 +52,7 @@ public class FaqController {
 	
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	public Optional<Faq> faqFoundById(@PathVariable Long id){
+	public Optional<FaqRequest> faqFoundById(@PathVariable Long id){
 		return faqServ.findById(id);
 	}
 
@@ -60,7 +61,7 @@ public class FaqController {
 	
 	@GetMapping("/question/{id}")
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	public Optional<Faq> faqFoundByQuestionId(@PathVariable String question){
+	public Optional<FaqRequest> faqFoundByQuestionId(@PathVariable String question){
 		return faqServ.findByQuestion(question);
 	}
 	
@@ -68,7 +69,7 @@ public class FaqController {
 	
 	@GetMapping("/organization/{id}")
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	public List<Faq> faqFoundByOrganizationId(@PathVariable Long organizationId){
+	public List<FaqRequest> faqFoundByOrganizationId(@PathVariable Long organizationId){
 		return faqServ.findByOrganization(organizationId);
 	}
 	
@@ -76,7 +77,7 @@ public class FaqController {
 	
 	@GetMapping("/area/{id}")
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	public List<Faq> faqFoundByAreaId(@PathVariable Long Id){
+	public List<FaqRequest> faqFoundByAreaId(@PathVariable Long Id){
 		return faqServ.findByArea(Id);
 	}
 	
@@ -85,7 +86,7 @@ public class FaqController {
 	
 	@GetMapping("/")
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	public List<Faq> faqListActive(){
+	public List<FaqRequest> faqListActive(){
 		return faqServ.findActive();
 	}
 	

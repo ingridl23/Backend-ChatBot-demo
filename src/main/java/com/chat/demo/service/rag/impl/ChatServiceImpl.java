@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.chat.demo.dto.ChatRequest;
 import com.chat.demo.dto.ChatResponse;
+import com.chat.demo.mapper.MessageMapper;
 import com.chat.demo.service.rag.ChatService;
 
 import com.chat.demo.service.rag.ConversationService;
@@ -18,6 +19,7 @@ public class ChatServiceImpl implements ChatService {
 
     private final ConversationService conversationService;
     private final MessageService messageService;
+    private final  MessageMapper mapper;
     private final RagService ragService;
 
     @Override

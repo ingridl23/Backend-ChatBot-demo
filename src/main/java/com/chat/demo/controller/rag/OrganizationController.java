@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chat.demo.dto.OrganizationRequest;
 import com.chat.demo.model.Organization;
 import com.chat.demo.service.rag.OrganizationService;
 
@@ -34,7 +35,7 @@ public class OrganizationController {
 	
 	@PostMapping
 	  @PreAuthorize("hasAnyRole('ADMIN')")
-	public Organization saveOrganization(@RequestBody Organization org) {
+	public OrganizationRequest saveOrganization(@RequestBody OrganizationRequest org) {
 		 return orgServ.save(org);
 	}
 	
@@ -42,7 +43,7 @@ public class OrganizationController {
 	
 	@PutMapping
 	  @PreAuthorize("hasAnyRole('ADMIN')")
-	public Organization updateOrganization(@PathVariable Long id ,@RequestBody Organization org) {
+	public OrganizationRequest updateOrganization(@PathVariable Long id ,@RequestBody OrganizationRequest org) {
 		 return orgServ.update(id,org);
 	}
 	
@@ -50,7 +51,7 @@ public class OrganizationController {
 	
 	@GetMapping("/{id}")
 	 @PreAuthorize("hasAnyRole('ADMIN','USER')")
-	public Optional<Organization> getOrganizationById(@PathVariable Long id){
+	public Optional<OrganizationRequest> getOrganizationById(@PathVariable Long id){
 		return orgServ.findById(id);
 	}
 	
@@ -58,7 +59,7 @@ public class OrganizationController {
 	
 	@GetMapping("/name/{id}")
 	 @PreAuthorize("hasAnyRole('ADMIN','USER')")
-	public Optional<Organization> getOrganizationByName(@PathVariable String name){
+	public Optional<OrganizationRequest> getOrganizationByName(@PathVariable String name){
 		return orgServ.findByName(name);
 	}
 	
@@ -66,7 +67,7 @@ public class OrganizationController {
 	
 	@GetMapping("/domain/{id}")
 	 @PreAuthorize("hasAnyRole('ADMIN','USER')")
-	public Optional<Organization> getOrganizationByDomain(@PathVariable String domain){
+	public Optional<OrganizationRequest> getOrganizationByDomain(@PathVariable String domain){
 		return orgServ.findByDomain(domain);
 	}
 	
@@ -74,7 +75,7 @@ public class OrganizationController {
 	
 	@GetMapping("/")
 	 @PreAuthorize("hasAnyRole('ADMIN','USER')")
-		public List<Organization> getOrganizations(){
+		public List<OrganizationRequest> getOrganizations(){
 			return orgServ.findAll();
 		}
 	

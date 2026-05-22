@@ -16,4 +16,6 @@ public interface MessageRepository extends JpaRepository<Message, Long>{
     List<Message> findByUserId(Long userId);
 
     List<Message> findByConversationIdOrderByCreatedAtAsc(Long conversationId);// render del chat (historial)
+
+    Optional<Message>findByStatus(Boolean status);
 }
