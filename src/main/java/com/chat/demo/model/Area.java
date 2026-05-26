@@ -29,7 +29,7 @@ public class Area {
     private List<User> users;
 
     @OneToMany(mappedBy = "area")
-    private List<Document> documents;
+    private List<DocumentStored> documents;
 
     @OneToMany(mappedBy = "area")
     private List<SystemLink> systems;

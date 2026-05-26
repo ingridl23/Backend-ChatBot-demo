@@ -1,6 +1,6 @@
 package com.chat.demo.controller.rag;
 
-import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,16 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chat.demo.dto.IntegrationRequest;
-import com.chat.demo.model.Integration;
+
 import com.chat.demo.service.rag.IntegrationService;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 @RestController
-@Getter
-@Setter
 @RequestMapping("/api/integrations")
 @RequiredArgsConstructor
 public class IntegrationController {
@@ -71,7 +67,7 @@ public class IntegrationController {
 	  
 	  @GetMapping("/organization/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN')")
-	  public List<IntegrationRequest> getIntegrationByOrganization(@PathVariable Long id){
+	  public Optional<IntegrationRequest> getIntegrationByOrganization(@PathVariable Long id){
 		   return integraServ.findByOrganization(id);
 	  }
 	  

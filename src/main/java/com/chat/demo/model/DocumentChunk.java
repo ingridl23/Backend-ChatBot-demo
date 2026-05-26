@@ -29,7 +29,7 @@ public class DocumentChunk {
 
 	  @ManyToOne
 	    @JoinColumn(name = "document_id")
-	    private Document document;
+	    private DocumentStored document;
 	  
 	  @Column(columnDefinition = "TEXT")
 	    private String content;

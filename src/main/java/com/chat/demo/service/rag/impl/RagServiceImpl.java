@@ -1,6 +1,7 @@
 package com.chat.demo.service.rag.impl;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import org.springframework.ai.chat.client.ChatClient;
@@ -13,6 +14,10 @@ import org.springframework.stereotype.Service;
 
 import com.chat.demo.dto.ChatRequest;
 import com.chat.demo.dto.ChatResponse;
+import com.chat.demo.model.DocumentChunk;
+import com.chat.demo.model.DocumentStored;
+import com.chat.demo.repository.DocumentChunkRepository;
+import com.chat.demo.repository.DocumentRepository;
 import com.chat.demo.service.rag.RagService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,28 +29,72 @@ public class RagServiceImpl implements RagService {
     private final VectorStore vectorStore;
 
     private final ChatClient chatClient;
+    private final DocumentRepository documentRepository;
+    private final DocumentChunkRepository chunkRepository;
 
+  
     @Override
-    public void ingestDocument(String filePath) {
+    public void ingestDocument(Long documentId) {
+
+        DocumentStored document = documentRepository.findById(documentId)
+                .orElseThrow(() ->
+                        new RuntimeException("Document not found"));
 
         PagePdfDocumentReader reader =
-                new PagePdfDocumentReader(filePath);
+                new PagePdfDocumentReader(document.getFilePath());
 
         List<Document> docs = reader.read();
 
         docs = new TokenTextSplitter().apply(docs);
 
+        docs.forEach(doc -> {
+
+            doc.getMetadata().put("organizationId",
+                    document.getOrganization().getId());
+
+            doc.getMetadata().put("areaId",
+                    document.getArea().getId());
+
+            doc.getMetadata().put("documentId",
+                    document.getId());
+
+            doc.getMetadata().put("fileName",
+                    document.getFileName());
+        });
+        
+        AtomicInteger index = new AtomicInteger(0);
+
+        docs.forEach(doc -> {
+
+            String embeddingId =
+                    "doc_" + document.getId()
+                    + "_chunk_" + index.get();
+
+            DocumentChunk chunk =
+                    DocumentChunk.builder()
+                    .document(document)
+                    .content(doc.getText())
+                    .chunkIndex(index.get())
+                    .embeddingId(embeddingId)
+                    .build();
+
+            chunkRepository.save(chunk);
+            index.incrementAndGet();
+        });
         vectorStore.add(docs);
     }
 
     @Override
-    public List<Document> searchRelevantChunks(String question) {
+    public List<Document> searchRelevantChunks(String question, Long organizationId) {
 
-        SearchRequest request = SearchRequest.builder()
-                .query(question)
-                .topK(5)
-                .similarityThreshold(0.7)
-                .build();
+    	SearchRequest request = SearchRequest.builder()
+    	        .query(question)
+    	        .topK(5)
+    	        .similarityThreshold(0.7)
+    	        .filterExpression(
+    	            "organizationId == " + organizationId
+    	        )
+    	        .build();
 
         return vectorStore.similaritySearch(request);
     }
@@ -60,30 +109,57 @@ public class RagServiceImpl implements RagService {
 
     @Override
     public ChatResponse ask(ChatRequest request) {
-/*
+
         List<Document> docs =
-                searchRelevantChunks(request.getQuestion());
+                searchRelevantChunks(request.getQuestion(), request.getOrganizationId());
 
         String context = buildContext(docs);
 
         String prompt = """
-                CONTEXTO:
-                %s
+        		CONTEXTO:
+        		%s
 
-                PREGUNTA:
-                %s
-                """.formatted(context, request.getQuestion());
+        		PREGUNTA:
+        		%s
+        		""".formatted(context, request.getQuestion());
 
         String answer = chatClient
                 .prompt()
                 .user(prompt)
                 .call()
                 .content();
-*/
+
         ChatResponse response = new ChatResponse();
 
-        //response.setAnswer(answer);
-        response.setAnswer("IA temporalmente no disponible");
+        response.setAnswer(answer);
+     //   response.setAnswer("IA temporalmente no disponible");
         return response;
     }
+    
+    
+ /**
+     * El pipeline completo quedó:
+
+UPLOAD PDF
+    ↓
+DocumentService.upload()
+    ↓
+guardar archivo físico
+    ↓
+guardar metadata SQL
+    ↓
+RagService.ingestDocument()
+    ↓
+PDF Reader
+    ↓
+Chunking
+    ↓
+Embeddings
+    ↓
+PGVector
+
+     */
+    
+    
+    
 }

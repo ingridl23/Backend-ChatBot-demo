@@ -1,17 +1,20 @@
 package com.chat.demo.mapper;
 
 import org.springframework.stereotype.Component;
+
+import com.chat.demo.dto.DocumentResponse;
+
 import com.chat.demo.dto.DocumentRequest;
-import com.chat.demo.model.Document;
+import com.chat.demo.model.DocumentStored;
 
 
 
 @Component
 public class DocumentMapper {
 
-	  public Document toEntity(DocumentRequest dto) {
+	  public DocumentStored toEntity(DocumentRequest dto) {
 
-	        return Document.builder()
+	        return DocumentStored.builder()
 	                .title(dto.getTitle())
 	                .fileName(dto.getFileName())
 	                .mimeType(dto.getMimeType())
@@ -19,15 +22,39 @@ public class DocumentMapper {
 	                .build();
 	    }
 
-	    public DocumentRequest toResponse(Document entity) {
+	    public DocumentResponse toResponse(DocumentStored entity) {
 
-	        DocumentRequest dto = new DocumentRequest();
+	        DocumentResponse dto = new DocumentResponse();
+
+	        dto.setId(entity.getId());
 
 	        dto.setTitle(entity.getTitle());
+
 	        dto.setFileName(entity.getFileName());
+
 	        dto.setMimeType(entity.getMimeType());
+
 	        dto.setFileSize(entity.getFileSize());
-	      
+
+	        dto.setCreatedAt(entity.getCreatedAt());
+
+	        dto.setUploadedAt(entity.getUploadedAt());
+
+	        if(entity.getStatus() != null) {
+	            dto.setStatusId(entity.getStatus().getId());
+	        }
+
+	        if(entity.getOrganization() != null) {
+	            dto.setOrganizationId(entity.getOrganization().getId());
+	        }
+
+	        if(entity.getArea() != null) {
+	            dto.setAreaId(entity.getArea().getId());
+	        }
+
+	        if(entity.getUploadedBy() != null) {
+	            dto.setUploadedById(entity.getUploadedBy().getId());
+	        }
 
 	        return dto;
 	    }

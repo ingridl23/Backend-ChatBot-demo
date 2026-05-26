@@ -1,52 +1,48 @@
 package com.chat.demo.controller.rag;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.chat.demo.dto.DocumentRequest;
-import com.chat.demo.model.Document;
+import com.chat.demo.dto.DocumentResponse;
 
 import com.chat.demo.service.rag.DocumentService;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+
 
 @RestController
-@Getter
-@Setter
 @RequestMapping("/api/documents")
 @RequiredArgsConstructor
 public class DocumentController {
 
 	private final  DocumentService docServ;
-	
-	
 	//crear o guardar una configuracion
 		  @PostMapping
 		  @PreAuthorize("hasAnyRole('ADMIN')")
-		    public DocumentRequest documentSave(@RequestBody DocumentRequest request) {
+		    public DocumentResponse documentSave(@RequestBody DocumentRequest request) {
 		        return docServ.save(request);
-		    }
-		  
-		  
+		    }				  
 		
 		// modificar una documentacion cargada
 		
 		 @PutMapping("/{id}")
 		  @PreAuthorize("hasAnyRole('ADMIN')")
-		 public DocumentRequest documentUpdate (@PathVariable Long id,@RequestBody DocumentRequest request) {
+		 public DocumentResponse documentUpdate (@PathVariable Long id,@RequestBody DocumentRequest request) {
 			 return docServ.update(id,request);
 		 }
 		
@@ -54,34 +50,34 @@ public class DocumentController {
 		 
 		 @GetMapping("/{id}")
 		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-		 public Optional<DocumentRequest> foundDocumentationById (@PathVariable Long id) {
+		 public List<DocumentResponse> foundDocumentationById (@PathVariable Long id) {
 			 return docServ.findById(id);
 		 }
 		 
 		 
 		// buscar una documentacion por su titulo
 		 
-		 @GetMapping("/title/{id}")
+		 @GetMapping("/title/{title}")
 		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-		 public Optional<DocumentRequest> foundDocumentationByTitle (@PathVariable String title) {
+		 public List<DocumentResponse> foundDocumentationByTitle (@PathVariable String title) {
 			 return docServ.findByTitle(title);
 		 }
 		 
 		 
 		 // obtener la documentacion por organizacion
-		  @GetMapping("/organization/{id}")
+		  @GetMapping("/organization/{organizationId}")
 		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-		 public Optional <DocumentRequest> foundDocumentationByOrganization (@PathVariable Long id) {
-			 return docServ.findByOrganization(id);
+		 public List <DocumentResponse> foundDocumentationByOrganization (@PathVariable Long organizationId) {
+			 return docServ.findByOrganization(organizationId);
 		 }
 		 
 		 
 		 // obtener documentacion por area (oficinas o especialidades)
 		 
-		  @GetMapping("/area/{id}")
+		  @GetMapping("/area/{areaId}")
 		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-		 public Optional <DocumentRequest> foundDocumentationByArea (@PathVariable Long id) {
-			 return docServ.findByArea(id);
+		 public List<DocumentResponse> foundDocumentationByArea (@PathVariable Long areaId) {
+			 return docServ.findByArea(areaId);
 		 }
 		 
 		 
@@ -89,21 +85,19 @@ public class DocumentController {
 		  
 		  @GetMapping("/user/{id}")
 		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-		 public Optional <DocumentRequest> foundDocumentationByUser (@PathVariable Long id) {
+		 public List<DocumentResponse> foundDocumentationByUser (@PathVariable Long id) {
 			 return docServ.findByUploadedBy(id);
 		 }
 		 
 		 
 		 // obtener las documentaciones
 		 
-		 @GetMapping("/")
+		 @GetMapping
 		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
-		 public List <DocumentRequest> getDocumentsAll() {
+		 public List <DocumentResponse> getDocumentsAll() {
 			 return docServ.findAllDocuments();
 		 }
-		 
-		 
-		  
+		   
 		//eliminar una documentacion
 			 
 		  @DeleteMapping("/{id}")
@@ -112,6 +106,34 @@ public class DocumentController {
 			  docServ.delete(id);
 		  }
 		 
+		  
+		  @PostMapping("/upload")
+		  @PreAuthorize("hasRole('ADMIN')")
+		  public DocumentResponse uploadDocument(
+		          @RequestParam("filePath") MultipartFile filePath,
+		          @RequestParam("title") String title,
+		          @RequestParam("organizationId") Long organizationId,
+		          @RequestParam("areaId") Long areaId,
+		          @RequestParam("statusId") Long statusId,
+		          @RequestParam("uploadedById") Long uploadedById
+		  ) {
+			  if (!filePath.getContentType().equals("application/pdf")) {
+				    throw new RuntimeException("Only PDF files allowed");
+				}
+			  
+			  if (filePath.getSize() > 10_000_000) {
+				    throw new RuntimeException("File too large");
+				}
+
+		      return docServ.upload(
+		              filePath,
+		              title,
+		              organizationId,
+		              areaId,
+		              statusId,
+		              uploadedById
+		      );
+		  }
 	
 	
 }

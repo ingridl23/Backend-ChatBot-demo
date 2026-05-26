@@ -21,14 +21,19 @@ import lombok.RequiredArgsConstructor;
 
 public class AuthController {
 
-	   private final AuthenticationManager authenticationManager;
+	    private final AuthenticationManager authenticationManager;
 	    private final UserDetailsService userDetailsService;
 	    private final JwtService jwtService;
 	    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
+	    
+	    
+	    
 	    @PostMapping("/login")
 	    public String login(@RequestBody LoginRequest request) {
 	    	
-	    try {	System.out.println("ENTRO LOGIN");
+	    try {
+	    	
+	    	System.out.println("ENTRO LOGIN");
 	        System.out.println("username: " + request.getUserName());
 	        System.out.println("password: " + request.getPassword());
 

@@ -3,17 +3,17 @@ package com.chat.demo.repository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.chat.demo.model.Document;
+import com.chat.demo.model.DocumentStored;
 
 
-public interface DocumentRepository extends JpaRepository<Document, Long>{
+public interface DocumentRepository extends JpaRepository<DocumentStored, Long>{
 
-	    Optional<Document>findByTitle(String title);
+	    Optional<DocumentStored>findByTitle(String title);
 
-	    List<Document> findByOrganizationId(Long organizationId);
+	    List<DocumentStored> findByOrganizationId(Long organizationId);
 
-	    List<Document> findByAreaId(Long areaId);
+	    List<DocumentStored> findByAreaId(Long areaId);
 
-	    List<Document> findByUploadedById(Long userId);
+	    List<DocumentStored> findByUploadedById(Long userId);
 	
 }

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Document {
+public class DocumentStored {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

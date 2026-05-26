@@ -24,6 +24,7 @@ public class DocumentRequest {
     private String mimeType;
     @NotNull
     private Long fileSize;
-	    
-	    
+    @NotNull
+    private String filePath;
+
 }

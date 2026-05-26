@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FaqResponse {
-
+	@NotNull
 	private Long id;
 	@NotBlank
 	private String question;
@@ -21,6 +21,10 @@ public class FaqResponse {
     private Integer priority;
 	@NotNull
     private Boolean isActive;
+	@NotNull
+	private Long organizationId;
+	@NotNull
+    private Long areaId;
 }
 
 

@@ -11,4 +11,8 @@ public class ChatRequest {
 	   private String question;
 	@NotNull
 	    private Long conversationId;
+	@NotNull
+    	private Long organizationId;
+	@NotNull
+	    private Long userId;
 }

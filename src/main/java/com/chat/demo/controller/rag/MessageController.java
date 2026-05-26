@@ -14,16 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chat.demo.dto.MessageRequest;
-import com.chat.demo.model.Message;
+
 import com.chat.demo.service.rag.MessageService;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+
 
 @RestController
-@Getter
-@Setter
 @RequestMapping("/api/messages")
 @RequiredArgsConstructor
 public class MessageController {

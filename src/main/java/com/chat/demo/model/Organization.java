@@ -57,7 +57,7 @@ public class Organization {
 	    private List<Area> areas;
 
 	    @OneToMany(mappedBy = "organization")
-	    private List<Document> documents;
+	    private List<DocumentStored> documents;
 	    
 	    @OneToMany(mappedBy = "organization")
 	    private List<Integration> integrations;

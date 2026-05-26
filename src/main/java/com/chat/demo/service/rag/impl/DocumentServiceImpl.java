@@ -2,22 +2,35 @@ package com.chat.demo.service.rag.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.chat.demo.dto.DocumentRequest;
+import com.chat.demo.dto.DocumentResponse;
 import com.chat.demo.mapper.DocumentMapper;
 
 import com.chat.demo.model.Area;
 
-import com.chat.demo.model.Document;
+import com.chat.demo.model.DocumentStored;
+import com.chat.demo.model.Organization;
+import com.chat.demo.model.User;
 import com.chat.demo.model.DocumentStatus;
 
 import com.chat.demo.repository.AreaRepository;
 import com.chat.demo.repository.DocumentRepository;
 import com.chat.demo.repository.DocumentStatusRepository;
+import com.chat.demo.repository.OrganizationRepository;
+import com.chat.demo.repository.UserRepository;
 import com.chat.demo.service.rag.DocumentService;
+import com.chat.demo.service.rag.RagService;
+
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Service
 @RequiredArgsConstructor
@@ -27,24 +40,45 @@ public class DocumentServiceImpl implements DocumentService{
 	private final DocumentStatusRepository docStatusRepo;
 	private final AreaRepository areaRepo;
 	private final DocumentMapper mapper;
-
+	private final OrganizationRepository organizationRepo;
+    private final RagService ragService;
+	private final UserRepository userRepo;
 	@Override
-	public DocumentRequest save(DocumentRequest document) {
-		Document entity = mapper.toEntity(document);
+	public DocumentResponse save(DocumentRequest document) {
+		
+		DocumentStored entity = mapper.toEntity(document);
 	    
-		  entity.setCreatedAt(LocalDateTime.now());
-	        entity.setUploadedAt(LocalDateTime.now());
+		DocumentStatus status = docStatusRepo.findById(document.getStatusId())
+	            .orElseThrow(() -> new RuntimeException("Status not found"));
 
-	        Document saved =
+	    Area area = areaRepo.findById(document.getAreaId())
+	            .orElseThrow(() -> new RuntimeException("Area not found"));
+
+	    Organization organization = organizationRepo
+	            .findById(document.getOrganizationId())
+	            .orElseThrow(() -> new RuntimeException("Organization not found"));
+
+	    User user = userRepo.findById(document.getUploadedById())
+	            .orElseThrow(() -> new RuntimeException("User not found"));
+	    
+	    
+	    entity.setStatus(status);
+	    entity.setArea(area);
+	    entity.setOrganization(organization);
+	    entity.setUploadedBy(user);
+		entity.setCreatedAt(LocalDateTime.now());
+	    entity.setUploadedAt(LocalDateTime.now());
+
+	        DocumentStored saved =
 	                documentRepository.save(entity);
 
 	        return mapper.toResponse(saved);
 	}
 
 	@Override
-	public DocumentRequest update(Long id, DocumentRequest document) {
+	public DocumentResponse update(Long id, DocumentRequest document) {
 
-	    Document existing = documentRepository.findById(id)
+	    DocumentStored existing = documentRepository.findById(id)
 	            .orElseThrow(() ->
 	                    new RuntimeException("Document not found"));
 
@@ -77,7 +111,7 @@ public class DocumentServiceImpl implements DocumentService{
 	        existing.setArea(area);
 	    }
 
-	    Document saved =
+	    DocumentStored saved =
 	            documentRepository.save(existing);
 
 	    return mapper.toResponse(saved);
@@ -85,48 +119,41 @@ public class DocumentServiceImpl implements DocumentService{
 	
 	
 	@Override
-	public Optional<DocumentRequest> findById(Long id) {
+	public List<DocumentResponse> findById(Long id) {
 
-		   return documentRepository.findById(id)
-		            .map(mapper::toResponse);
+		   return documentRepository.findById(id).stream()
+		            .map(mapper::toResponse).toList();
 	}
 
 	@Override
-	public Optional<DocumentRequest> findByTitle(String title) {
-		  Optional<Document> doc =
-		            documentRepository.findByTitle(title);
-
-		    return doc.stream()
-		            .findFirst()
-		            .map(mapper::toResponse);
+	public List<DocumentResponse> findByTitle(String title) {
+		
+		  return documentRepository.findByTitle(title)
+				  .stream().map(mapper::toResponse).toList();
 		
 		
 	}
 
 	@Override
-	public Optional<DocumentRequest> findByOrganization(Long organizationId) {
-		 List<Document> documents =
-		            documentRepository.findByOrganizationId(organizationId);
-
-		    return documents.stream()
-		            .findFirst()
-		            .map(mapper::toResponse);
+	public List<DocumentResponse> findByOrganization(Long organizationId) {
+		  return documentRepository.findByOrganizationId(organizationId)
+		            .stream()
+		            .map(mapper::toResponse)
+		            .toList();
 	}
 
 	@Override
-	public Optional<DocumentRequest> findByArea(Long areaId) {
+	public List<DocumentResponse> findByArea(Long areaId) {
 		
 		
-	      List <Document> docs = documentRepository.findByAreaId(areaId);
-	      
-	      return docs.stream().findFirst().map(mapper::toResponse);
+		 return  documentRepository.findByAreaId(areaId).stream().map(mapper::toResponse).toList();
 	}
 
 	@Override
-	public Optional<DocumentRequest> findByUploadedBy(Long userId) {
+	public List<DocumentResponse> findByUploadedBy(Long userId) {
 	
-		 List<Document> docs = documentRepository.findByUploadedById(userId);
-		 return docs.stream().findFirst().map(mapper::toResponse);
+		 return documentRepository.findByUploadedById(userId)
+				 .stream().map(mapper::toResponse).toList();
 	}
 
 	@Override
@@ -136,12 +163,97 @@ public class DocumentServiceImpl implements DocumentService{
 	}
 
 	@Override
-	public List<DocumentRequest> findAllDocuments() {
+	public List<DocumentResponse> findAllDocuments() {
 		return 	documentRepository.findAll()
 	            .stream()
 	            .map(mapper::toResponse)
 	            .toList();
 	
+	}
+
+	@Override
+	public DocumentResponse upload(MultipartFile file, String title, Long organizationId, Long areaId, Long statusId,
+			Long uploadedById) {
+	
+		 try {
+
+		        // carpeta uploads
+
+		        String uploadDir = "uploads/";
+
+		        Files.createDirectories(Paths.get(uploadDir));
+
+		        // nombre archivo
+
+		        String fileName =
+		                System.currentTimeMillis()
+		                + "_"
+		                + file.getOriginalFilename();
+
+		        // path final
+
+		        Path filePath =
+		                Paths.get(uploadDir, fileName);
+
+		        // guardar físico
+
+		        Files.copy(file.getInputStream(), filePath);
+
+		        // buscar relaciones
+
+		        DocumentStatus status =
+		                docStatusRepo.findById(statusId)
+		                .orElseThrow(() ->
+		                        new RuntimeException("Status not found"));
+
+		        Area area =
+		                areaRepo.findById(areaId)
+		                .orElseThrow(() ->
+		                        new RuntimeException("Area not found"));
+
+		        Organization organization =
+		                organizationRepo.findById(organizationId)
+		                .orElseThrow(() ->
+		                        new RuntimeException("Organization not found"));
+
+		        User user =
+		                userRepo.findById(uploadedById)
+		                .orElseThrow(() ->
+		                        new RuntimeException("User not found"));
+
+		        // crear entidad
+
+		        DocumentStored document =
+		                DocumentStored.builder()
+		                .title(title)
+		                .fileName(fileName)
+		                .mimeType(file.getContentType())
+		                .fileSize(file.getSize())
+		                .filePath(filePath.toString())
+		                .status(status)
+		                .area(area)
+		                .organization(organization)
+		                .uploadedBy(user)
+		                .createdAt(LocalDateTime.now())
+		                .uploadedAt(LocalDateTime.now())
+		                .build();
+
+		        DocumentStored saved =
+		                documentRepository.save(document);
+
+		        // RAG ingestion
+
+		        ragService.ingestDocument(saved.getId());
+
+		        return mapper.toResponse(saved);
+
+		    } catch (Exception e) {
+
+		        throw new RuntimeException("Upload failed");
+		    }
+		
+		
+		
 	}
 
 }

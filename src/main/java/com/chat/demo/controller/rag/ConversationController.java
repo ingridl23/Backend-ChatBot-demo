@@ -22,8 +22,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @RestController
-@Getter
-@Setter
 @RequestMapping("/api/conversation")
 @RequiredArgsConstructor
 public class ConversationController {
@@ -35,8 +33,8 @@ public class ConversationController {
 	
 	@PostMapping
 	  @PreAuthorize("hasAnyRole('USER','ADMIN')")
-	    public ConversationRequest createConversation(@RequestBody ConversationRequest request) {
-	        return conversaServ.createConversation(request.getUserId(), request.getTitle());
+	    public ConversationRequest saveConversation(@RequestBody ConversationRequest request) {
+	        return conversaServ.saveConversation(request);
 	    }
 	
 	
@@ -90,8 +88,8 @@ public class ConversationController {
 	
 	  @PatchMapping("/{id}")
 	  @PreAuthorize("hasAnyRole('ADMIN')")
-     public ConversationRequest updateConversation(@PathVariable Long id, @RequestBody Conversation request) {
-	   return conversaServ.update(id,request);
+     public ConversationRequest updateConversation(@PathVariable Long id, @RequestBody ConversationRequest request) {
+	   return conversaServ.updateConversation(id,request);
   }
 	
 	
