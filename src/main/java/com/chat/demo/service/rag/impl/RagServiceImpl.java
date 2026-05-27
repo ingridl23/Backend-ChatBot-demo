@@ -9,13 +9,14 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.SearchRequest;
-import org.springframework.ai.vectorstore.VectorStore;
+//import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Service;
 
 import com.chat.demo.dto.ChatRequest;
 import com.chat.demo.dto.ChatResponse;
 import com.chat.demo.model.DocumentChunk;
 import com.chat.demo.model.DocumentStored;
+
 import com.chat.demo.repository.DocumentChunkRepository;
 import com.chat.demo.repository.DocumentRepository;
 import com.chat.demo.service.rag.RagService;
@@ -26,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RagServiceImpl implements RagService {
 
-    private final VectorStore vectorStore;
+//private final VectorStore vectorStore;  lo descomentare luego de haber configurado docker con la extension pgvector
 
     private final ChatClient chatClient;
     private final DocumentRepository documentRepository;
@@ -81,7 +82,7 @@ public class RagServiceImpl implements RagService {
             chunkRepository.save(chunk);
             index.incrementAndGet();
         });
-        vectorStore.add(docs);
+        //vectorStore.add(docs); 
     }
 
     @Override
@@ -96,7 +97,8 @@ public class RagServiceImpl implements RagService {
     	        )
     	        .build();
 
-        return vectorStore.similaritySearch(request);
+       // return vectorStore.similaritySearch(request);
+        return List.of();
     }
 
     @Override
@@ -158,8 +160,7 @@ Embeddings
     ↓
 PGVector
 
-     */
-    
-    
+     */ 
     
 }
+

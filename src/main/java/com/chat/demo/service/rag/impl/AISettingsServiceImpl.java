@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.chat.demo.dto.AISettingsRequest;
 import com.chat.demo.mapper.AISettingsMapper;
 import com.chat.demo.model.AISettings;
+
 import com.chat.demo.repository.AISettingsRepository;
 import com.chat.demo.service.rag.AISettingsService;
 import lombok.RequiredArgsConstructor;

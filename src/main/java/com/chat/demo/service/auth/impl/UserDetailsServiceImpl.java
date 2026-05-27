@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 		    @Override
 		    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		    	 User user = userRepository.findByUsername(username)
+		    	 User user = userRepository.findByUserName(username)
 		    	            .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
 
 		    	    return new CustomUserDetails(user);

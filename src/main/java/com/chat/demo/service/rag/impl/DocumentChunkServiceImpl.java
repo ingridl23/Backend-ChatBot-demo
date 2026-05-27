@@ -24,8 +24,8 @@ public class DocumentChunkServiceImpl implements DocumentChunkService {
 	}
 
 	@Override
-	public Optional<DocumentChunk> findByChunkIndex(Integer index) {
-		return documentRepository.findByChuckIndex(index);
+	public List<DocumentChunk> findByChunkIndex(Integer chunkIndex) {
+		return documentRepository.findByChunkIndex(chunkIndex);
 	}
 
 	@Override

@@ -11,7 +11,7 @@ public interface DocumentChunkService  {
 
 	    Optional<DocumentChunk> findById(Long id);
 
-	    Optional<DocumentChunk> findByChunkIndex(Integer index);
+	    List<DocumentChunk> findByChunkIndex(Integer chunkIndex);
 
 	    List<DocumentChunk> findByDocument(Long documentId);
 

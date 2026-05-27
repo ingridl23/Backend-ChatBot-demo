@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.chat.demo.dto.MessageRequest;
 import com.chat.demo.mapper.MessageMapper;
-import com.chat.demo.model.AISettings;
-import com.chat.demo.model.DocumentStatus;
+//import com.chat.demo.model.AISettings;
+//import com.chat.demo.model.DocumentStatus;
+
+
 import com.chat.demo.model.Message;
-import com.chat.demo.model.MessageStatus;
+//import com.chat.demo.model.MessageStatus;
 import com.chat.demo.repository.MessageRepository;
 import com.chat.demo.service.rag.MessageService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class MessageServiceImpl implements MessageService{
 	
 	public final MessageRepository mensajeRepo;
-	
+
 	public final MessageMapper mapper;
 	
 	
@@ -38,7 +40,6 @@ public class MessageServiceImpl implements MessageService{
 
 	        return mapper.toResponse(saved);
 		
-	
 	}
 
 	
@@ -54,14 +55,17 @@ public class MessageServiceImpl implements MessageService{
 		entity.setMetadata(message.getMetadata());
 		
 		entity.setUpdatedAt(LocalDateTime.now());
-		 if (entity.getStatus() != null) {
+		
+		
+	    if (message.getStatus() != null) {
 
-		        MessageStatus status =
-		                mensajeRepo.findByStatus(message.getStatus())
-		                .orElseThrow(() ->
-		                        new RuntimeException("Message status not found"));
-		        entity.setStatus(message.getStatus());
-		    }
+	        Message existingMessage =
+	                mensajeRepo.findByStatus(message.getStatus())
+	                .orElseThrow(() ->
+	                        new RuntimeException("Message status not found"));
+
+	        entity.setStatus(message.getStatus());
+	    }
 		   Message saved =
 	                mensajeRepo.save(entity);
 

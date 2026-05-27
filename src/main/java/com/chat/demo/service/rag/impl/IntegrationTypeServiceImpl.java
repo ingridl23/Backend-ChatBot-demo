@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-
-import com.chat.demo.model.IntegrationType;
 import com.chat.demo.service.rag.IntegrationTypeService;
+import com.chat.demo.model.IntegrationType;
+import com.chat.demo.repository.IntegrationTypeRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class IntegrationTypeServiceImpl  implements IntegrationTypeService {
 	
-	private final IntegrationTypeService integraTyRepo;
+	private final IntegrationTypeRepository integraTyRepo;
 	
 	@Override
 	public IntegrationType save(IntegrationType type) {
@@ -38,7 +38,7 @@ public class IntegrationTypeServiceImpl  implements IntegrationTypeService {
 
 	@Override
 	public void delete(Long id) {
-		integraTyRepo.delete(id);
+		integraTyRepo.deleteById(id);
 		
 	}
 

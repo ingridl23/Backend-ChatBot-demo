@@ -4,20 +4,20 @@ import java.util.Date;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 //import io.jsonwebtoken.SignatureAlgorithm;
-import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
+//import jakarta.annotation.PostConstruct;
+//import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.AuthenticationManager;
+//import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 //import java.security.Key;
 import javax.crypto.SecretKey;
 import io.jsonwebtoken.io.Decoders;
 
 @Service
-@RequiredArgsConstructor
+
 public class JwtService {
 
 

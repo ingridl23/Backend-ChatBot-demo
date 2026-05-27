@@ -41,26 +41,29 @@ public class IntegrationServiceImpl implements IntegrationService {
 	@Override
 	public IntegrationRequest update(Long id, IntegrationRequest integration) {
 
-        Integration existing = integraRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Integration not found"));
+	    Integration existing = integraRepo.findById(id)
+	            .orElseThrow(() ->
+	                    new RuntimeException("Integration not found"));
 
-        existing.setName(integration.getName());
-        existing.setBaseUrl(integration.getBaseUrl());
-        existing.setApiKey(integration.getApyKey());
-        existing.setIsActive(integration.getIsActive());
-        
+	    existing.setName(integration.getName());
+	    existing.setBaseUrl(integration.getBaseUrl());
+	    existing.setApiKey(integration.getApyKey());
+	    existing.setIsActive(integration.getIsActive());
+	    existing.setUpdatedAt(LocalDateTime.now());
 
 	    if (integration.getTypeId() != null) {
 
 	        IntegrationType type =
 	                typeRepo.findById(integration.getTypeId())
 	                .orElseThrow(() ->
-	                        new RuntimeException("Integration status not found"));
-        existing.setType(integration.getTypeId());
+	                        new RuntimeException("Integration type not found"));
 
-        return integraRepo.save(existing);
+	        existing.setType(type);
 	    }
-    
+
+	    Integration saved = integraRepo.save(existing);
+
+	    return mapper.toResponse(saved);
 	}
 
 	@Override
@@ -77,7 +80,6 @@ public class IntegrationServiceImpl implements IntegrationService {
            .findFirst()
            .map(mapper::toResponse);
 
-		
 	}
 
 	@Override
