@@ -6,7 +6,8 @@
    #   chat:
     #    model: llama3
 		################ opcion 2 #########################
-		spring:
-		  ai:
-		    openai:
-		      api-key: ${OPENAI_API_KEY}		
+	# spring:
+		 # ai:
+		    #openai:
+				# api-key:  
+				

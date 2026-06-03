@@ -8,7 +8,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
-import org.springframework.ai.vectorstore.SearchRequest;
+//import org.springframework.ai.vectorstore.SearchRequest;
 //import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RagServiceImpl implements RagService {
 
-//private final VectorStore vectorStore;  lo descomentare luego de haber configurado docker con la extension pgvector
+   // private final VectorStore vectorStore; 
+	//lo descomentare luego de haber configurado docker con la extension pgvector // ya instale la extension pgvector en pgadmin
 
     private final ChatClient chatClient;
     private final DocumentRepository documentRepository;
@@ -64,7 +65,7 @@ public class RagServiceImpl implements RagService {
         });
         
         AtomicInteger index = new AtomicInteger(0);
-
+/*
         docs.forEach(doc -> {
 
             String embeddingId =
@@ -82,24 +83,61 @@ public class RagServiceImpl implements RagService {
             chunkRepository.save(chunk);
             index.incrementAndGet();
         });
-        //vectorStore.add(docs); 
+        //vectorStore.add(docs);     DESCOMENTAR CUANDO PAGUE OPENAI 
+        if (vectorStore != null) {
+            vectorStore.add(docs);
+        }
+        */
+        docs.forEach(doc -> {
+
+            String embeddingId =
+                    "doc_" + document.getId()
+                    + "_chunk_" + index.get();
+
+            DocumentChunk chunk =
+                    DocumentChunk.builder()
+                    .document(document)
+                    .content(doc.getText())
+                    .chunkIndex(index.get())
+                    .embeddingId(embeddingId)
+                    .build();
+
+            chunkRepository.save(chunk);
+            index.incrementAndGet();
+        });
+
+        // vectorStore.add(docs);
     }
 
     @Override
+    public List<Document> searchRelevantChunks(
+            String question,
+            Long organizationId) {
+
+        return chunkRepository
+                .findTop5ByDocumentOrganizationId(organizationId)
+                .stream()
+                .map(chunk -> new Document(chunk.getContent()))
+                .toList();
+    }
+    /*
+     * DESCOMENTAR CUANDO PAGUE OPENAI
     public List<Document> searchRelevantChunks(String question, Long organizationId) {
 
     	SearchRequest request = SearchRequest.builder()
     	        .query(question)
     	        .topK(5)
-    	        .similarityThreshold(0.7)
+    	        .similarityThreshold(0.5)
     	        .filterExpression(
     	            "organizationId == " + organizationId
     	        )
     	        .build();
 
-       // return vectorStore.similaritySearch(request);
+        //return vectorStore.similaritySearch(request);
         return List.of();
     }
+    
+    */
 
     @Override
     public String buildContext(List<Document> docs) {
@@ -108,8 +146,8 @@ public class RagServiceImpl implements RagService {
                 .map(Document::getText)
                 .collect(Collectors.joining("\n"));
     }
-
-    @Override
+/*
+    
     public ChatResponse ask(ChatRequest request) {
 
         List<Document> docs =
@@ -134,13 +172,50 @@ public class RagServiceImpl implements RagService {
         ChatResponse response = new ChatResponse();
 
         response.setAnswer(answer);
-     //   response.setAnswer("IA temporalmente no disponible");
+       // response.setAnswer("IA temporalmente no disponible");
         return response;
     }
     
+    */
+    @Override
+    public ChatResponse ask(ChatRequest request) {
+
+        String answer = chatClient
+                .prompt()
+                .user(request.getQuestion())
+                .call()
+                .content();
+
+        ChatResponse response = new ChatResponse();
+        response.setAnswer(answer);
+
+        return response;
+    }
     
- /**
-     * El pipeline completo quedó:
+    /**
+     * 
+     *  EL PIPELINE PARA PROBAR ARQUITECTURA ES : (antes de openai emmbeddings)
+     *  
+Frontend
+   ↓
+Controller
+   ↓
+RagService.ask()
+   ↓
+ Groq
+   ↓
+Respuesta
+     *  
+     *  
+     *  
+     *  
+     *  
+     *  
+     *  **/
+    
+    
+    
+     /** El pipeline completo quedó: (cuando se integre con openai)
 
 UPLOAD PDF
     ↓
@@ -163,4 +238,5 @@ PGVector
      */ 
     
 }
+
 

@@ -11,5 +11,5 @@ public interface DocumentChunkRepository extends JpaRepository<DocumentChunk, Lo
     List<DocumentChunk> findByDocumentOrganizationId(Long organizationId);
     List<DocumentChunk> findByEmbeddingId(String embedding);
 	List<DocumentChunk> findByChunkIndex(Integer chunkIndex);
-    
+	List<DocumentChunk> findTop5ByDocumentOrganizationId(Long organizationId);
 }
