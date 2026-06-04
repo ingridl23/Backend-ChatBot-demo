@@ -117,6 +117,9 @@ public class DocumentController {
 		          @RequestParam("statusId") Long statusId,
 		          @RequestParam("uploadedById") Long uploadedById
 		  ) {
+			  
+			   System.out.println("ENTRO AL UPLOAD");
+			   
 			  if (!filePath.getContentType().equals("application/pdf")) {
 				    throw new RuntimeException("Only PDF files allowed");
 				}

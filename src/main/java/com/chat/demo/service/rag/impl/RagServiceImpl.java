@@ -1,5 +1,8 @@
 package com.chat.demo.service.rag.impl;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -8,6 +11,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
+
 //import org.springframework.ai.vectorstore.SearchRequest;
 //import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Service;
@@ -27,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RagServiceImpl implements RagService {
 
-   // private final VectorStore vectorStore; 
+     // private final VectorStore vectorStore; 
 	//lo descomentare luego de haber configurado docker con la extension pgvector // ya instale la extension pgvector en pgadmin
 
     private final ChatClient chatClient;
@@ -41,6 +45,13 @@ public class RagServiceImpl implements RagService {
         DocumentStored document = documentRepository.findById(documentId)
                 .orElseThrow(() ->
                         new RuntimeException("Document not found"));
+        
+        System.out.println("PATH GUARDADO = " + document.getFilePath());
+
+        Path path = Paths.get(document.getFilePath());
+
+        System.out.println("EXISTE = " + Files.exists(path));
+        System.out.println("ABSOLUTE = " + path.toAbsolutePath());
 
         PagePdfDocumentReader reader =
                 new PagePdfDocumentReader(document.getFilePath());
@@ -88,6 +99,8 @@ public class RagServiceImpl implements RagService {
             vectorStore.add(docs);
         }
         */
+        
+        
         docs.forEach(doc -> {
 
             String embeddingId =
@@ -146,8 +159,8 @@ public class RagServiceImpl implements RagService {
                 .map(Document::getText)
                 .collect(Collectors.joining("\n"));
     }
-/*
-    
+
+    @Override
     public ChatResponse ask(ChatRequest request) {
 
         List<Document> docs =
@@ -176,8 +189,8 @@ public class RagServiceImpl implements RagService {
         return response;
     }
     
-    */
-    @Override
+   
+   /*
     public ChatResponse ask(ChatRequest request) {
 
         String answer = chatClient
@@ -191,7 +204,7 @@ public class RagServiceImpl implements RagService {
 
         return response;
     }
-    
+    */
     /**
      * 
      *  EL PIPELINE PARA PROBAR ARQUITECTURA ES : (antes de openai emmbeddings)

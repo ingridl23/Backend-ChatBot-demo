@@ -177,7 +177,7 @@ public class DocumentServiceImpl implements DocumentService{
 	
 		 try {
 
-		        // carpeta uploads
+		        // carpeta uploads /documents
 
 		        String uploadDir = "uploads/";
 
@@ -240,7 +240,13 @@ public class DocumentServiceImpl implements DocumentService{
 
 		        DocumentStored saved =
 		                documentRepository.save(document);
+		        System.out.println("DOCUMENTO GUARDADO ID = " + saved.getId());
 
+		        System.out.println("ANTES DE RAG");
+
+		        ragService.ingestDocument(saved.getId());
+
+		        System.out.println("DESPUES DE RAG");
 		        // RAG ingestion
 
 		        ragService.ingestDocument(saved.getId());
@@ -249,10 +255,25 @@ public class DocumentServiceImpl implements DocumentService{
 
 		    } catch (Exception e) {
 
+		        System.out.println("=================================");
+		        System.out.println("ERROR REAL:");
+		        System.out.println(e.getClass().getName());
+		        System.out.println(e.getMessage());
+		        e.printStackTrace();
+		        System.out.println("=================================");
+
+		        throw new RuntimeException("Upload failed", e);
+		    }
+		 
+		 
+		 /*
+		 
+		 catch (Exception e) {
+
 		        throw new RuntimeException("Upload failed");
 		    }
 		
-		
+		*/
 		
 	}
 
