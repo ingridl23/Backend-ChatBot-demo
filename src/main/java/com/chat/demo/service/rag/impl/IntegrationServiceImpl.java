@@ -1,14 +1,10 @@
 package com.chat.demo.service.rag.impl;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.chat.demo.dto.IntegrationRequest;
-import com.chat.demo.mapper.IntegrationMapper;
-import com.chat.demo.model.AISettings;
-import com.chat.demo.model.DocumentStatus;
 import com.chat.demo.model.Integration;
 import com.chat.demo.model.IntegrationType;
 import com.chat.demo.repository.IntegrationRepository;
@@ -20,96 +16,67 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class IntegrationServiceImpl implements IntegrationService {
 
-	private final  IntegrationRepository  integraRepo;
-	private final IntegrationTypeRepository typeRepo;
-	private final IntegrationMapper mapper;
-	@Override
-	public IntegrationRequest save(IntegrationRequest integration) {
-	     Integration entity =
-	                mapper.toEntity(integration);
+    private final IntegrationRepository integraRepo;
+    private final IntegrationTypeRepository typeRepo;
+    private final com.chat.demo.mapper.IntegrationMapper mapper;
 
-	        entity.setCreatedAt(LocalDateTime.now());
-	        entity.setUpdatedAt(LocalDateTime.now());
+    @Override
+    public IntegrationRequest save(IntegrationRequest integration) {
+        Integration entity = mapper.toEntity(integration);
+        entity.setCreatedAt(LocalDateTime.now());
+        entity.setUpdatedAt(LocalDateTime.now());
+        Integration saved = integraRepo.save(entity);
+        return mapper.toResponse(saved);
+    }
 
-	        Integration saved =
-	                integraRepo.save(entity);
+    @Override
+    public IntegrationRequest update(Long id, IntegrationRequest integration) {
+        Integration existing = integraRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Integration not found"));
 
-		return mapper.toResponse(saved);
-	}
+        existing.setName(integration.getName());
+        existing.setBaseUrl(integration.getBaseUrl());
+        existing.setApiKey(integration.getApyKey());
+        existing.setIsActive(integration.getIsActive());
+        existing.setUpdatedAt(LocalDateTime.now());
 
-	
-	@Override
-	public IntegrationRequest update(Long id, IntegrationRequest integration) {
+        if (integration.getTypeId() != null) {
+            IntegrationType type = typeRepo.findById(integration.getTypeId())
+                    .orElseThrow(() -> new RuntimeException("Integration type not found"));
+            existing.setType(type);
+        }
 
-	    Integration existing = integraRepo.findById(id)
-	            .orElseThrow(() ->
-	                    new RuntimeException("Integration not found"));
+        return mapper.toResponse(integraRepo.save(existing));
+    }
 
-	    existing.setName(integration.getName());
-	    existing.setBaseUrl(integration.getBaseUrl());
-	    existing.setApiKey(integration.getApyKey());
-	    existing.setIsActive(integration.getIsActive());
-	    existing.setUpdatedAt(LocalDateTime.now());
+    @Override
+    public Optional<IntegrationRequest> findById(Long id) {
+        return integraRepo.findById(id).map(mapper::toResponse);
+    }
 
-	    if (integration.getTypeId() != null) {
+    @Override
+    public Optional<IntegrationRequest> findByName(String name) {
+        return integraRepo.findByName(name).map(mapper::toResponse);
+    }
 
-	        IntegrationType type =
-	                typeRepo.findById(integration.getTypeId())
-	                .orElseThrow(() ->
-	                        new RuntimeException("Integration type not found"));
+    @Override
+    public Optional<IntegrationRequest> findByOrganization(Long organizationId) {
+        return integraRepo.findByOrganizationId(organizationId).stream()
+                .findFirst()
+                .map(mapper::toResponse);
+    }
 
-	        existing.setType(type);
-	    }
+    @Override
+    public void deactivate(Long id) {
+        Integration integration = integraRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Integration not found: " + id));
+        integration.setIsActive(false);
+        integration.setUpdatedAt(LocalDateTime.now());
+        integraRepo.save(integration);
+    }
 
-	    Integration saved = integraRepo.save(existing);
-
-	    return mapper.toResponse(saved);
-	}
-
-	@Override
-	public Optional<IntegrationRequest> findById(Long id) {
-	
-		 return integraRepo.findById(id) .map(mapper::toResponse);
-	}
-
-	@Override
-	public Optional<IntegrationRequest> findByName(String name) {
-
-
-        return integraRepo.findByName(name).stream()
-           .findFirst()
-           .map(mapper::toResponse);
-
-	}
-
-	@Override
-	public Optional<IntegrationRequest> findByOrganization(Long organizationId) {
-	
-		           return integraRepo.findByOrganizationId(organizationId).stream()
-		   	            .findFirst().map(mapper::toResponse);
-	}
-
-	
-	@Override
-	public void deactivate(Long id) {
-		
-		
-		  List<Integration> integration =
-	                integraRepo.findByOrganizationId(id);
-
-	        integration.forEach(setting -> setting.setIsActive(false));
-
-	        integraRepo.saveAll(integration);	
-		
-		/*************************************************/
-	
-	
-	}
-
-	@Override
-	public void delete(Long id) {
-		integraRepo.deleteById(id);
-		
-	}
-
+    @Override
+    public void delete(Long id) {
+        integraRepo.deleteById(id);
+    }
 }

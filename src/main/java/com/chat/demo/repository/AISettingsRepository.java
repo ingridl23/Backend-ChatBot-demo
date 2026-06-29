@@ -11,7 +11,8 @@ import com.chat.demo.model.AISettings;
 
 public interface AISettingsRepository extends JpaRepository<AISettings, Long>{
 
-	Optional<AISettings>findByModelName(String modelName);
+	Optional<AISettings> findByModelName(String modelName);
 	Optional<AISettings> findByOrganizationIdAndActiveTrue(Long organizationId);
 	List<AISettings> findByOrganizationId(Long organizationId);
+	List<AISettings> findAllByActiveTrue();
 }

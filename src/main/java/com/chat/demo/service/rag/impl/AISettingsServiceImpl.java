@@ -101,11 +101,11 @@ public class AISettingsServiceImpl implements AISettingsService{
 	}
 
 	@Override
-	public List <AISettingsRequest> getActiveSettingsAll() {
-		   return aiSettingsRepository.findAll()
-		            .stream()
-		            .map(mapper::toResponse)
-		            .toList();
+	public List<AISettingsRequest> getActiveSettingsAll() {
+		return aiSettingsRepository.findAllByActiveTrue()
+		        .stream()
+		        .map(mapper::toResponse)
+		        .toList();
 	}
 
 	@Override
