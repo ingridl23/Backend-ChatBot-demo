@@ -3,6 +3,8 @@ package com.chat.demo.service.rag.impl;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.chat.demo.dto.DocumentRequest;
@@ -34,8 +36,10 @@ import java.nio.file.Paths;
 
 @Service
 @RequiredArgsConstructor
-public class DocumentServiceImpl implements DocumentService{
-	
+public class DocumentServiceImpl implements DocumentService {
+
+	private static final Logger log = LoggerFactory.getLogger(DocumentServiceImpl.class);
+
 	private final DocumentRepository documentRepository;
 	private final DocumentStatusRepository docStatusRepo;
 	private final AreaRepository areaRepo;
@@ -240,28 +244,15 @@ public class DocumentServiceImpl implements DocumentService{
 
 		        DocumentStored saved =
 		                documentRepository.save(document);
-		        System.out.println("DOCUMENTO GUARDADO ID = " + saved.getId());
-
-		        System.out.println("ANTES DE RAG");
+		        log.info("Document saved with id={}", saved.getId());
 
 		        ragService.ingestDocument(saved.getId());
-
-		        System.out.println("DESPUES DE RAG");
-		        // RAG ingestion
-
-		        ragService.ingestDocument(saved.getId());
+		        log.info("RAG ingestion completed for documentId={}", saved.getId());
 
 		        return mapper.toResponse(saved);
 
 		    } catch (Exception e) {
-
-		        System.out.println("=================================");
-		        System.out.println("ERROR REAL:");
-		        System.out.println(e.getClass().getName());
-		        System.out.println(e.getMessage());
-		        e.printStackTrace();
-		        System.out.println("=================================");
-
+		        log.error("Upload failed", e);
 		        throw new RuntimeException("Upload failed", e);
 		    }
 		 

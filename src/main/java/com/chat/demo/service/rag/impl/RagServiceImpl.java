@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
@@ -31,6 +33,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RagServiceImpl implements RagService {
 
+    private static final Logger log = LoggerFactory.getLogger(RagServiceImpl.class);
+
      // private final VectorStore vectorStore; 
 	//lo descomentare luego de haber configurado docker con la extension pgvector // ya instale la extension pgvector en pgadmin
 
@@ -46,12 +50,8 @@ public class RagServiceImpl implements RagService {
                 .orElseThrow(() ->
                         new RuntimeException("Document not found"));
         
-        System.out.println("PATH GUARDADO = " + document.getFilePath());
-
         Path path = Paths.get(document.getFilePath());
-
-        System.out.println("EXISTE = " + Files.exists(path));
-        System.out.println("ABSOLUTE = " + path.toAbsolutePath());
+        log.info("Ingesting document id={}, path={}, exists={}", documentId, path.toAbsolutePath(), Files.exists(path));
 
         PagePdfDocumentReader reader =
                 new PagePdfDocumentReader(document.getFilePath());

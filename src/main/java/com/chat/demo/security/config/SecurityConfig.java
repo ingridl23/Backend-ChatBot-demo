@@ -1,5 +1,6 @@
 package com.chat.demo.security.config;
 
+import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +16,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -23,58 +27,63 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-
     private final JwtFilter jwtFilter;
     private final UserDetailsService userDetailsService;
 
-	   
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/users/**").hasRole("ADMIN")
+                        .requestMatchers("/api/roles/**").hasRole("ADMIN")
+                        .requestMatchers("/api/permissions/**").hasRole("ADMIN")
+                        .requestMatchers("/api/documents/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/api/chat/**").hasAnyRole("ADMIN", "USER")
+                        .anyRequest().authenticated()
+                )
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
+    }
 
-	    @Bean
-	    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        // Ajustar al dominio real del frontend en producción
+        config.setAllowedOrigins(List.of(
+                "http://localhost:4200",
+                "http://localhost:3000",
+                "http://localhost:5173"
+        ));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        config.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
 
-	        return http
-	                .csrf(csrf -> csrf.disable())
-	                .sessionManagement(session ->
-	                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-	                )
-	                .authorizeHttpRequests(auth -> auth
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
 
-	                        .requestMatchers("/api/auth/**").permitAll()
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
+    }
 
-	                        .requestMatchers("/api/users/**").hasRole("ADMIN")
-	                        .requestMatchers("/api/roles/**").hasRole("ADMIN")
-	                        .requestMatchers("/api/permissions/**").hasRole("ADMIN")
-
-	                        .requestMatchers("/api/documents/**").hasAnyRole("ADMIN","USER")
-	                   
-                            .requestMatchers("/api/chat/**").hasAnyRole("ADMIN","USER")
-	                        .anyRequest().authenticated()
-	                )
-	                .authenticationProvider(authenticationProvider())
-	                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-	                .build();
-	    }
-	    
-	    
-	    //creamos authentication manager
-	    @Bean
-	    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-	        return authenticationConfiguration.getAuthenticationManager();
-	    }
-	    @Bean
-	    public AuthenticationProvider authenticationProvider() {
-
-	        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-	        provider.setUserDetailsService(userDetailsService);
-	        provider.setPasswordEncoder(passwordEncoder());
-
-	        return provider;
-	    }
-	    //password encoder
-	    @Bean
-	    public PasswordEncoder passwordEncoder(){
-	         return new BCryptPasswordEncoder();
-	    }
-	
-	
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }

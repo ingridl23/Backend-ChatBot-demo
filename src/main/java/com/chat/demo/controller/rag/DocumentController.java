@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.chat.demo.dto.DocumentRequest;
@@ -30,7 +32,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DocumentController {
 
-	private final  DocumentService docServ;
+	private static final Logger log = LoggerFactory.getLogger(DocumentController.class);
+	private final DocumentService docServ;
 	//crear o guardar una configuracion
 		  @PostMapping
 		  @PreAuthorize("hasAnyRole('ADMIN')")
@@ -117,9 +120,7 @@ public class DocumentController {
 		          @RequestParam("statusId") Long statusId,
 		          @RequestParam("uploadedById") Long uploadedById
 		  ) {
-			  
-			   System.out.println("ENTRO AL UPLOAD");
-			   
+			  log.info("Upload request: title={}, organizationId={}", title, organizationId);
 			  if (!filePath.getContentType().equals("application/pdf")) {
 				    throw new RuntimeException("Only PDF files allowed");
 				}
