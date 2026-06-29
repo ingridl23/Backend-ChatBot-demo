@@ -36,7 +36,7 @@ public interface AISettingsService {
 
     Optional<AISettingsRequest> findByOrganizationId(Long organizationId);
     
-    Optional<AISettingsRequest> findByUserName(String name);
+    Optional<AISettingsRequest> findByModelName(String modelName);
     AISettingsRequest getActiveSettings(Long organizationId);
     
     List <AISettingsRequest> getActiveSettingsAll();

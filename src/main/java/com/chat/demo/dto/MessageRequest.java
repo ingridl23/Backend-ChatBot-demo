@@ -19,7 +19,6 @@ public class MessageRequest {
    // private Boolean status;
     @NotBlank
     private String content;
-    @NotBlank
     private String metadata;
     @NotNull
     private Long senderTypeId;

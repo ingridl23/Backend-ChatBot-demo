@@ -109,14 +109,9 @@ public class AISettingsServiceImpl implements AISettingsService{
 	}
 
 	@Override
-	public Optional<AISettingsRequest> findByUserName(String name) {
-		
-		   Optional<AISettings> settings =
-		            aiSettingsRepository.findByModelName(name);
-
-		    return settings.stream()
-		            .findFirst()
-		            .map(mapper::toResponse);
+	public Optional<AISettingsRequest> findByModelName(String modelName) {
+		return aiSettingsRepository.findByModelName(modelName)
+		        .map(mapper::toResponse);
 	}
 
 }
