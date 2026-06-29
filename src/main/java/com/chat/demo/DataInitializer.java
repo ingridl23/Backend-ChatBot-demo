@@ -75,6 +75,11 @@ public class DataInitializer {
             log.info("Área creada: Sistemas");
         }
 
+        Organization org1 = organizationRep.findById(1L)
+                .orElseThrow(() -> new RuntimeException("Organización no encontrada"));
+        Area area1 = areaRepo.findById(1L)
+                .orElseThrow(() -> new RuntimeException("Área no encontrada"));
+
         if (userRepository.findByUserName("admin").isEmpty()) {
             Role foundAdminRole = roleRepository.findByName("ADMIN")
                     .orElseThrow(() -> new RuntimeException("Role ADMIN no existe"));
@@ -84,10 +89,21 @@ public class DataInitializer {
                     .email("admin@gmail.com")
                     .password(passwordEncoder.encode("1234"))
                     .enabled(true)
+                    .organization(org1)
+                    .area(area1)
                     .roles(Set.of(foundAdminRole))
                     .build();
             userRepository.save(admin);
             log.info("Usuario admin creado");
+        } else {
+            userRepository.findByUserName("admin").ifPresent(admin -> {
+                if (admin.getOrganization() == null) {
+                    admin.setOrganization(org1);
+                    admin.setArea(area1);
+                    userRepository.save(admin);
+                    log.info("Usuario admin: organización asignada");
+                }
+            });
         }
 
         if (userRepository.findByUserName("user").isEmpty()) {
@@ -99,10 +115,21 @@ public class DataInitializer {
                     .email("user@gmail.com")
                     .password(passwordEncoder.encode("12345"))
                     .enabled(true)
+                    .organization(org1)
+                    .area(area1)
                     .roles(Set.of(foundUserRole))
                     .build();
             userRepository.save(user);
             log.info("Usuario user creado");
+        } else {
+            userRepository.findByUserName("user").ifPresent(user -> {
+                if (user.getOrganization() == null) {
+                    user.setOrganization(org1);
+                    user.setArea(area1);
+                    userRepository.save(user);
+                    log.info("Usuario user: organización asignada");
+                }
+            });
         }
 
         if (statusRepository.findById(1L).isEmpty()) {

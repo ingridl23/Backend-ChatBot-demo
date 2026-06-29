@@ -233,7 +233,7 @@ public class DocumentServiceImpl implements DocumentService {
 		                .fileName(fileName)
 		                .mimeType(file.getContentType())
 		                .fileSize(file.getSize())
-		                .filePath(filePath.toString())
+		                .filePath(filePath.toAbsolutePath().toString())
 		                .status(status)
 		                .area(area)
 		                .organization(organization)

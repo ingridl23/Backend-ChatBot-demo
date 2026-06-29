@@ -13,6 +13,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
+import org.springframework.core.io.FileSystemResource;
 
 //import org.springframework.ai.vectorstore.SearchRequest;
 //import org.springframework.ai.vectorstore.VectorStore;
@@ -54,7 +55,7 @@ public class RagServiceImpl implements RagService {
         log.info("Ingesting document id={}, path={}, exists={}", documentId, path.toAbsolutePath(), Files.exists(path));
 
         PagePdfDocumentReader reader =
-                new PagePdfDocumentReader(document.getFilePath());
+                new PagePdfDocumentReader(new FileSystemResource(path.toAbsolutePath()));
 
         List<Document> docs = reader.read();
 
