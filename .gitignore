@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Local dev scripts with credentials ###
+start-dev.bat
+
+### Uploaded files (runtime storage) ###
+uploads/

@@ -80,9 +80,12 @@ public class DataInitializer {
         Area area1 = areaRepo.findById(1L)
                 .orElseThrow(() -> new RuntimeException("Área no encontrada"));
 
+        Role foundAdminRole = roleRepository.findByName("ADMIN")
+                .orElseThrow(() -> new RuntimeException("Role ADMIN no existe"));
+        Role foundUserRole = roleRepository.findByName("USER")
+                .orElseThrow(() -> new RuntimeException("Role USER no existe"));
+
         if (userRepository.findByUserName("admin").isEmpty()) {
-            Role foundAdminRole = roleRepository.findByName("ADMIN")
-                    .orElseThrow(() -> new RuntimeException("Role ADMIN no existe"));
             User admin = User.builder()
                     .userName("admin")
                     .lastName("perez")
@@ -97,18 +100,22 @@ public class DataInitializer {
             log.info("Usuario admin creado");
         } else {
             userRepository.findByUserName("admin").ifPresent(admin -> {
+                boolean modified = false;
                 if (admin.getOrganization() == null) {
                     admin.setOrganization(org1);
                     admin.setArea(area1);
-                    userRepository.save(admin);
-                    log.info("Usuario admin: organización asignada");
+                    modified = true;
                 }
+                if (admin.getRoles() == null || admin.getRoles().isEmpty()) {
+                    admin.setRoles(Set.of(foundAdminRole));
+                    modified = true;
+                    log.info("Usuario admin: rol ADMIN asignado");
+                }
+                if (modified) userRepository.save(admin);
             });
         }
 
         if (userRepository.findByUserName("user").isEmpty()) {
-            Role foundUserRole = roleRepository.findByName("USER")
-                    .orElseThrow(() -> new RuntimeException("Role USER no existe"));
             User user = User.builder()
                     .userName("user")
                     .lastName("gonzalez")
@@ -123,12 +130,18 @@ public class DataInitializer {
             log.info("Usuario user creado");
         } else {
             userRepository.findByUserName("user").ifPresent(user -> {
+                boolean modified = false;
                 if (user.getOrganization() == null) {
                     user.setOrganization(org1);
                     user.setArea(area1);
-                    userRepository.save(user);
-                    log.info("Usuario user: organización asignada");
+                    modified = true;
                 }
+                if (user.getRoles() == null || user.getRoles().isEmpty()) {
+                    user.setRoles(Set.of(foundUserRole));
+                    modified = true;
+                    log.info("Usuario user: rol USER asignado");
+                }
+                if (modified) userRepository.save(user);
             });
         }
 
