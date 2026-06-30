@@ -120,9 +120,9 @@ public class DocumentController {
 		          @RequestParam("statusId") Long statusId,
 		          @RequestParam("uploadedById") Long uploadedById
 		  ) {
-			  log.info("Upload request: title={}, organizationId={}", title, organizationId);
-			  if (!filePath.getContentType().equals("application/pdf")) {
-				    throw new RuntimeException("Only PDF files allowed");
+			  log.info("Upload request: title={}, organizationId={}, contentType={}", title, organizationId, filePath.getContentType());
+			  if (!"application/pdf".equals(filePath.getContentType())) {
+				    throw new RuntimeException("Only PDF files allowed, received: " + filePath.getContentType());
 				}
 			  
 			  if (filePath.getSize() > 10_000_000) {
