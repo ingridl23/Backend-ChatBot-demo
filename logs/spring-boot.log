@@ -1,510 +1,142 @@
-2026-06-30T13:11:29.086-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] c.c.demo.SpringChatBotDemoApplication    : Starting SpringChatBotDemoApplication using Java 17.0.2 with PID 11044 (C:\Users\Martin\eclipse-workspace\Spring-ChatBot-demo\target\classes started by Andrea in C:\Users\Martin\eclipse-workspace\Spring-ChatBot-demo)
-2026-06-30T13:11:29.088-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] c.c.demo.SpringChatBotDemoApplication    : No active profile set, falling back to 1 default profile: "default"
-2026-06-30T13:11:29.129-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-06-30T13:11:29.130-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-06-30T13:11:30.063-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-30T13:11:30.251-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 177 ms. Found 18 JPA repository interfaces.
-2026-06-30T13:11:30.834-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2026-06-30T13:11:30.850-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-06-30T13:11:30.850-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
-2026-06-30T13:11:30.919-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-06-30T13:11:30.920-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1790 ms
-2026-06-30T13:11:31.066-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-06-30T13:11:31.145-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2026-06-30T13:11:31.188-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-06-30T13:11:31.489-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-30T13:11:31.530-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-06-30T13:11:31.680-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3a01d71c
-2026-06-30T13:11:31.682-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-06-30T13:11:33.071-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-06-30T13:11:33.418-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-30T13:11:33.638-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-06-30T13:11:34.040-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-2026-06-30T13:11:34.040-03:00  WARN 11044 --- [Spring-ChatBot-demo] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
-2026-06-30T13:11:34.910-03:00  WARN 11044 --- [Spring-ChatBot-demo] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-30T13:11:35.154-03:00 DEBUG 11044 --- [Spring-ChatBot-demo] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
-2026-06-30T13:11:35.587-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2026-06-30T13:11:35.622-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2026-06-30T13:11:35.633-03:00  INFO 11044 --- [Spring-ChatBot-demo] [restartedMain] c.c.demo.SpringChatBotDemoApplication    : Started SpringChatBotDemoApplication in 6.928 seconds (process running for 7.967)
-2026-06-30T13:11:58.690-03:00  INFO 11044 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-06-30T13:11:58.691-03:00  INFO 11044 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-06-30T13:11:58.702-03:00  INFO 11044 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
-2026-06-30T13:11:58.736-03:00 DEBUG 11044 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
-2026-06-30T13:11:58.755-03:00 DEBUG 11044 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
-2026-06-30T13:11:59.137-03:00 DEBUG 11044 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
-2026-06-30T13:11:59.156-03:00 DEBUG 11044 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:11:59.172-03:00 DEBUG 11044 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:12:12.148-03:00 DEBUG 11044 --- [Spring-ChatBot-demo] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents/upload
-2026-06-30T13:12:12.155-03:00 DEBUG 11044 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing POST /api/documents/upload
-2026-06-30T13:12:12.164-03:00 DEBUG 11044 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured POST /api/documents/upload
-2026-06-30T13:12:18.488-03:00 ERROR 11044 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] c.c.d.exception.GlobalExceptionHandler   : Unhandled exception: Maximum upload size exceeded
-
-org.springframework.web.multipart.MaxUploadSizeExceededException: Maximum upload size exceeded
-	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.handleParseFailure(StandardMultipartHttpServletRequest.java:124) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.parseRequest(StandardMultipartHttpServletRequest.java:111) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.<init>(StandardMultipartHttpServletRequest.java:87) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.multipart.support.StandardServletMultipartResolver.resolveMultipart(StandardServletMultipartResolver.java:112) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.DispatcherServlet.checkMultipart(DispatcherServlet.java:1228) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1061) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.31.jar:6.0]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.31.jar:6.0]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at com.chat.demo.security.config.JwtFilter.doFilterInternal(JwtFilter.java:64) ~[classes/:na]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
-Caused by: java.lang.IllegalStateException: org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException: The field filePath exceeds its maximum permitted size of 1048576 bytes.
-	at org.apache.catalina.connector.Request.parseParts(Request.java:2628) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.connector.Request.getParts(Request.java:2487) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.connector.RequestFacade.getParts(RequestFacade.java:773) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at jakarta.servlet.http.HttpServletRequestWrapper.getParts(HttpServletRequestWrapper.java:315) ~[tomcat-embed-core-10.1.31.jar:6.0]
-	at jakarta.servlet.http.HttpServletRequestWrapper.getParts(HttpServletRequestWrapper.java:315) ~[tomcat-embed-core-10.1.31.jar:6.0]
-	at jakarta.servlet.http.HttpServletRequestWrapper.getParts(HttpServletRequestWrapper.java:315) ~[tomcat-embed-core-10.1.31.jar:6.0]
-	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.parseRequest(StandardMultipartHttpServletRequest.java:94) ~[spring-web-6.1.14.jar:6.1.14]
-	... 96 common frames omitted
-Caused by: org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException: The field filePath exceeds its maximum permitted size of 1048576 bytes.
-	at org.apache.tomcat.util.http.fileupload.impl.FileItemStreamImpl$1.raiseError(FileItemStreamImpl.java:117) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.http.fileupload.util.LimitedInputStream.checkLimit(LimitedInputStream.java:76) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.http.fileupload.util.LimitedInputStream.read(LimitedInputStream.java:135) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at java.base/java.io.FilterInputStream.read(FilterInputStream.java:106) ~[na:na]
-	at org.apache.tomcat.util.http.fileupload.util.Streams.copy(Streams.java:96) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.http.fileupload.FileUploadBase.parseRequest(FileUploadBase.java:292) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.connector.Request.parseParts(Request.java:2587) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	... 102 common frames omitted
-
-2026-06-30T13:12:18.502-03:00  WARN 11044 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.multipart.MaxUploadSizeExceededException: Maximum upload size exceeded]
-2026-06-30T13:13:34.921-03:00  INFO 11044 --- [Spring-ChatBot-demo] [RMI TCP Connection(10)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2026-06-30T13:13:35.016-03:00  INFO 11044 --- [Spring-ChatBot-demo] [RMI TCP Connection(10)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-06-30T13:13:35.020-03:00  INFO 11044 --- [Spring-ChatBot-demo] [RMI TCP Connection(10)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2026-06-30T13:13:35.023-03:00  INFO 11044 --- [Spring-ChatBot-demo] [RMI TCP Connection(10)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2026-06-30T13:13:45.047-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] c.c.demo.SpringChatBotDemoApplication    : Starting SpringChatBotDemoApplication using Java 17.0.2 with PID 14492 (C:\Users\Martin\eclipse-workspace\Spring-ChatBot-demo\target\classes started by Andrea in C:\Users\Martin\eclipse-workspace\Spring-ChatBot-demo)
-2026-06-30T13:13:45.049-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] c.c.demo.SpringChatBotDemoApplication    : No active profile set, falling back to 1 default profile: "default"
-2026-06-30T13:13:45.092-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-06-30T13:13:45.092-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-06-30T13:13:46.011-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-30T13:13:46.201-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 178 ms. Found 18 JPA repository interfaces.
-2026-06-30T13:13:46.734-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2026-06-30T13:13:46.745-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-06-30T13:13:46.746-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
-2026-06-30T13:13:46.804-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-06-30T13:13:46.805-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1712 ms
-2026-06-30T13:13:46.940-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-06-30T13:13:46.988-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2026-06-30T13:13:47.018-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-06-30T13:13:47.260-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-30T13:13:47.286-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-06-30T13:13:47.536-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2eff4b20
-2026-06-30T13:13:47.538-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-06-30T13:13:48.772-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-06-30T13:13:49.093-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-30T13:13:49.308-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-06-30T13:13:49.694-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-2026-06-30T13:13:49.694-03:00  WARN 14492 --- [Spring-ChatBot-demo] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
-2026-06-30T13:13:50.560-03:00  WARN 14492 --- [Spring-ChatBot-demo] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-30T13:13:50.797-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
-2026-06-30T13:13:51.200-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2026-06-30T13:13:51.234-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2026-06-30T13:13:51.247-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] c.c.demo.SpringChatBotDemoApplication    : Started SpringChatBotDemoApplication in 6.526 seconds (process running for 7.199)
-2026-06-30T13:14:02.380-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-06-30T13:14:02.381-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-06-30T13:14:02.384-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2026-06-30T13:14:02.415-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
-2026-06-30T13:14:02.443-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
-2026-06-30T13:14:02.830-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
-2026-06-30T13:14:02.857-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:14:02.873-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:14:18.486-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents/upload
-2026-06-30T13:14:18.492-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing POST /api/documents/upload
-2026-06-30T13:14:18.502-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured POST /api/documents/upload
-2026-06-30T13:14:24.821-03:00 ERROR 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] c.c.d.exception.GlobalExceptionHandler   : Unhandled exception: Maximum upload size exceeded
-
-org.springframework.web.multipart.MaxUploadSizeExceededException: Maximum upload size exceeded
-	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.handleParseFailure(StandardMultipartHttpServletRequest.java:124) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.parseRequest(StandardMultipartHttpServletRequest.java:111) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.<init>(StandardMultipartHttpServletRequest.java:87) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.multipart.support.StandardServletMultipartResolver.resolveMultipart(StandardServletMultipartResolver.java:112) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.DispatcherServlet.checkMultipart(DispatcherServlet.java:1228) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1061) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.31.jar:6.0]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.31.jar:6.0]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at com.chat.demo.security.config.JwtFilter.doFilterInternal(JwtFilter.java:64) ~[classes/:na]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
-Caused by: java.lang.IllegalStateException: org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException: The field filePath exceeds its maximum permitted size of 1048576 bytes.
-	at org.apache.catalina.connector.Request.parseParts(Request.java:2628) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.connector.Request.getParts(Request.java:2487) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.connector.RequestFacade.getParts(RequestFacade.java:773) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at jakarta.servlet.http.HttpServletRequestWrapper.getParts(HttpServletRequestWrapper.java:315) ~[tomcat-embed-core-10.1.31.jar:6.0]
-	at jakarta.servlet.http.HttpServletRequestWrapper.getParts(HttpServletRequestWrapper.java:315) ~[tomcat-embed-core-10.1.31.jar:6.0]
-	at jakarta.servlet.http.HttpServletRequestWrapper.getParts(HttpServletRequestWrapper.java:315) ~[tomcat-embed-core-10.1.31.jar:6.0]
-	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.parseRequest(StandardMultipartHttpServletRequest.java:94) ~[spring-web-6.1.14.jar:6.1.14]
-	... 96 common frames omitted
-Caused by: org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException: The field filePath exceeds its maximum permitted size of 1048576 bytes.
-	at org.apache.tomcat.util.http.fileupload.impl.FileItemStreamImpl$1.raiseError(FileItemStreamImpl.java:117) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.http.fileupload.util.LimitedInputStream.checkLimit(LimitedInputStream.java:76) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.http.fileupload.util.LimitedInputStream.read(LimitedInputStream.java:135) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at java.base/java.io.FilterInputStream.read(FilterInputStream.java:106) ~[na:na]
-	at org.apache.tomcat.util.http.fileupload.util.Streams.copy(Streams.java:96) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.http.fileupload.FileUploadBase.parseRequest(FileUploadBase.java:292) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.connector.Request.parseParts(Request.java:2587) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	... 102 common frames omitted
-
-2026-06-30T13:14:24.835-03:00  WARN 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.multipart.MaxUploadSizeExceededException: Maximum upload size exceeded]
-2026-06-30T13:15:27.865-03:00  INFO 14492 --- [Spring-ChatBot-demo] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
-2026-06-30T13:15:27.957-03:00  INFO 14492 --- [Spring-ChatBot-demo] [Thread-11] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-06-30T13:15:27.961-03:00  INFO 14492 --- [Spring-ChatBot-demo] [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2026-06-30T13:15:27.965-03:00  INFO 14492 --- [Spring-ChatBot-demo] [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2026-06-30T13:15:28.060-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] c.c.demo.SpringChatBotDemoApplication    : Starting SpringChatBotDemoApplication using Java 17.0.2 with PID 14492 (C:\Users\Martin\eclipse-workspace\Spring-ChatBot-demo\target\classes started by Andrea in C:\Users\Martin\eclipse-workspace\Spring-ChatBot-demo)
-2026-06-30T13:15:28.060-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] c.c.demo.SpringChatBotDemoApplication    : No active profile set, falling back to 1 default profile: "default"
-2026-06-30T13:15:28.444-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-30T13:15:28.495-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 50 ms. Found 18 JPA repository interfaces.
-2026-06-30T13:15:28.613-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2026-06-30T13:15:28.614-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-06-30T13:15:28.614-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
-2026-06-30T13:15:28.638-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-06-30T13:15:28.638-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 576 ms
-2026-06-30T13:15:28.693-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-06-30T13:15:28.696-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-06-30T13:15:28.706-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-30T13:15:28.707-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-2026-06-30T13:15:28.856-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@1a316cf1
-2026-06-30T13:15:28.856-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-2026-06-30T13:15:29.143-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-06-30T13:15:29.378-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-30T13:15:29.476-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-2026-06-30T13:15:29.476-03:00  WARN 14492 --- [Spring-ChatBot-demo] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
-2026-06-30T13:15:29.919-03:00  WARN 14492 --- [Spring-ChatBot-demo] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-30T13:15:30.035-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
-2026-06-30T13:15:30.215-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2026-06-30T13:15:30.243-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2026-06-30T13:15:30.250-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] c.c.demo.SpringChatBotDemoApplication    : Started SpringChatBotDemoApplication in 2.22 seconds (process running for 106.202)
-2026-06-30T13:15:30.254-03:00  INFO 14492 --- [Spring-ChatBot-demo] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
-2026-06-30T13:15:50.015-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-06-30T13:15:50.015-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-06-30T13:15:50.016-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2026-06-30T13:15:50.017-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents/upload
-2026-06-30T13:15:50.023-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/documents/upload
-2026-06-30T13:15:50.054-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured POST /api/documents/upload
-2026-06-30T13:15:58.055-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public com.chat.demo.dto.DocumentResponse com.chat.demo.controller.rag.DocumentController.uploadDocument(org.springframework.web.multipart.MultipartFile,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:15:58.056-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public com.chat.demo.dto.DocumentResponse com.chat.demo.controller.rag.DocumentController.uploadDocument(org.springframework.web.multipart.MultipartFile,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:15:58.056-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] c.c.d.controller.rag.DocumentController  : Upload request: title=docker, organizationId=1, contentType=application/pdf
-2026-06-30T13:15:58.120-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] c.c.d.s.rag.impl.DocumentServiceImpl     : Document saved with id=16
-2026-06-30T13:15:58.121-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] c.c.d.service.rag.impl.RagServiceImpl    : Ingesting document id=16, path=C:\Users\Martin\eclipse-workspace\Spring-ChatBot-demo\uploads\1782836158057_Docker.pdf, exists=true
-2026-06-30T13:15:58.323-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.ai.reader.pdf.PagePdfDocumentReader  : Processing PDF page: 1
-2026-06-30T13:15:58.439-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.ai.reader.pdf.PagePdfDocumentReader  : Processing PDF page: 5
-2026-06-30T13:15:58.448-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.ai.reader.pdf.PagePdfDocumentReader  : Processing PDF page: 9
-2026-06-30T13:15:58.456-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.ai.reader.pdf.PagePdfDocumentReader  : Processing PDF page: 13
-2026-06-30T13:15:58.462-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.ai.reader.pdf.PagePdfDocumentReader  : Processing PDF page: 17
-2026-06-30T13:15:58.479-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.ai.reader.pdf.PagePdfDocumentReader  : Processing PDF page: 21
-2026-06-30T13:15:58.490-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.ai.reader.pdf.PagePdfDocumentReader  : Processing PDF page: 25
-2026-06-30T13:15:58.496-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.ai.reader.pdf.PagePdfDocumentReader  : Processing PDF page: 29
-2026-06-30T13:15:58.500-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.ai.reader.pdf.PagePdfDocumentReader  : Processing PDF page: 33
-2026-06-30T13:15:58.507-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.ai.reader.pdf.PagePdfDocumentReader  : Processing PDF page: 37
-2026-06-30T13:15:58.514-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.ai.reader.pdf.PagePdfDocumentReader  : Processing 41 pages
-2026-06-30T13:15:58.836-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] c.c.d.s.rag.impl.DocumentServiceImpl     : RAG ingestion completed for documentId=16
-2026-06-30T13:15:58.862-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
-2026-06-30T13:15:58.866-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
-2026-06-30T13:15:58.874-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
-2026-06-30T13:15:58.874-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:15:58.875-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:16:35.728-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
-2026-06-30T13:16:35.735-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
-2026-06-30T13:16:35.746-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
-2026-06-30T13:16:35.747-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:16:35.747-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:16:41.710-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
-2026-06-30T13:16:41.717-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
-2026-06-30T13:16:41.728-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
-2026-06-30T13:16:41.729-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:16:41.730-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:16:47.361-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
-2026-06-30T13:16:47.365-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
-2026-06-30T13:16:47.372-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
-2026-06-30T13:16:47.372-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:16:47.373-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:16:52.302-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
-2026-06-30T13:16:52.307-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
-2026-06-30T13:16:52.317-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
-2026-06-30T13:16:52.318-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:16:52.318-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:17:13.753-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:17:13.757-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:17:13.761-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/ask
-2026-06-30T13:17:26.233-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:17:26.238-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:17:26.244-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/ask
-2026-06-30T13:18:36.388-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:18:36.393-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:18:36.399-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/ask
-2026-06-30T13:20:24.298-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
-2026-06-30T13:20:24.304-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
-2026-06-30T13:20:24.312-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
-2026-06-30T13:20:24.313-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:20:24.313-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:22:21.260-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:22:21.264-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:22:21.268-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/ask
-2026-06-30T13:22:36.195-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:22:36.199-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:22:36.203-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/ask
-2026-06-30T13:23:25.244-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:23:25.248-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:23:25.253-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/ask
-2026-06-30T13:24:18.018-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:24:18.024-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:24:18.028-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/ask
-2026-06-30T13:24:59.195-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:24:59.199-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:24:59.203-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/ask
-2026-06-30T13:25:12.838-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
-2026-06-30T13:25:12.843-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
-2026-06-30T13:25:12.851-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
-2026-06-30T13:25:12.852-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:25:12.853-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
-2026-06-30T13:25:21.130-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:25:21.134-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:25:21.138-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/ask
-2026-06-30T13:27:27.872-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:27:27.876-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:27:27.879-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/ask
-2026-06-30T13:27:40.699-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:27:40.704-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:27:40.706-03:00  WARN 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] c.chat.demo.security.config.JwtFilter    : Invalid JWT token: JWT expired 3705 milliseconds ago at 2026-06-30T16:27:37.000Z. Current time: 2026-06-30T16:27:40.705Z. Allowed clock skew: 0 milliseconds.
-2026-06-30T13:27:40.707-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-06-30T13:27:40.707-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
-2026-06-30T13:27:40.716-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /error
-2026-06-30T13:27:40.716-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-06-30T13:27:40.716-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
-2026-06-30T13:27:48.970-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
-2026-06-30T13:27:48.974-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
-2026-06-30T13:27:48.976-03:00  WARN 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] c.chat.demo.security.config.JwtFilter    : Invalid JWT token: JWT expired 11976 milliseconds ago at 2026-06-30T16:27:37.000Z. Current time: 2026-06-30T16:27:48.976Z. Allowed clock skew: 0 milliseconds.
-2026-06-30T13:27:48.976-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-06-30T13:27:48.976-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
-2026-06-30T13:27:48.977-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /error
-2026-06-30T13:27:48.977-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-06-30T13:27:48.978-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
-2026-06-30T13:28:04.802-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:28:04.806-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:28:04.808-03:00  WARN 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] c.chat.demo.security.config.JwtFilter    : Invalid JWT token: JWT expired 27808 milliseconds ago at 2026-06-30T16:27:37.000Z. Current time: 2026-06-30T16:28:04.808Z. Allowed clock skew: 0 milliseconds.
-2026-06-30T13:28:04.808-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-06-30T13:28:04.808-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
-2026-06-30T13:28:04.809-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing POST /error
-2026-06-30T13:28:04.809-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-06-30T13:28:04.809-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
-2026-06-30T13:28:13.170-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:28:13.174-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:28:13.175-03:00  WARN 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] c.chat.demo.security.config.JwtFilter    : Invalid JWT token: JWT expired 36174 milliseconds ago at 2026-06-30T16:27:37.000Z. Current time: 2026-06-30T16:28:13.174Z. Allowed clock skew: 0 milliseconds.
-2026-06-30T13:28:13.175-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-06-30T13:28:13.175-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
-2026-06-30T13:28:13.176-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing POST /error
-2026-06-30T13:28:13.176-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-06-30T13:28:13.176-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
-2026-06-30T13:28:28.682-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:28:28.686-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:28:28.687-03:00  WARN 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] c.chat.demo.security.config.JwtFilter    : Invalid JWT token: JWT expired 51687 milliseconds ago at 2026-06-30T16:27:37.000Z. Current time: 2026-06-30T16:28:28.687Z. Allowed clock skew: 0 milliseconds.
-2026-06-30T13:28:28.687-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-06-30T13:28:28.688-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
-2026-06-30T13:28:28.688-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing POST /error
-2026-06-30T13:28:28.688-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-06-30T13:28:28.689-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
-2026-06-30T13:28:34.265-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:28:34.270-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:28:34.271-03:00  WARN 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] c.chat.demo.security.config.JwtFilter    : Invalid JWT token: JWT expired 57270 milliseconds ago at 2026-06-30T16:27:37.000Z. Current time: 2026-06-30T16:28:34.270Z. Allowed clock skew: 0 milliseconds.
-2026-06-30T13:28:34.271-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-06-30T13:28:34.271-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
-2026-06-30T13:28:34.271-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /error
-2026-06-30T13:28:34.271-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-06-30T13:28:34.272-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
-2026-06-30T13:28:41.666-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:28:41.670-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:28:41.671-03:00  WARN 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] c.chat.demo.security.config.JwtFilter    : Invalid JWT token: JWT expired 64671 milliseconds ago at 2026-06-30T16:27:37.000Z. Current time: 2026-06-30T16:28:41.671Z. Allowed clock skew: 0 milliseconds.
-2026-06-30T13:28:41.671-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-06-30T13:28:41.671-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
-2026-06-30T13:28:41.671-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing POST /error
-2026-06-30T13:28:41.672-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-06-30T13:28:41.672-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
-2026-06-30T13:33:38.053-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/auth/login
-2026-06-30T13:33:38.055-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
-2026-06-30T13:33:38.056-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-06-30T13:33:38.056-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
-2026-06-30T13:33:38.212-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
-2026-06-30T13:33:38.214-03:00  INFO 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] c.c.demo.controller.auth.AuthController  : Login successful for user: admin
-2026-06-30T13:33:43.019-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
-2026-06-30T13:33:43.023-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
-2026-06-30T13:33:43.027-03:00 DEBUG 14492 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/ask
-2026-06-30T13:43:28.226-03:00  INFO 14492 --- [Spring-ChatBot-demo] [RMI TCP Connection(42)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2026-06-30T13:43:28.310-03:00  INFO 14492 --- [Spring-ChatBot-demo] [RMI TCP Connection(42)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-06-30T13:43:28.310-03:00  INFO 14492 --- [Spring-ChatBot-demo] [RMI TCP Connection(42)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
-2026-06-30T13:43:28.313-03:00  INFO 14492 --- [Spring-ChatBot-demo] [RMI TCP Connection(42)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2026-07-01T11:44:40.672-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] c.c.demo.SpringChatBotDemoApplication    : Starting SpringChatBotDemoApplication using Java 17.0.2 with PID 19004 (C:\Users\Martin\eclipse-workspace\Spring-ChatBot-demo\target\classes started by Andrea in C:\Users\Martin\eclipse-workspace\Spring-ChatBot-demo)
+2026-07-01T11:44:40.677-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] c.c.demo.SpringChatBotDemoApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-07-01T11:44:40.743-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-07-01T11:44:40.743-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-07-01T11:44:42.321-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-01T11:44:42.568-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 237 ms. Found 18 JPA repository interfaces.
+2026-07-01T11:44:43.250-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-07-01T11:44:43.266-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-01T11:44:43.267-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-07-01T11:44:43.348-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-07-01T11:44:43.349-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2605 ms
+2026-07-01T11:44:43.522-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-07-01T11:44:43.605-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-07-01T11:44:43.650-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-07-01T11:44:43.986-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-01T11:44:44.025-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-01T11:44:44.227-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@414037a1
+2026-07-01T11:44:44.229-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-01T11:44:45.693-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-01T11:44:46.144-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-01T11:44:46.413-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-01T11:44:46.899-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-07-01T11:44:46.900-03:00  WARN 19004 --- [Spring-ChatBot-demo] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2026-07-01T11:44:47.942-03:00  WARN 19004 --- [Spring-ChatBot-demo] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-01T11:44:48.222-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2026-07-01T11:44:48.686-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-07-01T11:44:48.723-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-07-01T11:44:48.738-03:00  INFO 19004 --- [Spring-ChatBot-demo] [restartedMain] c.c.demo.SpringChatBotDemoApplication    : Started SpringChatBotDemoApplication in 8.517 seconds (process running for 9.84)
+2026-07-01T11:45:07.394-03:00  INFO 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-01T11:45:07.395-03:00  INFO 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-01T11:45:07.398-03:00  INFO 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2026-07-01T11:45:07.421-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/auth/login
+2026-07-01T11:45:07.440-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2026-07-01T11:45:07.444-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-01T11:45:07.446-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
+2026-07-01T11:45:07.800-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-07-01T11:45:07.806-03:00  INFO 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] c.c.demo.controller.auth.AuthController  : Login successful for user: admin
+2026-07-01T12:02:45.220-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
+2026-07-01T12:02:46.659-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
+2026-07-01T12:04:37.974-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/auth/login
+2026-07-01T12:04:37.990-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2026-07-01T12:04:38.013-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-01T12:04:38.018-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
+2026-07-01T12:04:38.474-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-07-01T12:04:38.479-03:00  INFO 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] c.c.demo.controller.auth.AuthController  : Login successful for user: admin
+2026-07-01T12:06:24.021-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
+2026-07-01T12:06:24.030-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
+2026-07-01T12:06:25.232-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
+2026-07-01T12:06:25.349-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:06:25.389-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:06:29.174-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
+2026-07-01T12:06:29.180-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
+2026-07-01T12:06:29.188-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
+2026-07-01T12:06:29.189-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-3] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:06:29.189-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-3] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:06:30.696-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
+2026-07-01T12:06:30.708-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
+2026-07-01T12:06:30.708-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:06:30.709-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:06:51.154-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
+2026-07-01T12:06:52.220-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
+2026-07-01T12:09:56.615-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/auth/login
+2026-07-01T12:09:56.620-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2026-07-01T12:09:56.620-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-01T12:09:56.620-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
+2026-07-01T12:09:56.711-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-07-01T12:09:56.713-03:00  INFO 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] c.c.demo.controller.auth.AuthController  : Login successful for user: admin
+2026-07-01T12:09:59.179-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
+2026-07-01T12:09:59.185-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
+2026-07-01T12:09:59.197-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
+2026-07-01T12:09:59.198-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:09:59.198-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:10:45.888-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/chat/ask
+2026-07-01T12:10:45.896-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/ask
+2026-07-01T12:10:45.903-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/ask
+2026-07-01T12:11:23.914-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
+2026-07-01T12:11:23.919-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
+2026-07-01T12:11:23.930-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
+2026-07-01T12:11:23.932-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:11:23.932-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:11:25.745-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
+2026-07-01T12:11:25.754-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
+2026-07-01T12:11:25.755-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:11:25.755-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:11:49.598-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
+2026-07-01T12:11:49.603-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
+2026-07-01T12:11:49.612-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
+2026-07-01T12:11:49.612-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:11:49.613-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:21:50.967-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
+2026-07-01T12:21:50.979-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
+2026-07-01T12:21:51.311-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
+2026-07-01T12:21:51.312-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:21:51.313-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:40:02.051-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/auth/login
+2026-07-01T12:40:02.104-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2026-07-01T12:40:02.109-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-01T12:40:02.111-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
+2026-07-01T12:40:02.340-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-07-01T12:40:02.343-03:00  INFO 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] c.c.demo.controller.auth.AuthController  : Login successful for user: admin
+2026-07-01T12:40:36.951-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/auth/login
+2026-07-01T12:40:36.955-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2026-07-01T12:40:36.956-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-01T12:40:36.957-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
+2026-07-01T12:40:37.061-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-07-01T12:40:37.063-03:00  INFO 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] c.c.demo.controller.auth.AuthController  : Login successful for user: admin
+2026-07-01T12:40:38.539-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
+2026-07-01T12:40:38.545-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
+2026-07-01T12:40:38.558-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
+2026-07-01T12:40:38.559-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:40:38.569-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:43:12.316-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/auth/login
+2026-07-01T12:43:12.322-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2026-07-01T12:43:12.322-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-01T12:43:12.323-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
+2026-07-01T12:43:12.460-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] o.s.s.a.dao.DaoAuthenticationProvider    : Failed to find user 'admin '
+2026-07-01T12:43:12.565-03:00  WARN 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.security.authentication.BadCredentialsException: Bad credentials]
+2026-07-01T12:43:20.330-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/auth/login
+2026-07-01T12:43:20.333-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2026-07-01T12:43:20.334-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-01T12:43:20.334-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
+2026-07-01T12:43:20.419-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-07-01T12:43:20.421-03:00  INFO 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-4] c.c.demo.controller.auth.AuthController  : Login successful for user: admin
+2026-07-01T12:43:22.636-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
+2026-07-01T12:43:22.642-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
+2026-07-01T12:43:22.652-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
+2026-07-01T12:43:22.652-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:43:22.653-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-6] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:43:59.357-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
+2026-07-01T12:43:59.366-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
+2026-07-01T12:43:59.397-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
+2026-07-01T12:43:59.398-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:43:59.398-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-8] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:44:23.162-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/documents
+2026-07-01T12:44:23.229-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/documents
+2026-07-01T12:44:23.363-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/documents
+2026-07-01T12:44:23.364-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:44:23.364-03:00 DEBUG 19004 --- [Spring-ChatBot-demo] [http-nio-8080-exec-10] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public java.util.List com.chat.demo.controller.rag.DocumentController.getDocumentsAll(); target is of class [com.chat.demo.controller.rag.DocumentController]
+2026-07-01T12:45:58.333-03:00  INFO 19004 --- [Spring-ChatBot-demo] [RMI TCP Connection(71)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2026-07-01T12:45:58.830-03:00  INFO 19004 --- [Spring-ChatBot-demo] [RMI TCP Connection(71)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-01T12:45:58.881-03:00  INFO 19004 --- [Spring-ChatBot-demo] [RMI TCP Connection(71)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-07-01T12:45:58.892-03:00  INFO 19004 --- [Spring-ChatBot-demo] [RMI TCP Connection(71)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
