@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.chat.demo.dto.DocumentRequest;
 import com.chat.demo.dto.DocumentResponse;
@@ -18,7 +19,10 @@ import com.chat.demo.model.Organization;
 import com.chat.demo.model.User;
 import com.chat.demo.model.DocumentStatus;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+
 import com.chat.demo.repository.AreaRepository;
+import com.chat.demo.repository.DocumentChunkRepository;
 import com.chat.demo.repository.DocumentRepository;
 import com.chat.demo.repository.DocumentStatusRepository;
 import com.chat.demo.repository.OrganizationRepository;
@@ -41,12 +45,15 @@ public class DocumentServiceImpl implements DocumentService {
 	private static final Logger log = LoggerFactory.getLogger(DocumentServiceImpl.class);
 
 	private final DocumentRepository documentRepository;
+	private final DocumentChunkRepository chunkRepository;
 	private final DocumentStatusRepository docStatusRepo;
 	private final AreaRepository areaRepo;
 	private final DocumentMapper mapper;
 	private final OrganizationRepository organizationRepo;
-    private final RagService ragService;
+	private final RagService ragService;
 	private final UserRepository userRepo;
+	private final JdbcTemplate jdbcTemplate;
+
 	@Override
 	public DocumentResponse save(DocumentRequest document) {
 		
@@ -161,9 +168,24 @@ public class DocumentServiceImpl implements DocumentService {
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
+		DocumentStored document = documentRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Document not found: " + id));
+
+		chunkRepository.deleteByDocumentId(id);
+
+		jdbcTemplate.update(
+				"DELETE FROM vector_store WHERE (metadata->>'documentId')::bigint = ?", id);
+
+		try {
+			Files.deleteIfExists(Paths.get(document.getFilePath()));
+		} catch (Exception e) {
+			log.warn("Could not delete file {}: {}", document.getFilePath(), e.getMessage());
+		}
+
 		documentRepository.deleteById(id);
-		
+		log.info("Document {} deleted (chunks, vectors and file removed)", id);
 	}
 
 	@Override

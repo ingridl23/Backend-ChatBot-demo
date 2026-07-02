@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.chat.demo.dto.ChangePasswordRequest;
+import com.chat.demo.dto.UpdateProfileRequest;
 import com.chat.demo.dto.UserRequest;
 import com.chat.demo.model.Area;
 import com.chat.demo.model.Organization;
@@ -88,6 +91,34 @@ public class UserServiceImpl implements UserService {
         if (pass != null && !pass.isBlank()) {
             user.setPassword(passwordEncoder.encode(pass));
         }
+        user.setUpdatedAt(new Date());
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public User updateProfile(Long id, UpdateProfileRequest request) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setUserName(request.getUserName());
+        user.setLastName(request.getLastName());
+        user.setEmail(request.getEmail());
+        user.setUpdatedAt(new Date());
+
+        return userRepository.save(user);
+    }
+
+    @Override
+    public void changePassword(Long id, ChangePasswordRequest request) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
+            throw new BadCredentialsException("Current password is incorrect");
+        }
+
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         user.setUpdatedAt(new Date());
 
         userRepository.save(user);
