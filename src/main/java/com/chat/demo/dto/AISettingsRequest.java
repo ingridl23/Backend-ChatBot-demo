@@ -13,6 +13,9 @@ public class AISettingsRequest {
 	private String modelName;
 	@NotNull
     private Long organizationId;
+	// Opcional: si se especifica, esta configuración solo aplica a esa área
+	// (permite un tono/saludo distinto por área). Nulo = configuración por defecto de la organización.
+	private Long areaId;
 	@NotNull
     private Double temperature;
     

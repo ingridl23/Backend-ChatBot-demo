@@ -25,7 +25,7 @@ public class AreaServiceImpl implements AreaService{
 
 	        existing.setName(area.getName());
 	        existing.setDescription(area.getDescription());
-	        existing.setOrganization(area.getOrganization());
+	        // La organización de un área no se reasigna una vez creada.
 
 	        return areaRepository.save(existing);
 	}

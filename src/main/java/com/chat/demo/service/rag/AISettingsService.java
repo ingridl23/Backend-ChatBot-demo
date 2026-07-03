@@ -38,6 +38,10 @@ public interface AISettingsService {
     
     Optional<AISettingsRequest> findByModelName(String modelName);
     AISettingsRequest getActiveSettings(Long organizationId);
+
+    // Configuración activa para un área puntual, con fallback a la de la organización
+    // si el área no tiene una propia (areaId puede ser null para pedir directamente la de la org).
+    AISettingsRequest getActiveSettings(Long organizationId, Long areaId);
     
     List <AISettingsRequest> getActiveSettingsAll();
 

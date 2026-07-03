@@ -1,6 +1,7 @@
 package com.chat.demo.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +25,7 @@ public class DocumentResponse {
 
 	    private Long organizationId;
 
-	    private Long areaId;
+	    private List<Long> areaIds;
 
 	    private Long uploadedById;
 

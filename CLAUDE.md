@@ -66,10 +66,10 @@ POST /api/chat/ask
   → Groq API (llama-3.3-70b-versatile via OpenAI-compatible endpoint)
 ```
 
-**Planned full pipeline (requires OpenAI credits + pgvector):**
-- Uncomment `VectorStore` in `RagServiceImpl`, `spring-ai-starter-vector-store-pgvector`, and pgvector schema init
-- Switch `spring.ai.openai.base-url` back to OpenAI proper and set model to `gpt-4o-mini`
-- Enable `spring.ai.vectorstore.pgvector.initialize-schema=true`
+**Planned full pipeline (requires a real embeddings provider):**
+- pgvector schema init and the `VectorStore` bean are already active; `RagServiceImpl` just needs `ingestDocument()`/`searchRelevantChunks()` switched back to `vectorStore.add()`/`similaritySearch()` (currently commented out — see Key Design Decisions)
+- Groq does not serve embeddings, so this is blocked on either OpenAI credits (`spring.ai.openai.embedding.options.model=text-embedding-3-small` or similar, `OPENAI_API_KEY`) or a free alternative (e.g. local Ollama, HuggingFace inference)
+- Documents ingested while retrieval is keyword-based have no `vector_store` rows — they'd need re-upload once semantic search is reactivated
 
 ### Package Structure
 
@@ -77,7 +77,8 @@ POST /api/chat/ask
 com.chat.demo
 ├── config/          # AIConfig (ChatClient bean)
 ├── controller/
-│   ├── auth/        # AuthController, RoleController, PermissionController
+│   ├── auth/        # AuthController, UserController (incl. /me profile, password change),
+│   │                # RoleController, PermissionController
 │   └── rag/         # ChatController, DocumentController, OrganizationController,
 │                    # ConversationController, MessageController, FaqController,
 │                    # IntegrationController, AISettingsController
@@ -108,7 +109,8 @@ Stateless JWT auth. Filter chain:
 ### Key Design Decisions
 
 - **No mapstruct** — mappers are written by hand in `mapper/` package
-- **PgVector autoconfiguration is excluded** (`spring.autoconfigure.exclude=...PgVectorStoreAutoConfiguration`) to avoid bean wiring failures until embeddings are activated
+- **PgVector autoconfiguration is enabled** (`spring.ai.vectorstore.pgvector.initialize-schema=true`, 768 dims, HNSW, COSINE_DISTANCE) and the `vector_store` table exists in Postgres, but `RagServiceImpl` does **not** call `vectorStore.add()`/`similaritySearch()` — an attempt to use Groq's `nomic-embed-text-v1.5` as embedding model failed with `404 model_not_found` (Groq's OpenAI-compatible endpoint only serves chat/completions, not embeddings). Retrieval stays keyword-based (`findTop5ByDocumentOrganizationId`) until a real embeddings provider (OpenAI w/ credits, or a free alternative) is wired in.
 - **PDF storage path** configured via `app.storage.documents-path=documents` (relative to working directory); PDFs are saved to disk and path stored in `DocumentStored.filePath`
+- **Document delete is cascading**: `DocumentServiceImpl.delete()` removes the `DocumentChunk` rows, any matching `vector_store` rows, the physical file, and the `Document` row, in that order, inside a single `@Transactional` method (required because the derived `deleteByDocumentId` query needs an active transaction)
 - **`RagService` is downstream of `DocumentService`** — `DocumentService.upload()` calls `ragService.ingestDocument()` after persisting metadata; there is no separate `/rag/ingest` endpoint
 - **Swagger UI** available at `/swagger-ui.html` (springdoc-openapi 2.5.0)

@@ -1,10 +1,13 @@
 package com.chat.demo.service.rag.impl;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,8 +65,7 @@ public class DocumentServiceImpl implements DocumentService {
 		DocumentStatus status = docStatusRepo.findById(document.getStatusId())
 	            .orElseThrow(() -> new RuntimeException("Status not found"));
 
-	    Area area = areaRepo.findById(document.getAreaId())
-	            .orElseThrow(() -> new RuntimeException("Area not found"));
+	    Set<Area> areas = resolveAreas(document.getAreaIds());
 
 	    Organization organization = organizationRepo
 	            .findById(document.getOrganizationId())
@@ -71,10 +73,10 @@ public class DocumentServiceImpl implements DocumentService {
 
 	    User user = userRepo.findById(document.getUploadedById())
 	            .orElseThrow(() -> new RuntimeException("User not found"));
-	    
-	    
+
+
 	    entity.setStatus(status);
-	    entity.setArea(area);
+	    entity.setAreas(areas);
 	    entity.setOrganization(organization);
 	    entity.setUploadedBy(user);
 		entity.setCreatedAt(LocalDateTime.now());
@@ -87,11 +89,13 @@ public class DocumentServiceImpl implements DocumentService {
 	}
 
 	@Override
-	public DocumentResponse update(Long id, DocumentRequest document) {
+	public DocumentResponse update(Long id, DocumentRequest document, Long callerAreaId) {
 
 	    DocumentStored existing = documentRepository.findById(id)
 	            .orElseThrow(() ->
 	                    new RuntimeException("Document not found"));
+
+	    assertAreaOwnership(existing, callerAreaId);
 
 	    existing.setTitle(document.getTitle());
 	    existing.setFileSize(document.getFileSize());
@@ -110,16 +114,10 @@ public class DocumentServiceImpl implements DocumentService {
 	        existing.setStatus(docStatus);
 	    }
 
-	    // AREA
+	    // AREAS
 
-	    if (document.getAreaId() != null) {
-
-	        Area area =
-	                areaRepo.findById(document.getAreaId())
-	                .orElseThrow(() ->
-	                        new RuntimeException("Area not found"));
-
-	        existing.setArea(area);
+	    if (document.getAreaIds() != null) {
+	        existing.setAreas(resolveAreas(document.getAreaIds()));
 	    }
 
 	    DocumentStored saved =
@@ -127,8 +125,32 @@ public class DocumentServiceImpl implements DocumentService {
 
 	    return mapper.toResponse(saved);
 	}
-	
-	
+
+	// callerAreaId == null (admin general) => sin restricción. Si no, el documento debe
+	// tener asignada esa área explícitamente (un AREA_ADMIN no puede tocar documentos
+	// globales ni de otras áreas).
+	private void assertAreaOwnership(DocumentStored document, Long callerAreaId) {
+	    if (callerAreaId == null) {
+	        return;
+	    }
+	    boolean owns = document.getAreas() != null
+	            && document.getAreas().stream().anyMatch(a -> a.getId().equals(callerAreaId));
+	    if (!owns) {
+	        throw new AccessDeniedException("AREA_ADMIN cannot modify a document outside their area");
+	    }
+	}
+
+	private Set<Area> resolveAreas(List<Long> areaIds) {
+	    if (areaIds == null || areaIds.isEmpty()) {
+	        return new HashSet<>();
+	    }
+	    Set<Area> areas = new HashSet<>(areaRepo.findAllById(areaIds));
+	    if (areas.size() != new HashSet<>(areaIds).size()) {
+	        throw new RuntimeException("One or more areaIds not found");
+	    }
+	    return areas;
+	}
+
 	@Override
 	public List<DocumentResponse> findById(Long id) {
 
@@ -157,7 +179,7 @@ public class DocumentServiceImpl implements DocumentService {
 	public List<DocumentResponse> findByArea(Long areaId) {
 		
 		
-		 return  documentRepository.findByAreaId(areaId).stream().map(mapper::toResponse).toList();
+		 return  documentRepository.findByAreasId(areaId).stream().map(mapper::toResponse).toList();
 	}
 
 	@Override
@@ -169,9 +191,11 @@ public class DocumentServiceImpl implements DocumentService {
 
 	@Override
 	@Transactional
-	public void delete(Long id) {
+	public void delete(Long id, Long callerAreaId) {
 		DocumentStored document = documentRepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("Document not found: " + id));
+
+		assertAreaOwnership(document, callerAreaId);
 
 		chunkRepository.deleteByDocumentId(id);
 
@@ -198,7 +222,7 @@ public class DocumentServiceImpl implements DocumentService {
 	}
 
 	@Override
-	public DocumentResponse upload(MultipartFile file, String title, Long organizationId, Long areaId, Long statusId,
+	public DocumentResponse upload(MultipartFile file, String title, Long organizationId, List<Long> areaIds, Long statusId,
 			Long uploadedById) {
 	
 		 try {
@@ -232,10 +256,7 @@ public class DocumentServiceImpl implements DocumentService {
 		                .orElseThrow(() ->
 		                        new RuntimeException("Status not found"));
 
-		        Area area =
-		                areaRepo.findById(areaId)
-		                .orElseThrow(() ->
-		                        new RuntimeException("Area not found"));
+		        Set<Area> areas = resolveAreas(areaIds);
 
 		        Organization organization =
 		                organizationRepo.findById(organizationId)
@@ -257,7 +278,7 @@ public class DocumentServiceImpl implements DocumentService {
 		                .fileSize(file.getSize())
 		                .filePath(filePath.toAbsolutePath().toString())
 		                .status(status)
-		                .area(area)
+		                .areas(areas)
 		                .organization(organization)
 		                .uploadedBy(user)
 		                .createdAt(LocalDateTime.now())

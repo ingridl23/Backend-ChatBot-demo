@@ -15,6 +15,10 @@ public interface UserService {
 
 	    List<User> getAllUsers();
 
+	    List<User> getUsersByOrganization(Long organizationId);
+
+	    List<User> getUsersByArea(Long areaId);
+
 	    Optional<User> getUserById(Long id);
 
 	    void deleteUser(Long id);

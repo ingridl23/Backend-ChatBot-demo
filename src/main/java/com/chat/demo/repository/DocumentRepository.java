@@ -12,7 +12,7 @@ public interface DocumentRepository extends JpaRepository<DocumentStored, Long>{
 
 	    List<DocumentStored> findByOrganizationId(Long organizationId);
 
-	    List<DocumentStored> findByAreaId(Long areaId);
+	    List<DocumentStored> findByAreasId(Long areaId);
 
 	    List<DocumentStored> findByUploadedById(Long userId);
 	

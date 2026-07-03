@@ -34,7 +34,13 @@ public class AISettings {
     @ManyToOne
     @JoinColumn(name = "organization_id")
     private Organization organization;
-    
+
+    // Nulo = configuración por defecto de toda la organización.
+    // Si se especifica, esta configuración solo aplica a esa área (tono/saludo distinto por área).
+    @ManyToOne
+    @JoinColumn(name = "area_id")
+    private Area area;
+
     private Double temperature;
     
     @Column(columnDefinition = "TEXT")

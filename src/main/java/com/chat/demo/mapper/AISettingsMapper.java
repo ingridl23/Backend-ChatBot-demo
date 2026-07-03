@@ -32,6 +32,13 @@ public class AISettingsMapper {
         dto.setProvider(entity.getProvider());
         dto.setActive(entity.getActive());
 
+        if (entity.getOrganization() != null) {
+            dto.setOrganizationId(entity.getOrganization().getId());
+        }
+        if (entity.getArea() != null) {
+            dto.setAreaId(entity.getArea().getId());
+        }
+
         return dto;
     }
 }

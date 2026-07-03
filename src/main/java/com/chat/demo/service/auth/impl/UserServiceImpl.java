@@ -43,6 +43,10 @@ public class UserServiceImpl implements UserService {
         Area area = areaRepository.findById(request.getAreaId())
                 .orElseThrow(() -> new RuntimeException("Area not found"));
 
+        if (!area.getOrganization().getId().equals(organization.getId())) {
+            throw new RuntimeException("Area does not belong to the specified organization");
+        }
+
         Set<Role> roles = new HashSet<>();
         for (Long roleId : request.getRolesId()) {
             Role role = roleRepository.findById(roleId)
@@ -69,6 +73,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<User> getUsersByOrganization(Long organizationId) {
+        return userRepository.findByOrganizationId(organizationId);
+    }
+
+    @Override
+    public List<User> getUsersByArea(Long areaId) {
+        return userRepository.findByAreaId(areaId);
     }
 
     @Override

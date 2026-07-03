@@ -33,6 +33,7 @@ public class ChatController {
         // Override any client-provided values with the authenticated user's actual data
         request.setUserId(user.getId());
         request.setOrganizationId(user.getOrganization().getId());
+        request.setAreaId(user.getArea() != null ? user.getArea().getId() : null);
 
         return chatService.ask(request);
     }

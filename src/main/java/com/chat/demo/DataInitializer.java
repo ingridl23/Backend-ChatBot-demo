@@ -51,6 +51,9 @@ public class DataInitializer {
         Role userRole = roleRepository.findByName("USER")
                 .orElseGet(() -> roleRepository.save(Role.builder().name("USER").build()));
 
+        roleRepository.findByName("AREA_ADMIN")
+                .orElseGet(() -> roleRepository.save(Role.builder().name("AREA_ADMIN").build()));
+
         if (organizationRep.findById(1L).isEmpty()) {
             Organization org1 = Organization.builder()
                     .name("Empresa Uno")
@@ -90,7 +93,7 @@ public class DataInitializer {
                     .userName("admin")
                     .lastName("perez")
                     .email("admin@gmail.com")
-                    .password(passwordEncoder.encode("1234"))
+                    .password(passwordEncoder.encode("12345678"))
                     .enabled(true)
                     .organization(org1)
                     .area(area1)
@@ -120,7 +123,7 @@ public class DataInitializer {
                     .userName("user")
                     .lastName("gonzalez")
                     .email("user@gmail.com")
-                    .password(passwordEncoder.encode("12345"))
+                    .password(passwordEncoder.encode("12345678"))
                     .enabled(true)
                     .organization(org1)
                     .area(area1)

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import com.chat.demo.dto.DocumentResponse;
 
 import com.chat.demo.dto.DocumentRequest;
+import com.chat.demo.model.Area;
 import com.chat.demo.model.DocumentStored;
 
 
@@ -48,8 +49,8 @@ public class DocumentMapper {
 	            dto.setOrganizationId(entity.getOrganization().getId());
 	        }
 
-	        if(entity.getArea() != null) {
-	            dto.setAreaId(entity.getArea().getId());
+	        if(entity.getAreas() != null) {
+	            dto.setAreaIds(entity.getAreas().stream().map(Area::getId).toList());
 	        }
 
 	        if(entity.getUploadedBy() != null) {

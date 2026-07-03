@@ -2,6 +2,8 @@ package com.chat.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -31,9 +33,13 @@ public class DocumentStored {
     @JoinColumn(name = "organization_id")
     private Organization organization;
 
-    @ManyToOne
-    @JoinColumn(name = "area_id")
-    private Area area;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "documents_areas",
+            joinColumns = @JoinColumn(name = "document_id"),
+            inverseJoinColumns = @JoinColumn(name = "area_id")
+    )
+    private Set<Area> areas = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "uploaded_by")

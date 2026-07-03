@@ -19,4 +19,5 @@ public class ChatRequest {
     // no se toman del body enviado por el cliente.
     private Long organizationId;
     private Long userId;
+    private Long areaId;
 }

@@ -13,6 +13,8 @@ public interface AISettingsRepository extends JpaRepository<AISettings, Long>{
 
 	Optional<AISettings> findByModelName(String modelName);
 	Optional<AISettings> findByOrganizationIdAndActiveTrue(Long organizationId);
+	Optional<AISettings> findByOrganizationIdAndAreaIdAndActiveTrue(Long organizationId, Long areaId);
+	Optional<AISettings> findByOrganizationIdAndAreaIsNullAndActiveTrue(Long organizationId);
 	List<AISettings> findByOrganizationId(Long organizationId);
 	List<AISettings> findAllByActiveTrue();
 }

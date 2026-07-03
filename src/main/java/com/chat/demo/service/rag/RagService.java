@@ -77,7 +77,7 @@ public interface RagService {
    // void ingestDocument(String filePath);
     void ingestDocument(Long documentId);
 
-    List<Document> searchRelevantChunks(String question , Long organizationId);
+    List<Document> searchRelevantChunks(String question, Long organizationId, Long areaId);
 
     String buildContext(List<Document> docs);
 

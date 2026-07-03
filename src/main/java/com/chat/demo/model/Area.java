@@ -3,6 +3,7 @@ package com.chat.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "areas")
@@ -28,8 +29,8 @@ public class Area {
     @OneToMany(mappedBy = "area")
     private List<User> users;
 
-    @OneToMany(mappedBy = "area")
-    private List<DocumentStored> documents;
+    @ManyToMany(mappedBy = "areas")
+    private Set<DocumentStored> documents;
 
     @OneToMany(mappedBy = "area")
     private List<SystemLink> systems;

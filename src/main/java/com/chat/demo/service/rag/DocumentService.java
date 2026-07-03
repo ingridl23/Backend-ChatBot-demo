@@ -13,7 +13,8 @@ public interface DocumentService {
 	
 	    DocumentResponse save(DocumentRequest document);
 
-	    DocumentResponse update(Long id, DocumentRequest document);
+	    // callerAreaId == null significa admin general (sin restricción de área)
+	    DocumentResponse update(Long id, DocumentRequest document, Long callerAreaId);
 
 	    List<DocumentResponse> findById(Long id);
 
@@ -25,7 +26,7 @@ public interface DocumentService {
 
 	    List<DocumentResponse> findByUploadedBy(Long userId);
 
-	    void delete(Long id);
+	    void delete(Long id, Long callerAreaId);
 	    
 	    List<DocumentResponse> findAllDocuments();
 	    
@@ -33,7 +34,7 @@ public interface DocumentService {
 	            MultipartFile file,
 	            String title,
 	            Long organizationId,
-	            Long areaId,
+	            List<Long> areaIds,
 	            Long statusId,
 	            Long uploadedById
 	    );

@@ -23,7 +23,7 @@ public class UserRequest {
 	private String password;
 	@NotNull
 	private Boolean enabled ;
-	@NotNull
+	// Lo sobreescribe el controller desde el JWT del admin autenticado; no se toma del cliente.
 	private Long organizationId;
 	@NotNull
 	private Long areaId;
