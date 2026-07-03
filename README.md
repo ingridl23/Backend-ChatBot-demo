@@ -38,6 +38,8 @@ POSTGRES_PASSWORD=<tu password>
 GROQ_API_KEY=<tu key>
 ```
 
+> ⚠️ **Nota de seguridad**: las credenciales, API keys y cualquier dato de ejemplo incluidos o referenciados en este repo son solo para pruebas de desarrollo. Si te clonás el repo, generá tus propias credenciales locales (no reutilices las de ejemplo). Si pensás usar este proyecto para algo real o desplegarlo, hacelo en un entorno aparte o en un repositorio privado nuevo, y nunca subas credenciales reales a un repo público.
+
 ## Cómo correrlo
 
 ```bash
