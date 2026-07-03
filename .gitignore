@@ -37,3 +37,6 @@ start-dev.bat
 
 ### Uploaded files (runtime storage) ###
 uploads/
+
+### Logs (runtime output) ###
+logs/
