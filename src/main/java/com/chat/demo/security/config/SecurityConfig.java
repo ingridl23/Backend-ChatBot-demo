@@ -3,6 +3,7 @@ package com.chat.demo.security.config;
 import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -40,6 +41,8 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
+                        // El logo/favicon lo carga el navegador directo en <img>/<link>, sin JWT.
+                        .requestMatchers(HttpMethod.GET, "/api/organizations/*/logo", "/api/organizations/*/favicon").permitAll()
                         .requestMatchers("/api/users/me/**").hasAnyRole("ADMIN", "USER", "AREA_ADMIN")
                         .requestMatchers("/api/users/area/**").hasAnyRole("ADMIN", "AREA_ADMIN")
                         .requestMatchers("/api/users/**").hasRole("ADMIN")

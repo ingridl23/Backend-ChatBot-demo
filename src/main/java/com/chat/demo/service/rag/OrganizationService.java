@@ -2,6 +2,9 @@ package com.chat.demo.service.rag;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.chat.demo.dto.BrandingFile;
 import com.chat.demo.dto.OrganizationRequest;
 import com.chat.demo.model.Organization;
 
@@ -20,5 +23,13 @@ public interface OrganizationService {
 	    List<OrganizationRequest> findAll();
 
 	    void delete(Long id);
+
+	    OrganizationRequest uploadLogo(Long id, MultipartFile file);
+
+	    OrganizationRequest uploadFavicon(Long id, MultipartFile file);
+
+	    Optional<BrandingFile> loadLogo(Long id);
+
+	    Optional<BrandingFile> loadFavicon(Long id);
 
 }

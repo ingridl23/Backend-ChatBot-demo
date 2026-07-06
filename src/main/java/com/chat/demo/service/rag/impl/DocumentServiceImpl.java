@@ -176,6 +176,14 @@ public class DocumentServiceImpl implements DocumentService {
 	}
 
 	@Override
+	public List<DocumentResponse> findByOrganizationScoped(Long organizationId, Long callerAreaId) {
+		List<DocumentStored> docs = callerAreaId == null
+				? documentRepository.findByOrganizationId(organizationId)
+				: documentRepository.findByOrganizationAndAreaOrGlobal(organizationId, callerAreaId);
+		return docs.stream().map(mapper::toResponse).toList();
+	}
+
+	@Override
 	public List<DocumentResponse> findByArea(Long areaId) {
 		
 		

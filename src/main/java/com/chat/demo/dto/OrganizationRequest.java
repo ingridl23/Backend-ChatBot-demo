@@ -13,13 +13,13 @@ import lombok.Setter;
 public class OrganizationRequest {
 	@NotBlank
 	    private String name;
-	@NotBlank
+	    // Gestionados exclusivamente por uploadLogo/uploadFavicon (POST .../logo, .../favicon):
+	    // este campo solo se lee en las respuestas, nunca se exige ni se aplica en save/update.
 	    private String logoUrl;
 	@NotBlank
 	    private String primaryColor;
 	@NotBlank
 	    private String secondaryColor;
-	@NotBlank
 	    private String faviconUrl;
 	@NotBlank
         private String domain;

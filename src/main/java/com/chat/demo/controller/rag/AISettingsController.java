@@ -78,7 +78,7 @@ public class AISettingsController {
 	 // buscar una configuracion por id
 
 	 @GetMapping("/{id}")
-	  @PreAuthorize("hasAnyRole('ADMIN','USER')")
+	  @PreAuthorize("hasAnyRole('ADMIN','USER','AREA_ADMIN')")
 	 public Optional<AISettingsRequest> foundSettingsAIById ( @Valid @PathVariable Long id, Authentication authentication) {
 		 User caller = currentUser(authentication);
 		 assertOwnership(id, caller.getOrganization().getId());
@@ -88,7 +88,7 @@ public class AISettingsController {
 	// buscar una configuracion por organizacion
 
 	 @GetMapping("/organization/{id}")
-	  @PreAuthorize("hasAnyRole('ADMIN','USER')")
+	  @PreAuthorize("hasAnyRole('ADMIN','USER','AREA_ADMIN')")
 	 public Optional <AISettingsRequest> foundSettingsAIByOrganizationId ( @Valid @PathVariable Long id, Authentication authentication) {
 		 User caller = currentUser(authentication);
 		 if (!id.equals(caller.getOrganization().getId())) {
@@ -100,7 +100,7 @@ public class AISettingsController {
 
 	 // obtener la configuracion activa por defecto de la organizacion
 	 @GetMapping("/active/{id}")
-	  @PreAuthorize("hasAnyRole('ADMIN','USER')")
+	  @PreAuthorize("hasAnyRole('ADMIN','USER','AREA_ADMIN')")
 	 public AISettingsRequest foundActiveSettingsAIById ( @Valid @PathVariable Long id, Authentication authentication) {
 		 User caller = currentUser(authentication);
 		 if (!id.equals(caller.getOrganization().getId())) {
@@ -111,7 +111,7 @@ public class AISettingsController {
 
 	 // obtener la configuracion activa para un area puntual (con fallback a la de la organizacion)
 	 @GetMapping("/active/{id}/area/{areaId}")
-	  @PreAuthorize("hasAnyRole('ADMIN','USER')")
+	  @PreAuthorize("hasAnyRole('ADMIN','USER','AREA_ADMIN')")
 	 public AISettingsRequest foundActiveSettingsAIByArea ( @PathVariable Long id, @PathVariable Long areaId, Authentication authentication) {
 		 User caller = currentUser(authentication);
 		 if (!id.equals(caller.getOrganization().getId())) {
@@ -123,7 +123,7 @@ public class AISettingsController {
 	 // obtener las configuraciones activas de la propia organizacion
 
 	 @GetMapping
-	  @PreAuthorize("hasAnyRole('ADMIN','USER')")
+	  @PreAuthorize("hasAnyRole('ADMIN','USER','AREA_ADMIN')")
 	 public List <AISettingsRequest> getActiveSettingsAll (Authentication authentication) {
 		 User caller = currentUser(authentication);
 		 return aiServ.getActiveSettingsAll()

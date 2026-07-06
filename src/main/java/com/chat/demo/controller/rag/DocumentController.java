@@ -111,7 +111,7 @@ public class DocumentController {
 		 // buscar una documentacion por id
 
 		 @GetMapping("/{id}")
-		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
+		  @PreAuthorize("hasAnyRole('ADMIN','USER','AREA_ADMIN')")
 		 public List<DocumentResponse> foundDocumentationById (@PathVariable Long id, Authentication authentication) {
 			 User user = currentUser(authentication);
 			 return scopedToCaller(docServ.findById(id), user.getOrganization().getId());
@@ -121,7 +121,7 @@ public class DocumentController {
 		// buscar una documentacion por su titulo
 
 		 @GetMapping("/title/{title}")
-		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
+		  @PreAuthorize("hasAnyRole('ADMIN','USER','AREA_ADMIN')")
 		 public List<DocumentResponse> foundDocumentationByTitle (@PathVariable String title, Authentication authentication) {
 			 User user = currentUser(authentication);
 			 return scopedToCaller(docServ.findByTitle(title), user.getOrganization().getId());
@@ -130,7 +130,7 @@ public class DocumentController {
 
 		 // obtener la documentacion por organizacion
 		  @GetMapping("/organization/{organizationId}")
-		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
+		  @PreAuthorize("hasAnyRole('ADMIN','USER','AREA_ADMIN')")
 		 public List <DocumentResponse> foundDocumentationByOrganization (@PathVariable Long organizationId, Authentication authentication) {
 			 User user = currentUser(authentication);
 			 // El organizationId de la URL es un dato del cliente y puede modificarse:
@@ -138,14 +138,15 @@ public class DocumentController {
 			 if (!organizationId.equals(user.getOrganization().getId())) {
 				 throw new AccessDeniedException("Organization does not belong to the authenticated user");
 			 }
-			 return docServ.findByOrganization(organizationId);
+			 Long callerAreaId = resolveCallerAreaId(user);
+			 return docServ.findByOrganizationScoped(organizationId, callerAreaId);
 		 }
 
 
 		 // obtener documentacion por area (oficinas o especialidades)
 
 		  @GetMapping("/area/{areaId}")
-		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
+		  @PreAuthorize("hasAnyRole('ADMIN','USER','AREA_ADMIN')")
 		 public List<DocumentResponse> foundDocumentationByArea (@PathVariable Long areaId, Authentication authentication) {
 			 User user = currentUser(authentication);
 			 return scopedToCaller(docServ.findByArea(areaId), user.getOrganization().getId());
@@ -155,7 +156,7 @@ public class DocumentController {
 		 // obtener documentacion cargada por un usuario seleccionado
 
 		  @GetMapping("/user/{id}")
-		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
+		  @PreAuthorize("hasAnyRole('ADMIN','USER','AREA_ADMIN')")
 		 public List<DocumentResponse> foundDocumentationByUser (@PathVariable Long id, Authentication authentication) {
 			 User user = currentUser(authentication);
 			 return scopedToCaller(docServ.findByUploadedBy(id), user.getOrganization().getId());
@@ -165,10 +166,11 @@ public class DocumentController {
 		 // obtener las documentaciones
 
 		 @GetMapping
-		  @PreAuthorize("hasAnyRole('ADMIN','USER')")
+		  @PreAuthorize("hasAnyRole('ADMIN','USER','AREA_ADMIN')")
 		 public List <DocumentResponse> getDocumentsAll(Authentication authentication) {
 			 User user = currentUser(authentication);
-			 return docServ.findByOrganization(user.getOrganization().getId());
+			 Long callerAreaId = resolveCallerAreaId(user);
+			 return docServ.findByOrganizationScoped(user.getOrganization().getId(), callerAreaId);
 		 }
 
 		//eliminar una documentacion

@@ -22,6 +22,10 @@ public interface DocumentService {
 
 	    List<DocumentResponse> findByOrganization(Long organizationId);
 
+	    // callerAreaId == null significa admin general (sin restricción de área); si no,
+	    // devuelve solo los documentos del área del caller y los globales (sin área asignada).
+	    List<DocumentResponse> findByOrganizationScoped(Long organizationId, Long callerAreaId);
+
 	    List<DocumentResponse> findByArea(Long areaId);
 
 	    List<DocumentResponse> findByUploadedBy(Long userId);
