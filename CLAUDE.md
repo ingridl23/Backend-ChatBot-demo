@@ -28,8 +28,9 @@ docker compose -f docker-composer.yml up -d
 ## Required Environment Variables
 
 ```
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=<password>
+SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/chatbotdb
+SPRING_DATASOURCE_USERNAME=postgres
+SPRING_DATASOURCE_PASSWORD=<password>
 GROQ_API_KEY=<key>
 # Future: OPENAI_API_KEY=<key>
 ```
