@@ -66,7 +66,9 @@ public class SecurityConfig {
                 "http://localhost:4200",
                 "http://localhost:3000",
                 "http://localhost:5173",
-                "https://*.vercel.app"
+                "https://*.vercel.app",
+                "https://chat-bot-front-end-demo.onrender.com"
+               
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
