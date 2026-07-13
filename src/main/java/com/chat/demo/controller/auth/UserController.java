@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chat.demo.dto.AdminUpdateUserRequest;
 import com.chat.demo.dto.ChangePasswordRequest;
 import com.chat.demo.dto.UpdateProfileRequest;
 import com.chat.demo.dto.UserRequest;
@@ -48,6 +50,15 @@ public class UserController {
 
     private boolean hasRole(User user, String roleName) {
         return user.getRoles().stream().anyMatch(r -> roleName.equals(r.getName()));
+    }
+
+    private User findOwnedOrThrow(Long id, Long callerOrganizationId) {
+        User user = userService.getUserById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        if (user.getOrganization() == null || !user.getOrganization().getId().equals(callerOrganizationId)) {
+            throw new AccessDeniedException("User does not belong to your organization");
+        }
+        return user;
     }
 
     @PostMapping
@@ -93,6 +104,29 @@ public class UserController {
                 .stream()
                 .map(userMapper::toResponse)
                 .toList();
+    }
+
+    // Un ADMIN edita a cualquier usuario de su propia organización.
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public UserResponse updateUser(@PathVariable Long id, @Valid @RequestBody AdminUpdateUserRequest request,
+            Authentication authentication) {
+        User caller = currentUser(authentication);
+        User target = findOwnedOrThrow(id, caller.getOrganization().getId());
+        userService.updateUser(target.getId(), request.getUserName(), request.getEmail(), request.getPassword(),
+                request.getAreaId(), request.getRolesId());
+        return userMapper.toResponse(userService.getUserById(id)
+                .orElseThrow(() -> new RuntimeException("User not found")));
+    }
+
+    // Un ADMIN borra a cualquier usuario de su propia organización.
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id, Authentication authentication) {
+        User caller = currentUser(authentication);
+        findOwnedOrThrow(id, caller.getOrganization().getId());
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/me")

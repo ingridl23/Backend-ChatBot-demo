@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(Long id, String username, String email, String pass) {
+    public void updateUser(Long id, String username, String email, String pass, Long areaId, Set<Long> rolesId) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -105,6 +105,26 @@ public class UserServiceImpl implements UserService {
         if (pass != null && !pass.isBlank()) {
             user.setPassword(passwordEncoder.encode(pass));
         }
+
+        if (areaId != null) {
+            Area area = areaRepository.findById(areaId)
+                    .orElseThrow(() -> new RuntimeException("Area not found"));
+            if (!area.getOrganization().getId().equals(user.getOrganization().getId())) {
+                throw new RuntimeException("Area does not belong to the user's organization");
+            }
+            user.setArea(area);
+        }
+
+        if (rolesId != null) {
+            Set<Role> roles = new HashSet<>();
+            for (Long roleId : rolesId) {
+                Role role = roleRepository.findById(roleId)
+                        .orElseThrow(() -> new RuntimeException("Role not found: " + roleId));
+                roles.add(role);
+            }
+            user.setRoles(roles);
+        }
+
         user.setUpdatedAt(new Date());
 
         userRepository.save(user);
