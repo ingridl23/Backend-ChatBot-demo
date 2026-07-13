@@ -3,7 +3,15 @@ package com.chat.demo.service.rag.impl;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.Normalizer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -14,7 +22,6 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import org.springframework.ai.vectorstore.VectorStore;
@@ -109,16 +116,122 @@ public class RagServiceImpl implements RagService {
         // vectorStore.add(docs); // TODO: reactivar cuando haya un proveedor de embeddings real (Groq no soporta embeddings)
     }
 
+    // Retrieval por keyword + diversidad entre documentos: Groq no ofrece endpoint de
+    // embeddings, por eso no se puede usar vectorStore.similaritySearch() todavia.
+    private static final int MAX_CHUNKS = 5;
+    private static final int MAX_CHUNKS_PER_DOCUMENT = 2;
+
+    private static final Set<String> STOPWORDS = Set.of(
+            "de", "la", "que", "el", "en", "y", "a", "los", "del", "se", "las", "por", "un",
+            "para", "con", "no", "una", "su", "al", "lo", "como", "mas", "pero", "sus", "le",
+            "ya", "o", "este", "si", "porque", "esta", "entre", "cuando", "muy", "sin", "sobre",
+            "tambien", "me", "hasta", "hay", "donde", "quien", "desde", "todo", "nos", "durante",
+            "todos", "uno", "les", "ni", "contra", "otros", "ese", "eso", "ante", "ellos", "esto",
+            "mi", "antes", "algunos", "unos", "yo", "otro", "otras", "otra", "tanto", "esa",
+            "estos", "mucho", "quienes", "nada", "muchos", "cual", "poco", "ella", "estar",
+            "estas", "algunas", "algo", "nosotros", "mis", "tu", "te", "ti", "tus", "ellas",
+            "esos", "esas", "es", "son", "fue", "ser", "han", "ha", "the", "and", "for", "are",
+            "was", "were"
+    );
+
+    private String normalize(String text) {
+        String withoutAccents = Normalizer.normalize(text, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+        return withoutAccents.toLowerCase(Locale.ROOT);
+    }
+
+    private List<String> extractKeywords(String question) {
+        if (question == null || question.isBlank()) {
+            return List.of();
+        }
+        return Arrays.stream(normalize(question).split("[^a-z0-9]+"))
+                .filter(w -> w.length() >= 3)
+                .filter(w -> !STOPWORDS.contains(w))
+                .distinct()
+                .toList();
+    }
+
+    private int scoreChunk(DocumentChunk chunk, List<String> keywords) {
+        String normalizedContent = normalize(chunk.getContent());
+        int score = 0;
+        for (String keyword : keywords) {
+            if (normalizedContent.contains(keyword)) {
+                score++;
+            }
+        }
+        return score;
+    }
+
+    // Reparte los cupos entre los grupos de a una ronda por documento, hasta llenar maxTotal
+    // o agotar maxPerDocument, para que un solo documento no acapare todos los resultados.
+    private List<DocumentChunk> roundRobinPick(List<List<DocumentChunk>> groupsByDocument, int maxTotal,
+            int maxPerDocument) {
+        List<DocumentChunk> result = new ArrayList<>();
+        for (int round = 0; round < maxPerDocument && result.size() < maxTotal; round++) {
+            for (List<DocumentChunk> group : groupsByDocument) {
+                if (result.size() >= maxTotal) {
+                    break;
+                }
+                if (round < group.size()) {
+                    result.add(group.get(round));
+                }
+            }
+        }
+        return result;
+    }
+
+    // Fallback cuando ninguna keyword matchea: reparte por orden de chunkIndex entre documentos.
+    private List<DocumentChunk> selectDiverse(List<DocumentChunk> candidates, int maxTotal, int maxPerDocument) {
+        Map<Long, List<DocumentChunk>> byDocument = candidates.stream()
+                .sorted(Comparator.comparing(DocumentChunk::getChunkIndex))
+                .collect(Collectors.groupingBy(c -> c.getDocument().getId(), LinkedHashMap::new,
+                        Collectors.toList()));
+
+        return roundRobinPick(new ArrayList<>(byDocument.values()), maxTotal, maxPerDocument);
+    }
+
+    private List<DocumentChunk> selectByKeywordRelevance(List<DocumentChunk> candidates, List<String> keywords,
+            int maxTotal, int maxPerDocument) {
+        Map<DocumentChunk, Integer> scores = new LinkedHashMap<>();
+        for (DocumentChunk chunk : candidates) {
+            int score = scoreChunk(chunk, keywords);
+            if (score > 0) {
+                scores.put(chunk, score);
+            }
+        }
+
+        if (scores.isEmpty()) {
+            return selectDiverse(candidates, maxTotal, maxPerDocument);
+        }
+
+        Map<Long, List<DocumentChunk>> byDocument = scores.keySet().stream()
+                .collect(Collectors.groupingBy(c -> c.getDocument().getId(), LinkedHashMap::new,
+                        Collectors.toList()));
+        byDocument.values().forEach(chunks -> chunks.sort(
+                Comparator.comparingInt((DocumentChunk c) -> scores.get(c)).reversed()
+                        .thenComparing(DocumentChunk::getChunkIndex)));
+
+        List<List<DocumentChunk>> documentGroups = new ArrayList<>(byDocument.values());
+        documentGroups.sort(Comparator.comparingInt((List<DocumentChunk> g) -> scores.get(g.get(0))).reversed());
+
+        return roundRobinPick(documentGroups, maxTotal, maxPerDocument);
+    }
+
     @Override
     public List<Document> searchRelevantChunks(String question, Long organizationId, Long areaId) {
-        // Retrieval por keyword: Groq no ofrece endpoint de embeddings,
-        // por eso no se puede usar vectorStore.similaritySearch() todavia.
-        Pageable top5 = PageRequest.of(0, 5);
-        List<DocumentChunk> chunks = areaId == null
-                ? chunkRepository.findByOrganizationGlobalOnly(organizationId, top5)
-                : chunkRepository.findByOrganizationAndAreaOrGlobal(organizationId, areaId, top5);
+        List<DocumentChunk> candidates = areaId == null
+                ? chunkRepository.findByOrganizationGlobalOnly(organizationId, Pageable.unpaged())
+                : chunkRepository.findByOrganizationAndAreaOrGlobal(organizationId, areaId, Pageable.unpaged());
 
-        return chunks.stream()
+        if (candidates.isEmpty()) {
+            return List.of();
+        }
+
+        List<String> keywords = extractKeywords(question);
+        List<DocumentChunk> selected = keywords.isEmpty()
+                ? selectDiverse(candidates, MAX_CHUNKS, MAX_CHUNKS_PER_DOCUMENT)
+                : selectByKeywordRelevance(candidates, keywords, MAX_CHUNKS, MAX_CHUNKS_PER_DOCUMENT);
+
+        return selected.stream()
                 .map(chunk -> new Document(chunk.getContent()))
                 .toList();
     }
