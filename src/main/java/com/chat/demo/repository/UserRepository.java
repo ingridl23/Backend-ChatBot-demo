@@ -14,7 +14,7 @@ import com.chat.demo.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
 
-    @Query("SELECT u FROM User u LEFT JOIN FETCH u.organization LEFT JOIN FETCH u.area LEFT JOIN FETCH u.roles WHERE u.userName = :username")
+    @Query("SELECT u FROM User u LEFT JOIN FETCH u.organization LEFT JOIN FETCH u.area LEFT JOIN FETCH u.roles r LEFT JOIN FETCH r.permissions WHERE u.userName = :username")
     Optional<User> findByUserName(@Param("username") String username);
 
     @Query("SELECT u FROM User u LEFT JOIN FETCH u.area LEFT JOIN FETCH u.roles WHERE u.organization.id = :organizationId")
