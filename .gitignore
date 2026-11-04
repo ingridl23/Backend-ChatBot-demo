@@ -36,8 +36,22 @@ build/
 start-dev.bat
 .env
 
+
+
+
+### Logs (runtime output) ###
+# Logs
+logs/
+*.log
+*.log.*.gz
+
 ### Uploaded files (runtime storage) ###
 uploads/
 
-### Logs (runtime output) ###
-logs/
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath

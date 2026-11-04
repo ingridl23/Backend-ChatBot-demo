@@ -1,5 +1,7 @@
 package com.chat.demo.controller.auth;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,7 +28,7 @@ public class AuthController {
     private final JwtService jwtService;
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest request) {
+    public Map<String, String> login(@RequestBody LoginRequest request) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUserName(),
@@ -36,6 +38,8 @@ public class AuthController {
 
         UserDetails user = (UserDetails) authentication.getPrincipal();
         log.info("Login successful for user: {}", request.getUserName());
-        return jwtService.generateToken(user);
+        String token = jwtService.generateToken(user);
+        return Map.of("token", token);
     }
-}
+    }
+
