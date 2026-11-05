@@ -17,13 +17,16 @@ import com.chat.demo.service.rag.ChatService;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 @RequestMapping("/api/chat")
 @RequiredArgsConstructor
 public class ChatController {
 
     private final ChatService chatService;
-
+    private static final Logger log = LoggerFactory.getLogger(ChatController.class);
     @PostMapping("/ask")
     public ChatResponse ask(@RequestBody ChatRequest request, Authentication authentication) {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
@@ -37,8 +40,13 @@ public class ChatController {
         request.setUserId(user.getId());
         request.setOrganizationId(user.getOrganization().getId());
         request.setAreaId(user.getArea() != null ? user.getArea().getId() : null);
-
-        return chatService.ask(request);
+        try {
+            return chatService.ask(request);
+        } catch (Exception e) {
+            log.error("Error en /ask: {}", e.getMessage(), e);
+            throw e;
+        }
+       // return chatService.ask(request);
     }
     
     @PostMapping(value = "/ask/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
