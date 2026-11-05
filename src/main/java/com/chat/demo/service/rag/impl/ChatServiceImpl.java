@@ -12,6 +12,7 @@ import com.chat.demo.service.rag.ChatService;
 import com.chat.demo.service.rag.RagService;
 
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Flux;
 
 @Service
 @RequiredArgsConstructor
@@ -28,5 +29,10 @@ public class ChatServiceImpl implements ChatService {
         // IA
     	return ragService.ask(request);
 
+    }
+    
+    @Override
+    public Flux<String> askStream(ChatRequest request) {
+        return ragService.askStream(request);
     }
 }

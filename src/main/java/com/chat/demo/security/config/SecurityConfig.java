@@ -32,7 +32,8 @@ public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
     private final UserDetailsService userDetailsService;
-
+    private final RateLimitFilter rateLimitFilter;
+    
     @Value("${app.cors.allowed-origins:http://localhost:4200,http://localhost:3000}")
     private String[] allowedOrigins;
     @Bean
@@ -58,6 +59,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
+                .addFilterBefore(rateLimitFilter, JwtFilter.class)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

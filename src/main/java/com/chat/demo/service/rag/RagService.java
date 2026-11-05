@@ -5,6 +5,9 @@ import com.chat.demo.dto.ChatRequest;
 import com.chat.demo.dto.ChatResponse;
 import com.chat.demo.dto.DocumentRequest;
 import com.chat.demo.dto.SystemLinkRequest;
+
+import reactor.core.publisher.Flux;
+
 import com.chat.demo.dto.IntegrationRequest;
 
 /**
@@ -83,5 +86,6 @@ public interface RagService {
 
     ChatResponse ask(ChatRequest request);
 	 
-
+ // Agregar este método a la interfaz RagService:
+    Flux<String> askStream(ChatRequest request);
 }

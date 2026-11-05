@@ -1,5 +1,7 @@
 package com.chat.demo.controller.rag;
 
+import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +15,7 @@ import com.chat.demo.service.auth.CustomUserDetails;
 import com.chat.demo.service.rag.ChatService;
 
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("/api/chat")
@@ -36,5 +39,12 @@ public class ChatController {
         request.setAreaId(user.getArea() != null ? user.getArea().getId() : null);
 
         return chatService.ask(request);
+    }
+    
+    @PostMapping(value = "/ask/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN','USER','AREA_ADMIN')")
+    public Flux<String> askStream(@RequestBody ChatRequest request) {
+        // ... override de userId/orgId con datos del token (igual que ask)
+        return chatService.askStream(request);
     }
 }

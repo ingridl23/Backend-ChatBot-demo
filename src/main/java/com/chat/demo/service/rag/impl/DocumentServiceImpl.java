@@ -235,7 +235,30 @@ public class DocumentServiceImpl implements DocumentService {
 	
 		 try {
 
-		        // carpeta uploads /documents
+			  // Validar que sea PDF
+			    if (file.isEmpty()) {
+			        throw new RuntimeException("File is empty");
+			    }
+
+			    String contentType = file.getContentType();
+			    String originalName = file.getOriginalFilename();
+
+			    if (contentType == null || !contentType.equals("application/pdf")) {
+			        throw new RuntimeException("Only PDF files are allowed");
+			    }
+
+			    if (originalName != null && !originalName.toLowerCase().endsWith(".pdf")) {
+			        throw new RuntimeException("File must have .pdf extension");
+			    }
+
+			    // Validar tamaño (ej: máximo 20MB)
+			    long maxSize = 20 * 1024 * 1024;
+			    if (file.getSize() > maxSize) {
+			        throw new RuntimeException("File exceeds maximum size of 20MB");
+			    }
+
+			    // ... 
+		       // carpeta uploads /documents
 
 		        String uploadDir = "uploads/";
 
@@ -306,16 +329,6 @@ public class DocumentServiceImpl implements DocumentService {
 		        log.error("Upload failed", e);
 		        throw new RuntimeException("Upload failed", e);
 		    }
-		 
-		 
-		 /*
-		 
-		 catch (Exception e) {
-
-		        throw new RuntimeException("Upload failed");
-		    }
-		
-		*/
 		
 	}
 
