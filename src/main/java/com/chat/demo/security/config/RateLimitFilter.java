@@ -14,12 +14,9 @@ import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.springframework.core.annotation.Order;
-import org.springframework.core.Ordered;
 
 
 @Component
-@Order(Ordered.HIGHEST_PRECEDENCE + 50)
 public class RateLimitFilter extends OncePerRequestFilter {
 
     // Un bucket por IP para /api/auth/login

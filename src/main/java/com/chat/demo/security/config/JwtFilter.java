@@ -17,11 +17,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 @Component
 @RequiredArgsConstructor
-@Order(Ordered.HIGHEST_PRECEDENCE + 100)
 public class JwtFilter extends OncePerRequestFilter {
 
     private static final Logger log = LoggerFactory.getLogger(JwtFilter.class);
@@ -61,7 +58,7 @@ public class JwtFilter extends OncePerRequestFilter {
                                     userDetails.getAuthorities()
                             );
                     SecurityContextHolder.getContext().setAuthentication(authToken);
-                    log.debug("Authenticated user: {} | authorities: {}", userDetails.getUsername(), userDetails.getAuthorities());
+                    log.info("Authenticated user: {} | authorities: {}", userDetails.getUsername(), userDetails.getAuthorities());
                 }
             }
         } catch (JwtException e) {
@@ -72,9 +69,5 @@ public class JwtFilter extends OncePerRequestFilter {
         	    SecurityContextHolder.getContext().getAuthentication() != null);
 
         filterChain.doFilter(request, response);
-    }
-    
-    public int getOrder() {
-        return Ordered.HIGHEST_PRECEDENCE + 100;
     }
 }
