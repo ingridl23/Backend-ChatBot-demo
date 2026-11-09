@@ -263,21 +263,24 @@ public class RagServiceImpl implements RagService {
                 context,
                 request.getQuestion());
 
-        // Agregar pregunta al historial
-        chatMemory.add(conversationId, new UserMessage(userPrompt));
-
-        // Obtener historial reciente (últimos 10 mensajes)
+        // Historial reciente (últimos 10 mensajes). Solo contiene preguntas y respuestas
+        // "limpias": el CONTEXTO se manda únicamente en el turno actual para que el prompt
+        // no crezca con los fragmentos de preguntas anteriores (límite de tokens de Groq).
         List<Message> history = chatMemory.get(conversationId);
 
-        // Llamar al modelo con historial
         String answer = chatClient.prompt()
                 .system(systemPrompt)
                 .messages(history)
+                .user(userPrompt)
                 .call()
                 .content();
 
-        // Guardar respuesta en el historial
-        chatMemory.add(conversationId, new AssistantMessage(answer));
+        // Se guarda en memoria solo si el modelo respondió, para no dejar preguntas
+        // huérfanas en el historial cuando la llamada falla.
+        chatMemory.add(conversationId, new UserMessage(request.getQuestion()));
+        if (answer != null && !answer.isBlank()) {
+            chatMemory.add(conversationId, new AssistantMessage(answer));
+        }
 
         ChatResponse response = new ChatResponse();
         response.setAnswer(answer);

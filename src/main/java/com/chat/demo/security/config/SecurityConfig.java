@@ -23,6 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import jakarta.servlet.DispatcherType;
 import lombok.RequiredArgsConstructor;
 
 
@@ -48,6 +49,11 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
+                        // Los dispatch internos de error/forward no vuelven a pasar por JwtFilter
+                        // (OncePerRequestFilter los saltea) y llegan anónimos: sin esto cualquier
+                        // 404/405/500 se enmascara como 403 al reenviarse a /error.
+                        .dispatcherTypeMatchers(DispatcherType.ERROR, DispatcherType.FORWARD).permitAll()
+                        .requestMatchers("/error").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         // El logo/favicon lo carga el navegador directo en <img>/<link>, sin JWT.
                         .requestMatchers(HttpMethod.GET, "/api/organizations/*/logo", "/api/organizations/*/favicon").permitAll()
