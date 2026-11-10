@@ -64,7 +64,8 @@ POST /api/documents/upload
 POST /api/chat/ask
   → ChatServiceImpl → RagServiceImpl.ask()
   → findTop5ByDocumentOrganizationId()  # keyword retrieval (no similarity search)
-  → Groq API (llama-3.3-70b-versatile via OpenAI-compatible endpoint)
+  → Groq API (openai/gpt-oss-120b by default, overridable via GROQ_MODEL env var;
+    llama-3.3-70b-versatile was shut down by Groq on 2026-08-16)
 ```
 
 **Planned full pipeline (requires a real embeddings provider):**
